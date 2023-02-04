@@ -1,2 +1,2 @@
-# Personal-PJ
-a mini personal project
+# Chaos-Tarot
+a personal project
