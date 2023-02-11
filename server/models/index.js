@@ -1,6 +1,6 @@
 const User = require('./User');
 const Log = require('./Log');
 const Card = require('./Card');
-// const Frames = require('./Frame');
+const Tarot = require('./Tarot');
 
-module.exports = { User, Log, Card };
+module.exports = { User, Log, Card, Tarot };

@@ -11,22 +11,19 @@ const logSchema = new Schema({
         default: Date.now,
         get: (timestamp) => dateFormat(timestamp),
     },
-    image: {
-        type: String,
-        require: true,
-    },
-    cards: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: "Card",
-        }
-    ],
     question: {
         type: String,
         require: true,
         minlength: 1,
         maxlength: 280,
     },
+    //as a array just in case we do more than 1 card spread later
+    cards: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Card"
+        }
+    ],
     //notes not required, but can be saved after card has been generated
     note: {
         type: String,

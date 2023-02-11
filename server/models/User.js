@@ -22,7 +22,11 @@ const userSchema = new Schema({
         required: true,
         minlength: 8,
     },
-    Logs: [
+    uprightOnly: {
+        type: Boolean,
+        require: true,
+    },
+    logs: [
         {
             type: Schema.Types.ObjectId,
             ref: "Log",

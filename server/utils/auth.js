@@ -3,7 +3,7 @@
 const jwt = require("jsonwebtoken");
 
 // secret used to sign the JWT
-const secret = "mysecretssshhhhhhh";
+const secret = "abracadabra";
 // expiration time for the JWT
 const expiration = "2h";
 
@@ -34,9 +34,9 @@ module.exports = {
     return req;
   },
   // function for signing tokens on user login
-  signToken: function ({ email, username, _id, firstname, image }) {
+  signToken: function ({ email, username, _id }) {
     // create a JWT payload containing the user's username and id
-    const payload = { email, username, _id, firstname, image };
+    const payload = { email, username, _id };
     // sign the token
     return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
   },
