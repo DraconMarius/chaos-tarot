@@ -1,11 +1,3 @@
-// meaning & data sources: 
-/*
-Rider Waite Smith based intepretation
-https://github.com/ekelen/tarot-api
-
-
-*/
-
 [
     {
         "name": "THE FOOL",
@@ -402,35 +394,30 @@ https://github.com/ekelen/tarot-api
         "upright": "Action, Impulsiveness, Defending Beliefs",
         "inverted": "No direction, Disregard for Consequences, Unpredictability",
         "suit": "Swords"
-
     },
     {
         "name": "Queen of Swords",
         "upright": "Complexity, Perceptive, Clear Intuition",
         "inverted": "Cold Hearted, Cruel, Bitterness",
         "suit": "Swords"
-
     },
     {
         "name": "King of Swords",
         "upright": "Ruled by Logic, The Truth, Discipline",
         "inverted": "Manipulative, Cruel, Weakness",
         "suit": "Swords"
-
     },
     {
         "name": "Ace of Swords",
         "upright": "Breakthrough, Clarity, Sharp Mind",
         "inverted": "Condusion, Brutality, Chaos",
         "suit": "Swords"
-
     },
     {
         "name": "Two of Swords",
         "upright": "Difficult Choices, Indecision, Stalemate",
         "inverted": "Lesser of Two Evils, Indeicision, Stalemate",
         "suit": "Swords"
-
     },
     {
         "name": "Three of Swords",

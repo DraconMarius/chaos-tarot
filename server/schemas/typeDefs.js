@@ -23,7 +23,7 @@ type Tarot {
     name: String!
     suit: String!
     upright: String!
-    inverse: String!
+    inverted: String!
 }
 
 type Card {

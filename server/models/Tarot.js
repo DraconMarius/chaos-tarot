@@ -11,7 +11,7 @@ const tarotSchema = new Schema({
         type: String,
         required: true,
     },
-    inverse: {
+    inverted: {
         type: String,
         required: true,
     },
