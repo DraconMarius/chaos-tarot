@@ -2,7 +2,7 @@
 const { Schema, model } = require('mongoose');
 //importin bcrypt for pw encrytion
 const bcrypt = require('bcrypt');
-const { StraightenSharp } = require('@mui/icons-material');
+// const { StraightenSharp } = require('@mui/icons-material');
 
 //user model
 const userSchema = new Schema({

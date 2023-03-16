@@ -4,7 +4,7 @@ mongoDB, mongoose
 */
 
 const express = require('express');
-const { AolloServer } = require('apollo-server-express');
+const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
 
 //requiring middleware for token verification
@@ -19,9 +19,13 @@ const db = require('./config/connection');
 //defining PORT
 const PORT = process.env.PORT || 3001;
 
-//setting up express app
+//setting up express app and apollo
 const app = express();
-//other middlewares
+const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+});
+//middlewares
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
@@ -31,14 +35,15 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 //catch route
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build/index.html'));
-})
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, '../client/build/index.html'));
+// })
+
 
 // Create a new instance of an Apollo server with the GraphQL schema
 const startApolloServer = async (typeDefs, resolvers) => {
     await server.start();
-    // integrate our Apollo server with the Express application as middleware
+    // integrate our Apollo server with the Express application
     server.applyMiddleware({ app });
     //   // start the  server
     db.once('open', () => {

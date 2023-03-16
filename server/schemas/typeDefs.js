@@ -51,12 +51,12 @@ input cardContent {
     name: String!
     image: String!
     upright: Boolean!
-    username: string!
-}å
-å
+    username: String!
+}
+
 type Mutation {
     signUp(
-        username: String!,
+        usernsame: String!,
         email: String!,
         password: String!,
         uprightOnly: Boolean!

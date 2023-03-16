@@ -7,9 +7,6 @@ const tarotSchema = new Schema({
         require: true,
         unique: true,
     },
-    suit: {
-        type: String,
-    },
     upright: {
         type: String,
         required: true,
@@ -17,6 +14,9 @@ const tarotSchema = new Schema({
     inverse: {
         type: String,
         required: true,
+    },
+    suit: {
+        type: String,
     },
 });
 

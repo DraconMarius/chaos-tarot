@@ -225,259 +225,259 @@ https://github.com/ekelen/tarot-api
     },
     {
         "name": "Page of Cups",
-        "upright": "",
-        "inverted": "",
+        "upright": "Happy Surprises, Dreamer, Sensitivity",
+        "inverted": "Emotional Immaturity, Insecurity, Disappointment",
         "suit": "Cups"
     },
     {
         "name": "Knight of Cups",
-        "upright": "",
-        "inverted": "",
+        "upright": "Idealistic, Romatic, Following One's Heart/Emotion",
+        "inverted": "Fickleness, MOodiness, Lost in Fantasy",
         "suit": "Cups"
     },
     {
         "name": "Queen of Cups",
-        "upright": "",
-        "inverted": "",
+        "upright": "Compassion, Calm, Emotional Comfort",
+        "inverted": "Martyrdom, Insecurity, Dependance",
         "suit": "Cups"
     },
     {
         "name": "King of Cup",
-        "upright": "",
-        "inverted": "",
+        "upright": "Emotional Control, Balanced Between Emotions and Logic",
+        "inverted": "Coldness, Moodiness, Emotional Manipulation",
         "suit": "Cups"
     },
     {
         "name": "Ace of Cups",
-        "upright": "",
-        "inverted": "",
+        "upright": "New Feelings, Spirituality, Intuition",
+        "inverted": "Emotional Loss, Blocked Creativity, Emptiness",
         "suit": "Cups"
     },
     {
         "name": "Two of Cups",
-        "upright": "",
-        "inverted": "",
+        "upright": "Unity, Partnership, Connection",
+        "inverted": "Imbalance, Broken Communication, Tension",
         "suit": "Cups"
     },
     {
         "name": "Three of Cups",
-        "upright": "",
-        "inverted": "",
+        "upright": "Friendship, Community, Happiness",
+        "inverted": "Overindulgence, Gossip, Isolation",
         "suit": "Cups"
     },
     {
         "name": "Four of Cups",
-        "upright": "",
-        "inverted": "",
+        "upright": "Apathy, Contemplation, Disconnection",
+        "inverted": "Choosing happiness, Acceptance, Awareness",
         "suit": "Cups"
     },
     {
         "name": "Five of Cups",
-        "upright": "",
-        "inverted": "",
+        "upright": "Loss, Grief, Disappointment, Mourning",
+        "inverted": "Acceptance, Moving On, Finding Peace",
         "suit": "Cups"
     },
     {
         "name": "Six of Cups",
-        "upright": "",
-        "inverted": "",
+        "upright": "Familiarity, Memories, Healing, Restoration",
+        "inverted": "Moving Forward, Leaving Home, Independence",
         "suit": "Cups"
     },
     {
         "name": "Seven of Cups",
-        "upright": "",
-        "inverted": "",
+        "upright": "Searching For Purpose, Choices, Daydreaming",
+        "inverted": "Diversion, Disarray, Lack of purpose, Confusion",
         "suit": "Cups"
     },
     {
         "name": "Eight of Cups",
-        "upright": "",
-        "inverted": "",
+        "upright": "Walking Away, Disilluysionment, Leavning Something Behind",
+        "inverted": "Avoidance, Fear of Change, Fear of Loss",
         "suit": "Cups"
     },
     {
         "name": "Nine of Cups",
-        "upright": "",
-        "inverted": "",
+        "upright": "Satisfaction, Luxury, Emotinal Stability",
+        "inverted": "Lack of True Joy, Smugness, Dissatisfaction",
         "suit": "Cups"
     },
     {
         "name": "Ten of Cups",
-        "upright": "",
-        "inverted": "",
+        "upright": "Inner Happiness, Fulfillment, Dreams Coming True",
+        "inverted": "Shattered Dreams, Broken Family, Domestic Dispute",
         "suit": "Cups"
     },
     {
         "name": "Page of Pentacles",
-        "upright": "",
-        "inverted": "",
+        "upright": "Ambition, Desire, Diligence, Craving New Venture",
+        "inverted": "Lack of Commitment, Greed, Laziness",
         "suit": "Pentacles"
     },
     {
         "name": "Knight of Pentacles",
-        "upright": "",
-        "inverted": "",
+        "upright": "Efficiency, Hard Work, Responsibility",
+        "inverted": "Obsessiveness, Work Without Reward",
         "suit": "Pentacles"
     },
     {
         "name": "Queen of Pentacles",
-        "upright": "",
-        "inverted": "",
+        "upright": "Practicality, Creature of Comforts, Security",
+        "inverted": "Self-Centeredness, Jealousy, Smothering",
         "suit": "Pentacles"
     },
     {
         "name": "King of Pentacles",
-        "upright": "",
-        "inverted": "",
+        "upright": "Abundance, Prosperity, Provider, Generousity",
+        "inverted": "Greed, Indulgence, Excess",
         "suit": "Pentacles"
     },
     {
         "name": "Ace of Pentacles",
-        "upright": "",
-        "inverted": "",
+        "upright": "Opportunity, Prosperity, New Venture",
+        "inverted": "Lost Opportunity, Missed Chance, Bad Investment",
         "suit": "Pentacles"
     },
     {
         "name": "Two of Pentacles",
-        "upright": "",
-        "inverted": "",
+        "upright": "Balancing Decisions, Priorities, Adaptaion",
+        "inverted": "Loss of Balance, Disorganization, Overwhelemd",
         "suit": "Pentacles"
     },
     {
         "name": "Three of Pentacles",
-        "upright": "",
-        "inverted": "",
+        "upright": "Teamwork, Collaboration, Building Together",
+        "inverted": "Lack of Teamwork, Disorganzation, Group Conflict",
         "suit": "Pentacles"
     },
     {
         "name": "Four of Pentacles",
-        "upright": "",
-        "inverted": "",
+        "upright": "Conservation, Security, Frugality",
+        "inverted": "Greediness, Stinginess, Posessiveness",
         "suit": "Pentacles"
     },
     {
         "name": "Five of Pentacles",
-        "upright": "",
-        "inverted": "",
+        "upright": "Needs, Proverty, Lack of Resources",
+        "inverted": "Recovery, Charity, Financial/Material Improvements",
         "suit": "Pentacles"
     },
     {
         "name": "Six of Pentacles",
-        "upright": "",
-        "inverted": "",
+        "upright": "Charity, Genrosity, Sharing",
+        "inverted": "Strings Attaches, Stinginess, Power and Domination, Terms and Conditions",
         "suit": "Pentacles"
     },
     {
         "name": "Seven of Pentacles",
-        "upright": "",
-        "inverted": "",
+        "upright": "Hard Work, Diligence, Preserverance",
+        "inverted": "Wasted Effort, Distractions, Lack of Results/Rewards",
         "suit": "Pentacles"
     },
     {
         "name": "Eight of Pentacles",
-        "upright": "",
-        "inverted": "",
+        "upright": "Diligence, Passion, High Standards, Perfectionist",
+        "inverted": "No Passion, Uninspired, No Motivation",
         "suit": "Pentacles"
     },
     {
         "name": "Nine of Pentacles",
-        "upright": "",
-        "inverted": "",
+        "upright": "Fruit of labor, Reckless Spending, Rewards",
+        "inverted": "Living Beyond Menas, Obsession With Work, Perfectionist",
         "suit": "Pentacles"
     },
     {
         "name": "Ten of Pentacles",
-        "upright": "",
-        "inverted": "",
+        "upright": "Legacy, Inheritance, Culmination",
+        "inverted": "Fleeting Sucess, Lack of Stability, Lack of Resources",
         "suit": "Pentacles"
     },
     {
         "name": "Page of Swords",
-        "upright": "",
-        "inverted": "",
+        "upright": "Curiosity, Restlessness, Mental Energy",
+        "inverted": "Deception, Manipulation, Platitude, Flattery",
         "suit": "Swords"
     },
     {
         "name": "Knight of Swords",
-        "upright": "",
-        "inverted": "",
+        "upright": "Action, Impulsiveness, Defending Beliefs",
+        "inverted": "No direction, Disregard for Consequences, Unpredictability",
         "suit": "Swords"
 
     },
     {
         "name": "Queen of Swords",
-        "upright": "",
-        "inverted": "",
+        "upright": "Complexity, Perceptive, Clear Intuition",
+        "inverted": "Cold Hearted, Cruel, Bitterness",
         "suit": "Swords"
 
     },
     {
         "name": "King of Swords",
-        "upright": "",
-        "inverted": "",
+        "upright": "Ruled by Logic, The Truth, Discipline",
+        "inverted": "Manipulative, Cruel, Weakness",
         "suit": "Swords"
 
     },
     {
         "name": "Ace of Swords",
-        "upright": "",
-        "inverted": "",
+        "upright": "Breakthrough, Clarity, Sharp Mind",
+        "inverted": "Condusion, Brutality, Chaos",
         "suit": "Swords"
 
     },
     {
         "name": "Two of Swords",
-        "upright": "",
-        "inverted": "",
+        "upright": "Difficult Choices, Indecision, Stalemate",
+        "inverted": "Lesser of Two Evils, Indeicision, Stalemate",
         "suit": "Swords"
 
     },
     {
         "name": "Three of Swords",
-        "upright": "",
-        "inverted": "",
+        "upright": "Heartbreak, Withdrawl, Grief",
+        "inverted": "Recovery, Forgiveness, Moving On, Acceptance",
         "suit": "Swords"
     },
     {
         "name": "Four of Swords",
-        "upright": "",
-        "inverted": "",
+        "upright": "Rest, Restoration, Contemplation",
+        "inverted": "Restlessness, Burnout, Stress",
         "suit": "Swords"
     },
     {
         "name": "Five of Swords",
-        "upright": "",
-        "inverted": "",
+        "upright": "Unbridled Ambition, Win At All Costs, Underhandedness",
+        "inverted": "Lingering Resentment, Desire to Reconcile, Forgiveness",
         "suit": "Swords"
     },
     {
         "name": "Six of Swords",
-        "upright": "",
-        "inverted": "",
+        "upright": "Transition, Leaving behind, Moving On",
+        "inverted": "Emotional Baggae, Unresolved Issues, Resisting Transition",
         "suit": "Swords"
     },
     {
         "name": "Seven of Swords",
-        "upright": "",
-        "inverted": "",
+        "upright": "Deception, Trickery, Tactics and Strategy",
+        "inverted": "Coming Clean, Rethinking Approach, Deception",
         "suit": "Swords"
     },
     {
         "name": "Eight of Swords",
-        "upright": "",
-        "inverted": "",
+        "upright": "Imprisonment, Entrapement, Self-Victimization",
+        "inverted": "Self-Acceptance, New Perspective, Freedom",
         "suit": "Swords"
     },
     {
         "name": "Nine of Swords",
-        "upright": "",
-        "inverted": "",
+        "upright": "Anxiety, Hopelessness, Trauma",
+        "inverted": "Hope, Reaching Out For Help, Despair",
         "suit": "Swords"
     },
     {
         "name": "Ten of Swords",
-        "upright": "",
-        "inverted": "",
+        "upright": "Failure, Collapse, Defeat, Backstabbing",
+        "inverted": "Can't Get Worse, Only Upward, Inevitabl Cycle",
         "suit": "Swords"
     }
 ]
