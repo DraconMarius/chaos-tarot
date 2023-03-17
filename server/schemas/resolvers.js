@@ -27,10 +27,9 @@ const resolvers = {
         //sign up, 
         signUp: async (
             parent,
-            { username, email, password, uprightOnly }) => {
+            { email, password, uprightOnly }) => {
             //creating a user based on what we passed in the argument
             const newUser = await User.create({
-                username,
                 email,
                 password,
                 uprightOnly,

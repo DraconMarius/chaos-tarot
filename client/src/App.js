@@ -30,7 +30,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
-// import Login from './pages/Login';
+import LogIn from './pages/Login';
 import SignUp from './pages/Signup';
 import Home from './pages/Home';
 // import Log from './pages/Log';
@@ -70,8 +70,8 @@ const client = new ApolloClient({
 
 function App() {
   const menuWidth = 300;
-  const inItems = ["Home", "Daily Card", "Logs", "Logout"];
-  const outItems = ["Home", "Login", "Disclaimer"]
+  const inItems = ["Home", "Daily Card", "Logs", "Logout", "Disclaimer"];
+  const outItems = ["Home", "Login", "SignUp", "Disclaimer"]
 
   //setting state for toggle
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -180,7 +180,7 @@ function App() {
                   <Route exact path="/" element={<Home />} />
                   {/* <Route exact path="/Reading" element={<Reading />} /> */}
                   {/* <Route exact path="/Card" element={<Card />} /> */}
-                  {/* <Route exact path="/login" element={<Login />} /> */}
+                  <Route exact path="/login" element={<LogIn />} />
                   {/* <Route exact path="/log" element={<Log />} /> */}
                   <Route exact path="/signup" element={<SignUp />} />
                   {/* <Route exact path="/profile" element={<ProfileContainer />} /> */}
