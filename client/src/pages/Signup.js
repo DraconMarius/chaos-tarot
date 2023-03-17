@@ -3,7 +3,13 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { SIGNUP } from './../utils/mutation'
 import Auth from './../utils/auth'
-import { Button, TextField, Grid, Typography, Checkbox, FormControlLabel, Alert } from '@mui/material';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Alert from '@mui/material/Alert';
 import styled from '@emotion/styled';
 
 const StyledForm = styled('form')`

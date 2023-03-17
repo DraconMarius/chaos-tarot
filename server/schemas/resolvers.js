@@ -56,7 +56,7 @@ const resolvers = {
                 throw new AuthenticationError(`User with ${email} does not exist`)
             };
             //decrypt PW and compare, should return boolean
-            const pwOK = await User.validatePW(password);
+            const pwOK = await user.validatePW(password);
             //if incorrect PW, => false
             if (!pwOK) {
                 throw new AuthenticationError(`Error, Incorrect Credential`)

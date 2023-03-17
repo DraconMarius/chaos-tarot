@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link as RouterLink } from 'react-router-dom';
 
 import {
   ApolloClient,
@@ -46,7 +46,7 @@ const darkTheme = createTheme({
 const httpLink = createHttpLink({
   uri: '/graphql',
   // uri: "http://localhost:3001/graphql",
-});
+})
 // Construct request middleware that will attach the JWT token to every request as an `authorization` header
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
@@ -70,8 +70,16 @@ const client = new ApolloClient({
 
 function App() {
   const menuWidth = 300;
-  const inItems = ["Home", "Daily Card", "Logs", "Logout", "Disclaimer"];
-  const outItems = ["Home", "Login", "SignUp", "Disclaimer"]
+  //since we are mapping our nav/appbar item
+  const inItems = [{ Tag: "Home", Link: "/" },
+  { Tag: "Daily Card", Link: "/" },
+  { Tag: "Logs", Link: "/" },
+  { Tag: "Disclaimer", Link: "/" }];
+  const outItems = [{ Tag: "Home", Link: "/" },
+  { Tag: "Login", Link: "/login" },
+  { Tag: "SignUp", Link: "/signup" },
+  { Tag: "Disclaimer", Link: "/" }]
+
 
   //setting state for toggle
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -90,20 +98,29 @@ function App() {
         {Auth.loggedIn() ? (
 
           inItems.map((item) => (
-            <ListItem key={item} disablePadding>
-              <ListItemButton sx={{ textAlign: 'center' }}>
-                <ListItemText primary={item} />
+            <ListItem key={item.Tag} disablePadding>
+              <ListItemButton sx={{ textAlign: 'center' }} >
+                <Button component={RouterLink} to={item.Link} sx={{ color: '#fff', textDecoration: 'none', width: '100%' }}>
+                  <ListItemText primary={item.Tag} />
+                </Button>
               </ListItemButton>
             </ListItem>
           ))
         ) : (
           outItems.map((item) => (
-            <ListItem key={item} disablePadding>
-              <ListItemButton sx={{ textAlign: 'center' }}>
-                <ListItemText primary={item} />
+            <ListItem key={item.Tag} disablePadding>
+              <ListItemButton sx={{ textAlign: 'center' }} >
+                <Button component={RouterLink} to={item.Link} sx={{ color: '#fff', textDecoration: 'none', width: '100%' }}>
+                  <ListItemText primary={item.Tag} />
+                </Button>
               </ListItemButton>
             </ListItem>)
           ))}
+        {Auth.loggedIn() ? (
+          <ListItemButton sx={{ textAlign: 'center' }}>
+            <ListItemText primary="Logout" onClick={Auth.logout} />
+          </ListItemButton>
+        ) : (null)}
       </List>
     </Box>
   );
@@ -114,66 +131,72 @@ function App() {
     <ApolloProvider client={client}>
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
-        <AppBar component="nav">
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open menu"
-              edge="start"
-              onClick={toggleMenu}
-              sx={{ mr: 2, display: { sm: 'none' } }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography
-              variant="h6"
-              component="div"
-              sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
-            >
-              Chaos Tarot
-            </Typography>
-            <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-              {Auth.loggedIn() ? (
-                inItems.map((item) => (
-                  <Button key={item} sx={{ color: '#fff' }}>
-                    {item}
+        <Router>
+          <AppBar component="nav">
+            <Toolbar>
+              <IconButton
+                color="inherit"
+                aria-label="open menu"
+                edge="start"
+                onClick={toggleMenu}
+                sx={{ mr: 2, display: { sm: 'none' } }}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography
+                variant="h6"
+                component="div"
+                sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+              >
+                Chaos Tarot
+              </Typography>
+              <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+                {Auth.loggedIn() ? (
+                  inItems.map((item) => (
+                    <Button key={item.Tag} component={RouterLink} to={item.Link} sx={{ color: '#fff' }}>
+                      <ListItemText primary={item.Tag} />
+                    </Button>
+                  ))) : (
+                  outItems.map((item) => (
+                    <Button key={item.Tag} component={RouterLink} to={item.Link} sx={{ color: '#fff' }}>
+                      <ListItemText primary={item.Tag} />
+                    </Button>
+                  )
+                  ))}
+                {Auth.loggedIn() ? (
+                  <Button sx={{ color: '#fff' }}>
+                    <ListItemText primary="Logout" onClick={Auth.logout} />
                   </Button>
-                ))) : (
-                outItems.map((item) => (
-                  <Button key={item} sx={{ color: '#fff' }}>
-                    {item}
-                  </Button>
-                )
-                ))}
-            </Box>
-          </Toolbar>
-        </AppBar>
-        <Box component="nav">
-          <Drawer
-            container={container}
-            variant="temporary"
-            open={mobileOpen}
-            onClose={toggleMenu}
-            ModalProps={{
-              keepMounted: true, // https://mui.com/material-ui/react-app-bar/
-            }}
-            sx={{
-              display: { xs: 'block', sm: 'none' },
-              '& .MuiDrawer-paper': { boxSizing: 'border-box', width: menuWidth },
-            }}
-          >
-            {menu}
-          </Drawer>
-        </Box>
-        <Box component="main" sx={{
-          p: 3,
-          display: 'flex',
-          flexDirection: 'column',
-          minHeight: '100vh',
-        }}>
-          <Toolbar />
-          {/* //router component to handle the navigation between pages */}
-          <Router>
+                ) : (null)}
+              </Box>
+
+            </Toolbar>
+          </AppBar>
+          <Box component="nav">
+            <Drawer
+              container={container}
+              variant="temporary"
+              open={mobileOpen}
+              onClose={toggleMenu}
+              ModalProps={{
+                keepMounted: true, // https://mui.com/material-ui/react-app-bar/
+              }}
+              sx={{
+                display: { xs: 'block', sm: 'none' },
+                '& .MuiDrawer-paper': { boxSizing: 'border-box', width: menuWidth },
+              }}
+            >
+              {menu}
+            </Drawer>
+          </Box>
+          <Box component="main" sx={{
+            p: 3,
+            display: 'flex',
+            flexDirection: 'column',
+            minHeight: '100vh',
+          }}>
+            <Toolbar />
+            {/* //router component to handle the navigation between pages */}
             <div>
               <Container>
                 <Routes>
@@ -187,8 +210,8 @@ function App() {
                 </Routes>
               </Container>
             </div>
-          </Router>
-        </Box>
+          </Box>
+        </Router>
       </ThemeProvider>
       {/* <Footer /> */}
     </ApolloProvider >

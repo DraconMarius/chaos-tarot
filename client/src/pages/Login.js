@@ -2,7 +2,12 @@ import React, { useState } from 'react';
 //mutation hook 
 import { useMutation } from '@apollo/client';
 import { LOGIN } from './../utils/mutation'
-import { Button, TextField, Grid, Typography, Alert } from '@mui/material';
+//mUI
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import Alert from '@mui/material/Alert';
 import styled from '@emotion/styled';
 
 import Auth from './../utils/auth'
@@ -36,7 +41,7 @@ const LogIn = () => {
             });
 
             //create token for user
-            Auth.login(data.LogIn.token);
+            Auth.login(data.logIn.token);
         } catch (error) {
             console.log(error);
             console.error(error);
