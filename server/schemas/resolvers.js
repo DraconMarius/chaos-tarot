@@ -36,7 +36,17 @@ const resolvers = {
             });
             //signing JWT, and returning the `Auth` object that we defined in typeDefs
             const token = signToken(newUser);
-            return { token, newUser };
+            // console.log(newUser);
+            //rewriting obj to match user typeDefs
+            return {
+                token,
+                user: {
+                    email: newUser.email,
+                    password: "hidden",
+                    uprightOnly: newUser.uprightOnly,
+                    _id: newUser._id
+                }
+            };
         },
         //login user,
         logIn: async (parent, { email, password }) => {
@@ -71,7 +81,7 @@ const resolvers = {
             { question, cardContent, note }) => {
             const newCards = await Card.insertMany(cardContent);
             console.log(newCards);
-            const newCardsID = await newCards.map(card => newCards._id);
+            const newCardsID = newCards.map(card => newCards._id);
             console.log(newCardsID);
             const newLog = await Log.create({
                 question,

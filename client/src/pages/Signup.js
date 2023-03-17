@@ -24,30 +24,28 @@ const Signup = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
-        // Replace this with your sign up logic
-        console.log({
+        // prep data to send to server
+        const newObj = {
             email: formData.get('email'),
             password: formData.get('password'),
             uprightOnly: uprightOnly,
-        });
+        };
         try {
-            console.log("flag");
-            // execute addUser mutation and pass in variable data from form
+            // console.log("flag");
+            // newUser mutation
             const { data } = await newUser({
                 variables: {
-                    email: formData.get('email'),
-                    password: formData.get('password'),
-                    uprightOnly: uprightOnly,
+                    ...newObj
                 },
             });
-
+            // console.log(data);
             //create token for user
-            Auth.login(data.newUser.token);
+            Auth.login(data.signUp.token);
         } catch (error) {
             console.log(error);
             console.error(error);
             setErrorMessage('An error occurred while signing up. Please try again.');
-        }
+        };
     };
 
     return (

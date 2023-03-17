@@ -2,6 +2,7 @@
     "name": "chaos-tarot",
     "version": "0.0.1",
     "private": true,
+    "proxy": "http://localhost:3001/",
     "dependencies": {
         "@apollo/client": "^3.5.8",
         "@emotion/react": "^11.10.6",

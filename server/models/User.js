@@ -13,7 +13,7 @@ const userSchema = new Schema({
         //validation for email
         match: [/.+@.+\..+/, "Please provide a valide email address"],
     },
-    passowrd: {
+    password: {
         type: String,
         required: true,
         minlength: 8,

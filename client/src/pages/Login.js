@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 //mutation hook 
 import { useMutation } from '@apollo/client';
 import { LOGIN } from './../utils/mutation'
-import { Button, TextField, Grid, Typography } from '@mui/material';
+import { Button, TextField, Grid, Typography, Alert } from '@mui/material';
 import styled from '@emotion/styled';
 
 import Auth from './../utils/auth'
@@ -16,21 +16,22 @@ const LogIn = () => {
 
     const [logIn, { error, data }] = useMutation(LOGIN);
 
+    const [errorMessage, setErrorMessage] = useState('');
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
-        // Replace this with your sign up logic
-        console.log({
+        // prep data
+        const loginData = {
             email: formData.get('email'),
             password: formData.get('password'),
-        });
+        };
         try {
             console.log("flag");
             // execute login mutation and pass in variable data from form
             const { data } = await logIn({
                 variables: {
-                    email: formData.get('email'),
-                    password: formData.get('password'),
+                    ...loginData
                 },
             });
 
@@ -39,14 +40,20 @@ const LogIn = () => {
         } catch (error) {
             console.log(error);
             console.error(error);
+            setErrorMessage('An error occurred while logging in. Please try again.');
         }
     };
 
     return (
         <Grid container direction="column" alignItems="center">
             <Typography component="h1" variant="h5">
-                Sign up
+                Welcome Back
             </Typography>
+            {errorMessage && (
+                <Grid item xs={12}>
+                    <Alert severity="error">{errorMessage}</Alert>
+                </Grid>
+            )}
             <StyledForm onSubmit={handleSubmit}>
                 <Grid container direction="column" alignItems="center" spacing={2}>
                     <Grid item xs={12}>
@@ -74,20 +81,8 @@ const LogIn = () => {
                         />
                     </Grid>
                     <Grid item xs={12}>
-                        <TextField
-                            variant="outlined"
-                            required
-                            fullWidth
-                            id="confirmPassword"
-                            label="Confirm Password"
-                            name="confirmPassword"
-                            type="password"
-                            autoComplete="new-password"
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
                         <Button type="submit" fullWidth variant="contained" color="primary">
-                            Sign Up
+                            Login
                         </Button>
                     </Grid>
                 </Grid>

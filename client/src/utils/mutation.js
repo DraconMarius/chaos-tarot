@@ -7,7 +7,6 @@ export const SIGNUP = gql`
       token
       user {
         _id
-        username
         email
         password
         Logs
