@@ -33,6 +33,7 @@ import Button from '@mui/material/Button';
 import LogIn from './pages/Login';
 import SignUp from './pages/Signup';
 import Home from './pages/Home';
+import Daily from './pages/Daily';
 // import Log from './pages/Log';
 // import Reading from './pages/Reading';
 
@@ -72,7 +73,7 @@ function App() {
   const menuWidth = 300;
   //since we are mapping our nav/appbar item
   const inItems = [{ Tag: "Home", Link: "/" },
-  { Tag: "Daily Card", Link: "/" },
+  { Tag: "Daily", Link: "/daily" },
   { Tag: "Logs", Link: "/" },
   { Tag: "Disclaimer", Link: "/" }];
   const outItems = [{ Tag: "Home", Link: "/" },
@@ -127,7 +128,7 @@ function App() {
   const container = typeof window !== 'undefined' ? window.document.body : undefined;
 
   return (
-    //wrapping provier to the App component, we can then use the useQuery() Hook in any component to make a GraphQL query.
+    //wrapping provier to the App component, we can then use the Hooks in any component to make a GraphQL query.
     <ApolloProvider client={client}>
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
@@ -201,10 +202,10 @@ function App() {
               <Container>
                 <Routes>
                   <Route exact path="/" element={<Home />} />
-                  {/* <Route exact path="/Reading" element={<Reading />} /> */}
-                  {/* <Route exact path="/Card" element={<Card />} /> */}
+                  <Route exact path="/daily" element={<Daily />} />
+                  {/* <Route exact path="/cards" element={<Card />} /> */}
                   <Route exact path="/login" element={<LogIn />} />
-                  {/* <Route exact path="/log" element={<Log />} /> */}
+                  {/* <Route exact path="/logs" element={<Log />} /> */}
                   <Route exact path="/signup" element={<SignUp />} />
                   {/* <Route exact path="/profile" element={<ProfileContainer />} /> */}
                 </Routes>
