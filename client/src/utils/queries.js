@@ -3,7 +3,7 @@ import { gql } from '@apollo/client';
 //graphQL Queries
 
 // Query for getting the current user
-const ME_QUERY = gql`
+export const ME_QUERY = gql`
   query Me {
     me {
       _id
@@ -16,7 +16,7 @@ const ME_QUERY = gql`
 `;
 
 // Query for getting a specific log
-const LOG_QUERY = gql`
+export const LOG_QUERY = gql`
   query Log($logId: ID!) {
     log(logId: $logId) {
       _id
@@ -32,7 +32,7 @@ const LOG_QUERY = gql`
 `;
 
 // Query for getting a specific card
-const CARD_QUERY = gql`
+export const CARD_QUERY = gql`
   query Card($cardId: ID!) {
     card(cardId: $cardId) {
       _id
@@ -46,7 +46,7 @@ const CARD_QUERY = gql`
 `;
 
 // Query for getting a specific tarot card meaning
-const TAROT_QUERY = gql`
+export const TAROT_QUERY = gql`
   query Tarot($tarotName: String!) {
     tarot(tarotName: $tarotName) {
       name

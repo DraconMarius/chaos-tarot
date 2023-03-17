@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 // Mutation for signing up a new user
-const SIGNUP_MUTATION = gql`
+export const SIGNUP = gql`
   mutation SignUp($username: String!, $email: String!, $password: String!, $uprightOnly: Boolean!) {
     signUp(username: $username, email: $email, password: $password, uprightOnly: $uprightOnly) {
       token
@@ -17,7 +17,7 @@ const SIGNUP_MUTATION = gql`
 `;
 
 // Mutation for logging in a user
-const LOGIN_MUTATION = gql`
+export const LOGIN = gql`
   mutation LogIn($email: String!, $password: String!) {
     logIn(email: $email, password: $password) {
       token
@@ -33,7 +33,7 @@ const LOGIN_MUTATION = gql`
 `;
 
 // Mutation for updating a user's settings
-const UPDATE_USER_MUTATION = gql`
+export const UPDATE_USER = gql`
   mutation UpdateUser($userId: ID!, $uprightOnly: Boolean!) {
     updateUser(userId: $userId, uprightOnly: $uprightOnly) {
       _id
@@ -46,7 +46,7 @@ const UPDATE_USER_MUTATION = gql`
 `;
 
 // Mutation for creating a new log
-const CREATE_LOG_MUTATION = gql`
+export const CREATE_LOG = gql`
   mutation CreateLog($question: String!, $cards: [cardContent]!, $note: String) {
     createLog(question: $question, cards: $cards, note: $note) {
       _id
@@ -62,7 +62,7 @@ const CREATE_LOG_MUTATION = gql`
 `;
 
 // Mutation for updating an existing log
-const UPDATE_LOG_MUTATION = gql`
+export const UPDATE_LOG = gql`
   mutation UpdateLog($logId: ID!, $question: String!, $note: String) {
     updateLog(logId: $logId, question: $question, note: $note) {
       _id
