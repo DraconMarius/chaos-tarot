@@ -5,8 +5,7 @@ const dateFormat = require("../utils/dateFormat");
 const cardSchema = new Schema({
     name: {
         type: String,
-        require: true,
-        unique: true,
+        require: true
     },
     image: {
         type: String,
@@ -20,12 +19,7 @@ const cardSchema = new Schema({
         type: Date,
         default: Date.now,
         get: (timestamp) => dateFormat(timestamp),
-    },
-    user: {
-        type: String,
-        require: true
     }
-
 });
 
 const Card = model("Card", cardSchema);

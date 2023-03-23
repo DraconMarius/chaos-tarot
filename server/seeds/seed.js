@@ -6,13 +6,17 @@ https://labyrinthos.co/blogs/tarot-card-meanings-list
 */
 
 const db = require("../config/connection");
-const { Tarot, User } = require("../models");
+const { Tarot, User, Card, Log } = require("../models");
 const tarotData = require("./tarotData.json");
 //seed the db. delete existing db every time we seed
 db.once("open", async () => {
   try {
     //for testing purp
     await User.deleteMany({});
+
+    await Card.deleteMany({});
+
+    await Log.deleteMany({});
 
     await Tarot.deleteMany({});
 

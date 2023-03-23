@@ -20,7 +20,8 @@
         "graphql": "^16.3.0",
         "jsonwebtoken": "^8.5.1",
         "mongoose": "^6.1.8",
-        "openai": "^3.2.1"
+        "openai": "^3.2.1",
+        "dotenv": "^16.0.3"
     },
     "devDependencies": {
         "nodemon": "^2.0.6"

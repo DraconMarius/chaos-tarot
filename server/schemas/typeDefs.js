@@ -14,7 +14,6 @@ type Log {
     _id: ID
     date: String
     question: String!
-    image: String!
     cards: [ID!]
     note: String
 }
@@ -32,7 +31,6 @@ type Card {
     image: String!
     upright: Boolean!
     date: String
-    user: String
 }
 
 type Auth {
@@ -47,13 +45,6 @@ type Query {
     tarot(tarotName: String!): Tarot
 }
 
-input cardContent {
-    name: String!
-    image: String!
-    upright: Boolean!
-    username: String!
-}
-
 type Mutation {
     signUp(
         email: String!,
@@ -62,11 +53,7 @@ type Mutation {
     ): Auth
     logIn(email: String!, password: String!): Auth
     updateUser(userId: ID!, uprightOnly: Boolean!): User
-    createLog(
-        question: String!,
-        cards: [cardContent]!,
-        note: String,
-        ): Log
+    createLog(question: String, pref: String!, num: String!): Log
     updateLog(logId: ID!, question: String!, note: String): Log
 }
 `;

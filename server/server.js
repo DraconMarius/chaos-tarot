@@ -10,6 +10,9 @@ const path = require('path');
 //requiring middleware for token verification
 const { authMiddleware } = require('./utils/auth')
 
+const dotenv = require('dotenv');
+dotenv.config();
+
 //typeDefs and Resolvers for graphQL
 const { typeDefs, resolvers } = require('./schemas');
 
@@ -24,6 +27,7 @@ const app = express();
 const server = new ApolloServer({
     typeDefs,
     resolvers,
+    context: authMiddleware
 });
 //middlewares
 app.use(express.urlencoded({ extended: false }));

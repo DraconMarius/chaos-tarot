@@ -45,8 +45,8 @@ export const UPDATE_USER = gql`
 
 // Mutation for creating a new log
 export const CREATE_LOG = gql`
-  mutation CreateLog($question: String!, $cards: [cardContent]!, $note: String) {
-    createLog(question: $question, cards: $cards, note: $note) {
+  mutation CreateLog($question: String!) {
+    createLog(question: $question) {
       _id
       date
       question
