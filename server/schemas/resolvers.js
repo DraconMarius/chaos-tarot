@@ -5,6 +5,16 @@ const { openaiCreateLog,
     downloadImageFromURL,
     uploadImageToCloudinary, resClean, okJSON } = require('../utils/API')
 
+//fs to read and write img for AI edit and download img
+
+// const axios = require("axios");
+
+const fs = require("fs"),
+    // http = require("http"),
+    https = require("https");
+const Stream = require("stream").Transform;
+const path = require("path");
+
 // openai api for generation;
 const { Configuration, OpenAIApi } = require("openai");
 const configuration = new Configuration({
@@ -94,50 +104,38 @@ const resolvers = {
             parent,
             { question, pref, num }) => {
 
+            //geting reading from API
+            //pref = upright and inverted
+            //num = 1 or 3
+            //question is optional 
 
-
-            const openaiCreateLog = async (question, pref, num) => {
-                //pref = upright and inverted
-                //num = 1 or 3
-                //question is optional 
-
-                let prompt = `Experiment: You are a tarot card reader. 
-                    Simulate a random ${num} card ${question} reading that includes ${pref} cards as a possibility, 
+            let prompt = `Experiment: You are a tarot card reader. 
+                    Simulate a random ${num} card ${question} reading that includes ${pref} major and minor cards as a possibility, 
                     and list 1 concise advice per Card you would share to clarify. Respond in a JSON-string so it can be parsed directly.
                     JSON-like String: 
                     {card: 'card name', upright: 'true / false', meaning: 'meaning', advice: 'advice'};`
 
-                //reading generation
-                const response = await openai.createCompletion({
-                    model: "text-davinci-003",
-                    prompt: prompt,
-                    max_tokens: 3000,
-                    stop: ";",
-                    temperature: 0.5
-                })
-                console.log(response.data.choices[0]);
-                //doubly make sure the response we get is parsable
-                const cleanedRes = await resClean(response.data.choices[0].text);
-                //json parse, has error handling in util parse fn
-                const finalRes = await okJSON(cleanedRes);
-                if (finalRes) {
-                    return { //return the actual json obj so we can use it to generate card
-                        // and the cleaned string version to save to log
-                        finalRes, note: cleanedRes
-                    };
-                } else {
-                    throw new Error('Error parsing the JSON response from ChatGPT');
-                }
-            };
-            const AIresponse = await openaiCreateLog(question, pref, num)
-            console.log(AIresponse);
-            //const AIImage = await openaiCreateImage(cardName);
-            //const imageURL = await Promise.all(images.map(uploadImageToCloudinary));
+            //reading generation
+            const responseReading = await openai.createCompletion({
+                model: "text-davinci-003",
+                prompt: prompt,
+                max_tokens: 800,
+                stop: ";",
+                temperature: 0.5
+            })
+            console.log(responseReading.data.choices[0]);
+            //doubly make sure the response we get is parsable
+            const cleanedRes = await resClean(responseReading.data.choices[0].text);
+            //json parse, has error handling in util parse fn
+            const finalRes = await okJSON(cleanedRes);
+            console.log(cleanedRes);
+
+            const cardName = finalRes.card
 
             const cardCont = [{
-                name: "test1",
-                image: "2",
-                upright: true
+                name: finalRes.card,
+                image: "placeholder",
+                upright: finalRes.upright
             }
                 // {
                 //     name: "test2",
@@ -153,12 +151,12 @@ const resolvers = {
             const newCards = await Card.insertMany(cardCont);
             console.log(newCards);
             const newCardsID = newCards.map(card => card._id);
-            console.log(newCardsID + "test");
+            console.log(newCardsID + "<-- CardID test");
 
             const logCont = {
                 question,
                 cards: [...newCardsID],
-                note: AIresponse.note
+                note: cleanedRes
             }
 
 

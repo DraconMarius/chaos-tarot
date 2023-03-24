@@ -7,38 +7,65 @@ const Stream = require("stream").Transform;
 //upload/save to cloud
 const cloudinary = require('cloudinary')
 
-// openai api for generation;
-const { Configuration, OpenAIApi } = require("openai");
-const configuration = new Configuration({
-    // organization: "org-1nvXFlSzwuTzmg1WTc0CyxH8",
-    apiKey: process.env.OPENAI_API_KEY,
-});
-const openai = new OpenAIApi(configuration);
+// // openai api for generation;
+// const { Configuration, OpenAIApi } = require("openai");
+// const configuration = new Configuration({
+//     // organization: "org-1nvXFlSzwuTzmg1WTc0CyxH8",
+//     apiKey: process.env.OPENAI_API_KEY,
+// });
+// const openai = new OpenAIApi(configuration);
 
 
-const openaiCreateLog = async (question, pref, num) => {
-    //pref = upright and inverted
-    //num = 1 or 3
-    //question is optional 
+// const openaiCreateLog = async (question, pref, num) <-- moved to resolver
+//couldn't read API key from here for some reason
 
-    let prompt = `Experiment: You are a tarot card reader. 
-                    Simulate a random ${num} card ${question} reading that includes ${pref} cards as a possibility, 
-                    and list 1 concise advice per Card you would share to clarify. 
-                    Only respond in json format: {card: name, meaning: , advice:}`
+// const openaiCreateImage = async (cardName) => {
+//     // API for Dalle image generation
+// };
 
-    //reading generation
-    const response = await openai.createCompletion({
-        model: "text-davinci-003",
-        prompt: prompt
-    })
-    console.log(response)
-    return response
-};
+// //create file stream to load the img
+// // const image1Promise = new Promise((resolve, reject) => {
+// //     const imageStream = fs.createReadStream(path.join(__dirname, '..', 'template', 'black-fill.png'));
+// //     imageStream.on('error', reject);
+// //     imageStream.on('open', () => resolve(imageStream));
+// //     imageStream.on('data', (chunk) => {
+// //         console.log(chunk);
+// //     });
+// // });
+// const image1Buffer = fs.readFileSync(path.join(__dirname, '..', 'template', 'black-fill.png'));
 
-const openaiCreateImage = async (cardName) => {
-    // API for Dalle image generation
-};
+// // const image2Promise = new Promise((resolve, reject) => {
+// //     const imageStream = fs.createReadStream(path.join(__dirname, '..', 'template', 'black.png'));
+// //     imageStream.on('error', reject);
+// //     imageStream.on('open', () => resolve(imageStream));
+// // });
+// //then generate the edit
+// const imgRes = await openai.createImageVariation(
+//     {
+//         data: image1Buffer,
+//         headers: { 'Content-Type': 'image/png' }
+//     },
+//     `Tarot Card: ${cardName}`,
+//     1,
+//     "512 x 512",
+//     {
+//         // Add a custom transformResponse function
+//         transformResponse: (response) => {
+//             // Parse the response data
+//             const parsedData = JSON.parse(response.data);
+//             // Extract the necessary information (URL)
+//             const imageUrl = parsedData.data[0].url;
+//             // Return the extracted URL
+//             return imageUrl;
+//         },
+//     }
+// );
+// console.log(imgRes)
+// await downloadImageFromURL(imgRes);
 
+//const imageURL = await Promise.all(images.map(uploadImageToCloudinary));
+
+// to save ^
 
 const downloadImageFromURL = async (url) => {
     var client = https;
@@ -78,7 +105,6 @@ const resClean = (text) => {
         .replace(/\n/g, ' ')
         .replace(/(\w+):/g, '"$1":')
         .replace(/'/g, '"');
-    console.log(fixedString)
     return fixedString;
 }
 //try catch block to parse
@@ -93,4 +119,4 @@ const okJSON = (jsonString) => {
     }
 }
 
-module.exports = { openaiCreateLog, openaiCreateImage, downloadImageFromURL, uploadImageToCloudinary, resClean, okJSON };
+module.exports = { downloadImageFromURL, uploadImageToCloudinary, resClean, okJSON };
