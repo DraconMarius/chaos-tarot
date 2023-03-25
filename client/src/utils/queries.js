@@ -10,7 +10,18 @@ export const ME_QUERY = gql`
       username
       email
       password
-      Logs
+      logs{
+        _id
+        date
+        question
+        cards {
+          _id
+          image
+          description
+          upright
+        }
+        note
+      }
     }
   }
 `;
@@ -22,7 +33,6 @@ export const LOG_QUERY = gql`
       _id
       date
       question
-      image
       cards {
         _id
       }

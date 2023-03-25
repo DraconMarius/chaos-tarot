@@ -65,7 +65,34 @@ const cloudinary = require('cloudinary')
 
 //const imageURL = await Promise.all(images.map(uploadImageToCloudinary));
 
-// to save ^
+// to save ^ another version of the generate img using sharp V
+
+//  //create file stream to load the img
+//  const ogPath = path.join(__dirname, '../template/black-fill.png');
+//  const ogImg = await sharp(ogPath).toBuffer();
+//  const ogStream = await sharp(ogImg).jpeg().toBuffer();
+//  //then generate the edit
+//  const imgRes = await openai.createImageVariation(
+//      ogStream,
+//      `Tarot Card The Sun`,
+//      1,
+//      "512 x 512",
+//      {
+//          // Add a custom transformResponse function
+//          transformResponse: (response) => {
+//              // Parse the response data
+//              const parsedData = JSON.parse(response.data);
+//              // Extract the necessary information (URL)
+//              const imageUrl = parsedData.data[0].url;
+//              // Return the extracted URL
+//              return imageUrl;
+//          },
+//      }
+//  );
+//  console.log(imgRes)
+//  await downloadImageFromURL(imgRes);
+
+//const imageURL = await Promise.all(images.map(uploadImageToCloudinary));
 
 const downloadImageFromURL = async (url) => {
     var client = https;
@@ -82,7 +109,7 @@ const downloadImageFromURL = async (url) => {
             // console.log(data.read());
 
             response.on("end", function () {
-                fs.writeFileSync(`./template/img/${filename}`, data.read());
+                fs.writeFileSync(`../template/${filename}`, data.read());
             })
         })
 };
@@ -111,7 +138,7 @@ const resClean = (text) => {
 const okJSON = (jsonString) => {
     try {
         const json = JSON.parse(jsonString);
-        console.log(json);
+        // console.log(json);
         return json;
     } catch (error) {
         console.error('Error parsing JSON from API:', error, jsonString);

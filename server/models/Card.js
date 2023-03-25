@@ -11,6 +11,10 @@ const cardSchema = new Schema({
         type: String,
         require: true,
     },
+    description: {
+        type: String,
+        require: true,
+    },
     upright: {
         type: Boolean,
         required: true,

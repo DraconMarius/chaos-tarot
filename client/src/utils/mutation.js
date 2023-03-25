@@ -24,7 +24,18 @@ export const LOGIN = gql`
         _id
         email
         password
-        Logs
+        logs{
+          _id
+          date
+          question
+          cards {
+            _id
+            image
+            description
+            upright
+          }
+          note
+        }
       }
     }
   }
@@ -50,7 +61,6 @@ export const CREATE_LOG = gql`
       _id
       date
       question
-      image
       cards {
         _id
       }
@@ -58,6 +68,24 @@ export const CREATE_LOG = gql`
     }
   }
 `;
+
+//Mutation for creating a new card img and update log, return log
+export const CREATE_CARD = gql`
+  mutation CreateCard($note: String, $logId: ID!) {
+    createCard(note: $note, logId: $logId) {
+      _id
+      date
+      question
+      cards {
+        _id
+        image
+        description
+        upright
+      }
+      note
+    }
+  } 
+`
 
 // Mutation for updating an existing log
 export const UPDATE_LOG = gql`
