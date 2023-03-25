@@ -5,17 +5,6 @@ const { openaiCreateLog,
     downloadImageFromURL,
     uploadImageToCloudinary, resClean, okJSON } = require('../utils/API')
 
-//fs to read and write img for AI edit and download img
-
-const axios = require("axios");
-
-const fs = require("fs"),
-    // http = require("http"),
-    https = require("https");
-const Stream = require("stream").Transform;
-const FormData = require('form-data');
-// const path = require("path");
-// const sharp = require("sharp");
 
 // openai api for generation;
 const { Configuration, OpenAIApi } = require("openai");
@@ -27,7 +16,7 @@ const openai = new OpenAIApi(configuration);
 
 const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
-const { LocalConvenienceStoreOutlined } = require('@mui/icons-material');
+const { LocalConvenienceStoreOutlined, Input } = require('@mui/icons-material');
 
 const resolvers = {
     Query: {
@@ -60,6 +49,7 @@ const resolvers = {
             parent,
             { email, password, uprightOnly }) => {
             //creating a user based on what we passed in the argument
+            console.log(uprightOnly)
             const newUser = await User.create({
                 email,
                 password,
@@ -116,18 +106,27 @@ const resolvers = {
         //to create the log
         createLog: async (
             parent,
-            { question, pref, num }) => {
+            { question, pref, num, userId }) => {
 
             //geting reading from API
-            //pref = upright and inverted
+            //pref = string true false
             //num = 1 or 3
             //question is optional 
 
-            let prompt = `Experiment: You are a tarot card reader. 
-                    Pick a really random ${num} card for a ${question} reading that includes ${pref} for Major and Minor arcana Tarot cards as a possibility, 
-                    and list 1 concise advice per Card you would share to clarify. Respond in a JSON-string so it can be parsed directly.
-                    JSON-like String: 
-                    {card: 'card name', upright: 'true / false', 'imagery': imagery, meaning: 'meaning', advice: 'advice'};`
+            let prompt = `Choose ${num} random number from -78 to 77 representing upright and inverted tarot card for a ${question} reading with Major and Minor Arcana Tarot cards as a possibility, then one sentence about the imagery of the card, and
+            1 concise advice per Card you would share to clarify. Respond in a JSON-string so it can be parsed directly.
+            JSON-like String: 
+            {card: 'card name', upright: 'true / false', 'imagery': imagery  meaning: 'meaning', advice: 'advice'};`
+
+            if (pref === "true") {
+                prompt = `Experiment: You are a tarot card reader, 
+                Choose ${num} random number from 0 to 77 representing upright only tarot card for a ${question} reading with Major and Minor Arcana Tarot cards as a possibility, then one sentence about the imagery of the card, and
+                 1 concise advice per Card you would share to clarify. Respond in a JSON-string so it can be parsed directly.
+                 JSON-like String: 
+                 {card: 'card name', upright: 'true / false', 'imagery': imagery  meaning: 'meaning', advice: 'advice'};`
+            }
+
+            console.log(prompt);
 
             //reading generation
             const responseReading = await openai.createCompletion({
@@ -151,52 +150,40 @@ const resolvers = {
                 note: cleanedRes
             }
             const newLog = await Log.create(logCont);
+
+            //update User entries by pushing newly created Log ID
+            await User.findByIdAndUpdate(
+                userId,
+                { $addToSet: { matches: newLog._id } },
+                { new: true }
+            );
+
+
             console.log(newLog);
             return newLog;
         },
 
-        createCard: async (parent, { note, logId }) => {
+        createCard: async (parent, { note, logId, imgUrl, name }) => {
             const obj = okJSON(note);
-            console.log(obj);
+            // console.log(obj);
             const flip = "is upside down"
             const cardName = obj.card;
             let prompt = obj.imagery;
             const upright = obj.upright;
 
-            if (!upright) {
-                return prompt = `${description}, ${flip}`
-            };
+            if (upright === "false") {
+                prompt = `Tarot Card "${cardName}", ${prompt}, ${flip}`
+            } else {
+                prompt = `Tarot Card "${cardName}", ${prompt}`
+            }
+            console.log(prompt)
 
-            const inputImageURL = "https://res.cloudinary.com/dbjhly3lm/image/upload/v1679693646/input.png";
-            const maskImageURL = "https://res.cloudinary.com/dbjhly3lm/image/upload/v1679693645/mask.png";
+            let imageURL = response.data.data[0].url;
 
-            let formData = new FormData();
-            const apiUrl = 'https://api.openai.com/v1/images/variations';
-            const headers = {
-                'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
-                'Content-Type': `multipart/form-data; boundary=${formData._boundary}`
-            };
+            await downloadImageFromURL(imgUrl, name);
 
-            formData.append('image', await axios.get(inputImageURL, { responseType: 'arraybuffer' }), {
-                filename: 'input.png',
-                contentType: 'image/png'
-            });
-            formData.append('mask', await axios.get(maskImageURL, { responseType: 'arraybuffer' }), {
-                filename: 'mask.png',
-                contentType: 'image/png'
-            });
-            formData.append('prompt', prompt);
-            formData.append('n', "1");
-            formData.append('size', "512x512");
+            await uploadImageToCloudinary(name);
 
-            const response = await axios.post(apiUrl, formData, { headers });
-            console.log(response.data);
-            const imageUrl = response.data.data[0].url;
-            console.log(imageUrl)
-
-            await downloadImageFromURL(imageUrl);
-
-            //const imageURL = await Promise.all(images.map(uploadImageToCloudinary));
 
             const cardCont = [{
                 name: cardName,

@@ -34,22 +34,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 //cloudinary
-var cloudinary = require('cloudinary');
-cloudinary.config({
-    cloud_name: process.env.CLOUD_NAME,
-    api_key: process.env.API_KEY,
-    api_secret: process.env.API_SECRET
-});
+
 
 //static public build folder
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../client/build')));
 }
 
-//catch route
-// app.get('*', (req, res) => {
-//     res.sendFile(path.join(__dirname, '../client/build/index.html'));
-// })
+// catch route
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build/index.html'));
+})
 
 
 // Create a new instance of an Apollo server with the GraphQL schema

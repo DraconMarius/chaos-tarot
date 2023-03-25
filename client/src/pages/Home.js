@@ -1,54 +1,38 @@
-import React, { useState } from 'react';
-import { Typography } from '@mui/material';
-import { styled } from '@emotion/react';
-import { PageFlip } from 'react-pageflip';
 
-const HomePageContainer = styled('div')`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  background-color: #f5f5f5;
-`;
-
-const Page = styled('div')`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: white;
-`;
-
-const PageContent = styled('div')`
-  width: 80%;
-  height: 80%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
+import React, { useState, useEffect, useRef } from 'react';
+import { FlippingPages } from 'flipping-pages';
+import { Paper, Typography } from '@mui/material';
+// import "../styles/Home.css";
+import styled from '@emotion/styled';
 
 const Home = () => {
-    const [date] = useState(new Date().toLocaleDateString());
+    const [selected, setSelected] = useState(0);
+    const back = () => {
+        setSelected(selected => Math.max(selected - 1, 0));
+    }
+    const next = () => {
+        setSelected(selected => Math.max(selected + 1, 1));
+    }
 
     return (
-        <HomePageContainer>
-            <Typography variant="h5" component="h2" gutterBottom>
-                {date}
-            </Typography>
-            <PageFlip>
-                <Page>
-                    <PageContent>
-                        <Typography variant="h4" component="h1" gutterBottom>
-                            Welcome
-                        </Typography>
-                    </PageContent>
-                </Page>
-                {/* Add more pages if needed */}
-            </PageFlip>
-        </HomePageContainer>
+        <div className="pages">
+            <FlippingPages
+                direction="right-to-left"
+                onSwpeEnd={setSelected}
+                selected={selected}
+            >
+                <div className="page page1"><Paper>Page 1</Paper></div>
+                <div className="page page2"><Paper>Page 2</Paper></div>
+                <div className="page page3"><Paper>Page 3</Paper></div>
+            </FlippingPages>
+
+            <div className="container">
+                <div>
+                    <button onClick={back}>Back</button>
+                    <button onClick={next}>Next</button>
+                </div>
+            </div>
+        </div>
     );
 };
 

@@ -25,7 +25,7 @@ const Signup = () => {
         setPref(!uprightOnly)
     }
 
-    const [newUser, { error, data }] = useMutation(SIGNUP);
+    const [newUser] = useMutation(SIGNUP);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -36,6 +36,7 @@ const Signup = () => {
             password: formData.get('password'),
             uprightOnly: uprightOnly,
         };
+        console.log(newObj)
         try {
             // console.log("flag");
             // newUser mutation

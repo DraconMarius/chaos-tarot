@@ -19,7 +19,7 @@ const StyledForm = styled('form')`
 
 const LogIn = () => {
 
-    const [logIn, { error, data }] = useMutation(LOGIN);
+    const [logIn] = useMutation(LOGIN);
 
     const [errorMessage, setErrorMessage] = useState('');
 
