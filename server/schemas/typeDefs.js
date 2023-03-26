@@ -41,6 +41,7 @@ type Auth {
 
 type Query {
     me: User
+    user(userId: ID!): User
     log(logId: ID!): Log
     card(cardId: ID!): Card
     tarot(tarotName: String!): Tarot

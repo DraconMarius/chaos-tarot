@@ -5,13 +5,24 @@ import styled from '@emotion/styled'
 
 
 
-const Reading = ({logData}) => {
+
+function Reading({ logData }) {
     const [selected, setSelected] = useState(0);
     console.log(logData)
-    const [display, setDisplay] = useState(logData)
+    const [log, setLog] = useState()
+    const okJSON = (logData) => {
+        try {
+            const json = JSON.parse(logData.note);
+            // console.log(json);
+            return json;
+        } catch (error) {
+            console.error('Error parsing JSON from API:', error, logData.note);
+            return null;
+        }
+    }
 
     useEffect(() => {
-        setDisplay(logData);
+
     }, [logData]);
 
     const handleSubmit = (e, newData) => {
@@ -37,12 +48,13 @@ const Reading = ({logData}) => {
 
     return (
         <div className="pages">
-            <FlippingPages
+            {/* <FlippingPages
             // direction="right-to-left"
             // onSwpeEnd={setSelected}
             // selected={selected}
-            >
-                <div className="page page1">
+            > */}
+            {(!logData) ? ("Error, please refresh to try again") :
+                (<div className="page page1">
                     <Container>
                         <Box
                             sx={{
@@ -61,7 +73,6 @@ const Reading = ({logData}) => {
                             <ReadingForm onSubmit={handleSubmit}>
                                 <TextField
                                     variant="outlined"
-                                    value={display.note}
                                     required
                                     fullWidth
                                     id="title"
@@ -91,8 +102,9 @@ const Reading = ({logData}) => {
                                 Save
                             </Button>
                         </Box>
-                    </Container></div>
-            </FlippingPages>
+                    </Container></div>)
+            }
+            {/* </FlippingPages> */}
 
         </div>
     );

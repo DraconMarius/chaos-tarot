@@ -33,7 +33,9 @@ import Button from '@mui/material/Button';
 import LogIn from './pages/Login';
 import SignUp from './pages/Signup';
 import Home from './pages/Home';
-import Daily from './pages/Daily';
+import ReadingContainer from './components/ReadingContainer';
+
+
 // import Log from './pages/Log';
 // import Reading from './pages/Reading';
 
@@ -84,6 +86,8 @@ function App() {
 
   //setting state for toggle
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [loggedInU, setUserU] = React.useState();
+
   const toggleMenu = () => {
     setMobileOpen((prevState) => !prevState);
   }
@@ -202,7 +206,7 @@ function App() {
               <Container>
                 <Routes>
                   <Route exact path="/" element={<Home />} />
-                  <Route exact path="/daily" element={<Daily />} />
+                  <Route exact path="/daily" element={<ReadingContainer />} />
                   {/* <Route exact path="/cards" element={<Card />} /> */}
                   <Route exact path="/login" element={<LogIn />} />
                   {/* <Route exact path="/logs" element={<Log />} /> */}

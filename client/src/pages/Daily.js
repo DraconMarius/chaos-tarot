@@ -5,11 +5,14 @@ import Grid from '@mui/material/Grid';
 import Alert from '@mui/material/Alert';
 
 import Reading from './../components/Reading'
+
 import { useQuery, useMutation } from "@apollo/client";
-import { ME_QUERY } from '../utils/queries';
+import { USER_QUERY } from '../utils/queries';
 import { CREATE_LOG, CREATE_CARD } from '../utils/mutation';
 import { Configuration, OpenAIApi } from "openai";
 import okJSON from '../utils/API'
+
+import Auth from '../utils/auth'
 
 
 // import input from './assets/input.png';
@@ -21,32 +24,36 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 
-const Daily = () => {
+const Daily = ({ user }) => {
     const current = new Date();
     const date = ` ${current.getMonth()} / 
                     ${current.getDate()} / 
                     ${current.getFullYear()}`
-
-    const { loading: loading, data: user } = useQuery(ME_QUERY);
-    // const Log = user?.log || [];
+    // const { loading: loading, data: user } = useQuery(USER_QUERY, {
+    //     variables: { userId: Auth.getProfile.user_ }
+    // });
+    // const userId = user.me._id;
+    // console.log(userObj);
     const [createLog] = useMutation(CREATE_LOG);
     const [createCard] = useMutation(CREATE_CARD);
     const [logData, setLogData] = useState(null);
     //check if log contain same dates
+
     useEffect(() => {
         const hasTodayLog = (logs) => {
-            const today = new Date();
             return logs.some(log => {
                 const logDate = new Date(log.date);
-                return logDate.getDate() === today.getDate() &&
-                    logDate.getMonth() === today.getMonth() &&
-                    logDate.getFullYear() === today.getFullYear();
+                return logDate.getDate() === current.getDate() &&
+                    logDate.getMonth() === current.getMonth() &&
+                    logDate.getFullYear() === current.getFullYear();
             });
         };
+        console.log(hasTodayLog);
+
         const fetchLogData = async () => {
-            if (!loading && user) {
+            if (user) {
                 const logs = user.me.logs;
-                const pref = user.me.uprightOnly
+                const pref = user.me.uprightOnly;
 
                 console.log(pref);
 
@@ -114,8 +121,11 @@ const Daily = () => {
                 }
             }
         };
+
         fetchLogData();
-    }, [loading, logData]);
+    }, []);
+
+
 
 
     return (

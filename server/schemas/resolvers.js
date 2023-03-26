@@ -16,13 +16,22 @@ const openai = new OpenAIApi(configuration);
 
 const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
-const { LocalConvenienceStoreOutlined, Input } = require('@mui/icons-material');
-
 const resolvers = {
     Query: {
         //get self from loggedIn context
         me: async (parent, args, context) => {
-            return User.findbyId(context.user._id).populate({
+            console.log(context.user._id)
+            return User.findById(context.user._id).populate({
+                path: 'logs',
+                populate: {
+                    path: 'cards'
+                }
+            })
+
+        },
+
+        user: async (parent, args) => {
+            return User.findById(args._id).populate({
                 path: 'logs',
                 populate: {
                     path: 'cards'
