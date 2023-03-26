@@ -76,9 +76,6 @@ export const CREATE_CARD = gql`
       question
       cards {
         _id
-        image
-        description
-        upright
       }
       note
     }

@@ -122,15 +122,14 @@ const resolvers = {
             //num = 1 or 3
             //question is optional 
 
-            let prompt = `Choose ${num} random number from -78 to 77 representing upright and inverted tarot cards for a ${question} reading with Major and Minor Arcana Tarot cards as possibilities, then one sentence about the imagery of the card, and
-            1 concise advice per Card you would share to clarify. Respond in a JSON-string so it can be parsed directly.
+            let prompt = `Experiment: You are a tarot card reader and math generator, Choose 1 random number from -78 to 77 where each number representing upright (positive number) and inverted(negative number) major and minor arcana cards for a ${question} reading, then provide one sentence about the imagery of the card, and
+            1 concise advice per Card you would share to clarify. Only Respond in a JSON-string so it can be parsed directly.
             JSON-like String format: 
             {card: 'card name', upright: 'true / false', 'imagery': imagery  meaning: 'meaning', advice: 'advice'};`
 
             if (pref) {
-                prompt = `Experiment: You are a tarot card reader, 
-                Choose ${num} random number from 0 to 77 representing upright only tarot card for a ${question} reading with Major and Minor Arcana Tarot cards as possibilities, then one sentence about the imagery of the card, and
-                 1 concise advice per Card you would share to clarify. Respond in a JSON-string so it can be parsed directly.
+                prompt = `Experiment: You are a tarot card reader and math generator, Choose 1 random number from 0 to 77 where each number representing only upright magor and minor arcana tarot card for a ${question} reading, then one sentence about the imagery of the card, and
+                 1 concise advice per Card you would share to clarify. Only Respond in a JSON-string so it can be parsed directly.
                  JSON-like String format: 
                  {card: card name, upright: true / false, imagery: imagery  meaning: meaning, advice: advice};`
             }
@@ -180,11 +179,18 @@ const resolvers = {
             console.log(obj);
             const cardName = obj.card;
             let prompt = obj.imagery;
-            const upright = obj.upright;
-            console.log(prompt)
+            const upright = await obj.upright;
+            console.log(upright)
+
+            if (upright === "false") {
+                prompt = `Tarot Card "${cardName}", ${prompt}, ${flip}`
+            } else {
+                prompt = `Tarot Card "${cardName}", ${prompt}`
+            }
+            console.log(prompt + "<-- prompt");
 
             const cardCont = [{
-                name: cardName,
+                name: name,
                 image: imgUrl,
                 description: prompt,
                 upright: upright
@@ -205,17 +211,13 @@ const resolvers = {
                 logId,
                 {
                     $set: {
-                        card: [...newCards]
+                        cards: [...newCardsID]
                     }
                 },
-                { new: true }
+                { new: true, upsert: true }
             );
 
-            const populateLog = await insertLog.populate("cards").execPopulate();
-
-            console.log(populateLog);
-
-            return populateLog;
+            return insertLog;
         },
 
         //updating log's note or question

@@ -3,6 +3,7 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import { Box, Button, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import Backdrop from '@mui/material/Backdrop';
 
 import Reading from './../components/Reading'
 
@@ -47,11 +48,11 @@ const Daily = ({ userId, uprightOnly, logs }) => {
                     userId: userId
                 }
             });
-            const logId = data.createLog._id
-            const stringNote = data.createLog.note
+            const logId = await data.createLog._id
+            const stringNote = await data.createLog.note
 
             const obj = okJSON(stringNote);
-            console.log(typeof (stringNote))
+            console.log(logId)
             console.log(obj);
             const flip = "is upside down"
             const cardName = obj.card;
@@ -82,7 +83,8 @@ const Daily = ({ userId, uprightOnly, logs }) => {
             }).then(response => response.json());
             console.log(imgRes)
 
-            const name = imgRes.created
+            const name = await imgRes.created
+            console.log(name)
 
             const imgB64 = imgRes.data[0].b64_json;
             const imgBlob = await fetch(`data:image/png;base64,${imgB64}`).then((r) => r.blob());
@@ -100,20 +102,19 @@ const Daily = ({ userId, uprightOnly, logs }) => {
             ).then(response => response.json());
             console.log(cloudinaryRes);
 
-            const cloudinaryUrl = cloudinaryRes.secure_url;
+            const cloudinaryUrl = await cloudinaryRes.url;
             console.log(cloudinaryUrl);
             const { dataCloud } = await createCard({
                 variables:
                 {
-                    logId: logId,
-                    imgUrl: cloudinaryUrl,
-                    name: name
+                    logId: `${logId}`,
+                    imgUrl: `${cloudinaryUrl}`,
+                    name: `${name}`
                 }
             });
 
-            console.log(dataCloud.getCard);
-
-            setLogData(dataCloud.createCard);
+            setLogData(dataCloud);
+            console.log(dataCloud);
         }
         fetchLogData();
     };
