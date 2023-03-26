@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import { Box, Button, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import Reading from './../components/Reading'
 
@@ -11,7 +12,9 @@ import { useQuery, useMutation } from "@apollo/client";
 import { USER_QUERY } from '../utils/queries';
 import { CREATE_LOG, CREATE_CARD } from '../utils/mutation';
 import { Configuration, OpenAIApi } from "openai";
-import { okJSON, resClean } from '../utils/API'
+import FormData from 'form-data';
+
+import { okJSON, resClean, urlToBase64DataUrl, dataUrlToFile } from '../utils/API'
 
 
 
@@ -28,12 +31,15 @@ const Daily = ({ userId, uprightOnly, logs }) => {
     const [logData, setLogData] = useState(null);
     const [questionType, setQuestionType] = useState("daily");
 
+    const [loading, setLoading] = useState(false);
+
     const handleChange = (event) => {
         setQuestionType(event.target.value);
     };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setLoading(true);
         //check if log contain same dates
         const fetchLogData = async () => {
 
@@ -67,21 +73,49 @@ const Daily = ({ userId, uprightOnly, logs }) => {
             }
             console.log(prompt + "<-- prompt");
 
-            //then generate the edit
-            const imgRes = await fetch('https://api.openai.com/v1/images/generations', {
+            // then generate the edit
+            // const imgRes = await fetch('https://api.openai.com/v1/images/generations', {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //         'Authorization': `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
+            //     },
+            //     body: JSON.stringify({
+            //         prompt: prompt,
+            //         n: 1,
+            //         size: "512x512",
+            //         response_format: "b64_json",
+            //     }),
+            // }).then(response => response.json());
+            // console.log(imgRes)
+
+
+            const inputImgUrl = 'https://res.cloudinary.com/dbjhly3lm/image/upload/v1679693646/input.png.png';
+            const maskImgUrl = 'https://res.cloudinary.com/dbjhly3lm/image/upload/v1679693645/mask.png.png';
+            const [inputBlob, maskBlob] = await Promise.all([
+                fetch(inputImgUrl).then((r) => r.blob()),
+                fetch(maskImgUrl).then((r) => r.blob())
+            ]);
+            inputBlob.name = "input.png";
+            maskBlob.name = "mask.png";
+
+            const imgFormData = new FormData();
+            imgFormData.append("image", inputBlob, "input.png");
+            imgFormData.append("mask", maskBlob, "mask.png");
+            imgFormData.append("prompt", prompt);
+            imgFormData.append("n", 1);
+            imgFormData.append("size", "512x512");
+            imgFormData.append("response_format", "b64_json");
+
+            const imgRes = await fetch('https://api.openai.com/v1/images/edits', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
+                    'Authorization': `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`
                 },
-                body: JSON.stringify({
-                    prompt: prompt,
-                    n: 1,
-                    size: "512x512",
-                    response_format: "b64_json",
-                }),
+                body: imgFormData
             }).then(response => response.json());
             console.log(imgRes)
+                ;
 
             const name = await imgRes.created
             console.log(name)
@@ -115,6 +149,7 @@ const Daily = ({ userId, uprightOnly, logs }) => {
 
             setLogData(dataCloud);
             console.log(dataCloud);
+            setLoading(false);
         }
         fetchLogData();
     };
@@ -141,7 +176,7 @@ const Daily = ({ userId, uprightOnly, logs }) => {
                 </Box>
                 <Box sx={{ mt: 2 }}>
                     <Button variant="contained" color="primary" onClick={handleSubmit}>
-                        Run createLog Mutation
+                        Pull a Card
                     </Button>
                 </Box>
                 {(!logData) ? (
@@ -152,6 +187,12 @@ const Daily = ({ userId, uprightOnly, logs }) => {
                     </Grid>
                 )}
             </Grid>
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={loading}
+            >
+                <CircularProgress color="inherit" />
+            </Backdrop>
         </Container>
     );
 };
