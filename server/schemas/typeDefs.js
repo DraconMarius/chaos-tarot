@@ -56,7 +56,7 @@ type Mutation {
     logIn(email: String!, password: String!): Auth
     updateUser(userId: ID!, uprightOnly: Boolean!): User
     createLog(question: String!, pref: Boolean!, num: String!, userId: String!): Log
-    createCard(note: String!, logId: ID!, imgUrl: String!, name: String!): Log
+    createCard(logId: ID!, imgUrl: String!, name: String!): Log
     updateLog(logId: ID!, question: String!, note: String): Log
 }
 `;

@@ -69,8 +69,8 @@ export const CREATE_LOG = gql`
 
 //Mutation for creating a new card img and update log, return log
 export const CREATE_CARD = gql`
-  mutation CreateCard($note: String, $logId: ID!, $imgUrl: String!, $name: String!) {
-    createCard(note: $note, logId: $logId, imgUrl: $imgUrl, name: $name) {
+  mutation CreateCard( $logId: ID!, $imgUrl: String!, $name: String!) {
+    createCard( logId: $logId, imgUrl: $imgUrl, name: $name) {
       _id
       date
       question

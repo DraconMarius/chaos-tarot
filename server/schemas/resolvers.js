@@ -122,17 +122,17 @@ const resolvers = {
             //num = 1 or 3
             //question is optional 
 
-            let prompt = `Choose ${num} random number from -78 to 77 representing upright and inverted tarot card for a ${question} reading with Major and Minor Arcana Tarot cards as a possibility, then one sentence about the imagery of the card, and
+            let prompt = `Choose ${num} random number from -78 to 77 representing upright and inverted tarot cards for a ${question} reading with Major and Minor Arcana Tarot cards as possibilities, then one sentence about the imagery of the card, and
             1 concise advice per Card you would share to clarify. Respond in a JSON-string so it can be parsed directly.
-            JSON-like String: 
+            JSON-like String format: 
             {card: 'card name', upright: 'true / false', 'imagery': imagery  meaning: 'meaning', advice: 'advice'};`
 
-            if (pref === "true") {
+            if (pref) {
                 prompt = `Experiment: You are a tarot card reader, 
-                Choose ${num} random number from 0 to 77 representing upright only tarot card for a ${question} reading with Major and Minor Arcana Tarot cards as a possibility, then one sentence about the imagery of the card, and
+                Choose ${num} random number from 0 to 77 representing upright only tarot card for a ${question} reading with Major and Minor Arcana Tarot cards as possibilities, then one sentence about the imagery of the card, and
                  1 concise advice per Card you would share to clarify. Respond in a JSON-string so it can be parsed directly.
-                 JSON-like String: 
-                 {card: 'card name', upright: 'true / false', 'imagery': imagery  meaning: 'meaning', advice: 'advice'};`
+                 JSON-like String format: 
+                 {card: card name, upright: true / false, imagery: imagery  meaning: meaning, advice: advice};`
             }
 
             console.log(prompt);
@@ -143,14 +143,14 @@ const resolvers = {
                 prompt: prompt,
                 max_tokens: 600,
                 stop: ";",
-                temperature: 1
+                temperature: 0.5
             })
             console.log(responseReading.data.choices[0]);
             //make doubly sure the response we get is parsable
             const cleanedRes = await resClean(responseReading.data.choices[0].text);
             //json parse, has error handling in util parse fn
             const finalRes = await okJSON(cleanedRes);
-            console.log(cleanedRes);
+            console.log(cleanedRes, + "<-- test cleanedRes");
             console.log(finalRes);
 
             const logCont = {
@@ -161,42 +161,31 @@ const resolvers = {
             const newLog = await Log.create(logCont);
 
             //update User entries by pushing newly created Log ID
-            await User.findByIdAndUpdate(
+            const updateUser = await User.findByIdAndUpdate(
                 userId,
-                { $addToSet: { matches: newLog._id } },
+                { $addToSet: { logs: newLog._id } },
                 { new: true }
             );
 
-
+            console.log(updateUser)
             console.log(newLog);
             return newLog;
         },
 
-        createCard: async (parent, { note, logId, imgUrl, name }) => {
-            const obj = okJSON(note);
-            // console.log(obj);
-            const flip = "is upside down"
+        createCard: async (parent, { logId, imgUrl, name }) => {
+
+            const getLog = await Log.findById(logId)
+
+            const obj = okJSON(getLog.note);
+            console.log(obj);
             const cardName = obj.card;
             let prompt = obj.imagery;
             const upright = obj.upright;
-
-            if (upright === "false") {
-                prompt = `Tarot Card "${cardName}", ${prompt}, ${flip}`
-            } else {
-                prompt = `Tarot Card "${cardName}", ${prompt}`
-            }
             console.log(prompt)
-
-            let imageURL = response.data.data[0].url;
-
-            await downloadImageFromURL(imgUrl, name);
-
-            await uploadImageToCloudinary(name);
-
 
             const cardCont = [{
                 name: cardName,
-                image: imgRes,
+                image: imgUrl,
                 description: prompt,
                 upright: upright
             }
@@ -206,6 +195,7 @@ const resolvers = {
                 //     upright: false
                 // }
             ];
+            console.log(cardCont + "testing card create")
             const newCards = await Card.insertMany(cardCont);
             console.log(newCards);
             const newCardsID = newCards.map(card => card._id);

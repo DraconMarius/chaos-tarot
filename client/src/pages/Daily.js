@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-import Alert from '@mui/material/Alert';
+import { Box, Button, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 
 import Reading from './../components/Reading'
 
@@ -10,120 +10,113 @@ import { useQuery, useMutation } from "@apollo/client";
 import { USER_QUERY } from '../utils/queries';
 import { CREATE_LOG, CREATE_CARD } from '../utils/mutation';
 import { Configuration, OpenAIApi } from "openai";
-import okJSON from '../utils/API'
-
-import Auth from '../utils/auth'
+import { okJSON, resClean } from '../utils/API'
 
 
-// import input from './assets/input.png';
-// import mask from './assets/mask.png';
 
-const configuration = new Configuration({
-    apiKey: process.env.OPENAI_API_KEY,
-});
-const openai = new OpenAIApi(configuration);
-
-
-const Daily = ({ user }) => {
+const Daily = ({ userId, uprightOnly, logs }) => {
     const current = new Date();
     const date = ` ${current.getMonth()} / 
                     ${current.getDate()} / 
                     ${current.getFullYear()}`
-    // const { loading: loading, data: user } = useQuery(USER_QUERY, {
-    //     variables: { userId: Auth.getProfile.user_ }
-    // });
-    // const userId = user.me._id;
-    // console.log(userObj);
+
+    console.log(userId, uprightOnly, logs);
+
     const [createLog] = useMutation(CREATE_LOG);
     const [createCard] = useMutation(CREATE_CARD);
     const [logData, setLogData] = useState(null);
-    //check if log contain same dates
+    const [questionType, setQuestionType] = useState("daily");
 
-    useEffect(() => {
-        const hasTodayLog = (logs) => {
-            return logs.some(log => {
-                const logDate = new Date(log.date);
-                return logDate.getDate() === current.getDate() &&
-                    logDate.getMonth() === current.getMonth() &&
-                    logDate.getFullYear() === current.getFullYear();
-            });
-        };
-        console.log(hasTodayLog);
+    const handleChange = (event) => {
+        setQuestionType(event.target.value);
+    };
 
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        //check if log contain same dates
         const fetchLogData = async () => {
-            if (user) {
-                const logs = user.me.logs;
-                const pref = user.me.uprightOnly;
 
-                console.log(pref);
+            // Perform createLog mutation
 
-                if (!hasTodayLog(logs)) {
-                    // Perform createLog mutation
-
-                    const { data } = await createLog({
-                        variables:
-                        {
-                            question: 'Daily',
-                            pref: pref,
-                            num: "1",
-                            userId: user.me._id
-                        }
-                    });
-                    const logId = data.createLog.logId
-                    const note = data.createLog.note
-                    const obj = okJSON(note);
-                    // console.log(obj);
-                    const flip = "is upside down"
-                    const cardName = obj.card;
-                    let prompt = obj.imagery;
-                    const upright = obj.upright;
-
-                    if (upright === "false") {
-                        prompt = `Tarot Card "${cardName}", ${prompt}, ${flip}`
-                    } else {
-                        prompt = `Tarot Card "${cardName}", ${prompt}`
-                    }
-                    console.log(prompt);
-                    //then generate the edit
-                    const imgRes = await openai.createImage({
-                        promt: prompt,
-                        n: 1,
-                        size: "512 x 512",
-                    });
-                    let imgUrl = imgRes.data.data[0].url
-                    const name = imgRes.data.created;
-
-                    console.log(imgRes.data)
-                    console.log(imgUrl)
-
-                    const { dataCloud } = await createCard({
-                        variables:
-                        {
-                            note: note,
-                            logId: logId,
-                            imgUrl: imgUrl,
-                            name: name
-                        }
-                    });
-
-                    console.log(dataCloud.getCard);
-
-                    setLogData(dataCloud.createCard);
-                } else {
-                    const todaysLog = logs.find(log => {
-                        const logDate = new Date(log.date);
-                        const today = new Date();
-                        return logDate.getDate() === today.getDate() &&
-                            logDate.getMonth() === today.getMonth() &&
-                            logDate.getFullYear() === today.getFullYear();
-                    });
-                    setLogData(todaysLog);
+            const { data } = await createLog({
+                variables:
+                {
+                    question: questionType,
+                    pref: uprightOnly,
+                    num: "1",
+                    userId: userId
                 }
-            }
-        };
+            });
+            const logId = data.createLog._id
+            const stringNote = data.createLog.note
 
+            const obj = okJSON(stringNote);
+            console.log(typeof (stringNote))
+            console.log(obj);
+            const flip = "is upside down"
+            const cardName = obj.card;
+            let prompt = obj.imagery;
+            const upright = obj.upright;
+            const advice = obj.advice;
+            const meaning = obj.meaning;
+            if (upright === "false") {
+                prompt = `Tarot Card "${cardName}", ${prompt}, ${flip}`
+            } else {
+                prompt = `Tarot Card "${cardName}", ${prompt}`
+            }
+            console.log(prompt + "<-- prompt");
+
+            //then generate the edit
+            const imgRes = await fetch('https://api.openai.com/v1/images/generations', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
+                },
+                body: JSON.stringify({
+                    prompt: prompt,
+                    n: 1,
+                    size: "512x512",
+                    response_format: "b64_json",
+                }),
+            }).then(response => response.json());
+            console.log(imgRes)
+
+            const name = imgRes.created
+
+            const imgB64 = imgRes.data[0].b64_json;
+            const imgBlob = await fetch(`data:image/png;base64,${imgB64}`).then((r) => r.blob());
+            const formData = new FormData();
+            formData.append("file", imgBlob, "image.png");
+            formData.append("upload_preset", "tarotApp_preset");
+            // Set a `name` that ends with .png so that the API knows it's a PNG image
+
+            const cloudinaryRes = await fetch(
+                `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_NAME}/image/upload`,
+                {
+                    method: "POST",
+                    body: formData,
+                }
+            ).then(response => response.json());
+            console.log(cloudinaryRes);
+
+            const cloudinaryUrl = cloudinaryRes.secure_url;
+            console.log(cloudinaryUrl);
+            const { dataCloud } = await createCard({
+                variables:
+                {
+                    logId: logId,
+                    imgUrl: cloudinaryUrl,
+                    name: name
+                }
+            });
+
+            console.log(dataCloud.getCard);
+
+            setLogData(dataCloud.createCard);
+        }
         fetchLogData();
-    }, []);
+    };
 
 
 
@@ -134,15 +127,31 @@ const Daily = ({ user }) => {
                 <Typography component="h1" variant="h5">
                     Today is {date}
                 </Typography>
-                {(!logData) ? <div>loading...</div> :
+                <Box sx={{ mt: 2, width: '100%' }}>
+                    <FormControl fullWidth>
+                        <InputLabel>Type</InputLabel>
+                        <Select value={questionType} onChange={handleChange}>
+                            <MenuItem value={'daily'}>Daily</MenuItem>
+                            <MenuItem value={'relationship'}>Relationship</MenuItem>
+                            <MenuItem value={'abundance'}>Abundance</MenuItem>
+                            <MenuItem value={'yes_or_no'}>Yes or No</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Box>
+                <Box sx={{ mt: 2 }}>
+                    <Button variant="contained" color="primary" onClick={handleSubmit}>
+                        Run createLog Mutation
+                    </Button>
+                </Box>
+                {(!logData) ? (
+                    <div></div>
+                ) : (
                     <Grid item xs={9}>
                         <Reading data={logData} />
                     </Grid>
-                }
-
+                )}
             </Grid>
         </Container>
     );
 };
-
 export default Daily;

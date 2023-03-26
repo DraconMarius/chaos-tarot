@@ -86,7 +86,6 @@ function App() {
 
   //setting state for toggle
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [loggedInU, setUserU] = React.useState();
 
   const toggleMenu = () => {
     setMobileOpen((prevState) => !prevState);

@@ -19,7 +19,7 @@ const ReadingContainer = () => {
         return <div>Error loading user data. Please try again.</div>;
     }
 
-    return <>{loading ? <div>Loading...</div> : <Daily user={user} />}</>;
+    return <>{loading ? <div>Loading...</div> : <Daily userId={user._id} uprightOnly={user.uprightOnly} logs={user.logs} />}</>;
 }
 
 export default ReadingContainer
