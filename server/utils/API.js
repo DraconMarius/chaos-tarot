@@ -146,4 +146,4 @@ const okJSON = (jsonString) => {
     }
 }
 
-module.exports = { downloadImageFromURL, uploadImageToCloudinary, resClean, okJSON };
+module.exports = { resClean, okJSON };

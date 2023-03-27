@@ -1,9 +1,6 @@
 const { User, Log, Card, Tarot } = require('../models');
 //import util function for API Call
-const { openaiCreateLog,
-    openaiCreateImage,
-    downloadImageFromURL,
-    uploadImageToCloudinary, resClean, okJSON } = require('../utils/API')
+const { resClean, okJSON } = require('../utils/API')
 
 
 // openai api for generation;
@@ -122,14 +119,10 @@ const resolvers = {
             //num = 1 or 3
             //question is optional 
 
-            let prompt = `As an experiment: Pick 1 random major or minor arcana cards for a ${question} reading that includes upright and inverted meanings ased on the probability of drawing a minor Arcana card is 72%(and within that 72% of them will be number cards and 28% of them will be court cards), while drawing a major arcana is  25%. Whether it is inverted is 50%, Then provide one sentence about the imagery of the card while keeping it'family friendly', and
-            1 concise advice per Card you would share to clarify. Only Respond in a JSON_string format and nothing else so it can be parsed directly : 
-            {'card': name, upright: 'true / false', 'imagery': imagery  meaning: 'meaning', advice: 'advice'};`
+            let prompt = `As an experiment: Pick 1 random major or minor arcana cards for a ${question} reading that includes upright and inverted meanings where the probability of drawing a minor Arcana card is 72%(and within that 72% of them will be number cards and 28% of them will be court cards), while drawing a major arcana is 25%. Whether it is inverted is 50%. Then provide one sentence about the imagery of the card while keeping it 'family friendly', and also 1 concise advice per Card you would share to clarify. Only Respond in a JSON string format and no apostrphes so it can be parsed directly : '{"card": "name", "upright": "true / false", "imagery": "imagery", "meaning'" :"meaning", "advice": "advice"}';`
 
             if (pref) {
-                prompt = `As an experiment: Pick 1 random major or minor arcana cards for a ${question} reading that includes upright only meaning based on the probability of drawing a minor Arcana card is 72%(and within that 72% of them will be number cards and 28% of them will be court cards), while drawing a major arcana is  25%, Then provide a sentence about the imagery of the card while keeping it 'family friendly', and
-                1 concise advice per Card you would share to clarify. Only Respond in a JSON_string format and nothing else so it can be parsed directly : 
-                {'card':name , upright: 'true / false', 'imagery': imagery  meaning: 'meaning', advice: 'advice'};`
+                prompt = `As an experiment: Pick 1 random major or minor arcana cards for a ${question} reading that includes upright only meaning based on the probability of drawing a minor Arcana card is 72%(and within that 72% of them will be number cards and 28% of them will be court cards), while drawing a major arcana is  25%. Then provide a sentence about the imagery of the card while keeping it 'family friendly', and also 1 concise advice per Card you would share to clarify. Only Respond in a JSON string format and no apostrphes so it can be parsed directly : '{"card": "name", "upright": "true / false", "imagery": "imagery", "meaning'" :"meaning", "advice": "advice"}'`
             }
 
             console.log(prompt);
@@ -172,8 +165,8 @@ const resolvers = {
         createCard: async (parent, { logId, imgUrl, name }) => {
 
             const getLog = await Log.findById(logId)
-
-            const obj = okJSON(getLog.note);
+            const cleanedRes = await resClean(getLog.not)
+            const obj = await okJSON(cleanedRes);
             console.log(obj);
             const cardName = obj.card;
             let prompt = obj.imagery;
