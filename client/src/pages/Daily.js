@@ -2,19 +2,20 @@ import React, { useState, useEffect } from 'react';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-import { Box, Button, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import { Box, Button, FormControl, InputLabel, MenuItem, Select, Paper } from '@mui/material';
 import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
+import '../styles/loading.css'
+
 
 import Reading from './../components/Reading'
 
 import { useQuery, useMutation } from "@apollo/client";
 import { USER_QUERY } from '../utils/queries';
 import { CREATE_LOG, CREATE_CARD } from '../utils/mutation';
-import { Configuration, OpenAIApi } from "openai";
+
 import FormData from 'form-data';
 
-import { okJSON, resClean, urlToBase64DataUrl, dataUrlToFile } from '../utils/API'
+import { okJSON, resClean } from '../utils/API'
 
 
 
@@ -56,8 +57,8 @@ const Daily = ({ userId, uprightOnly, logs }) => {
             });
             const logId = await data.createLog._id
             const stringNote = await data.createLog.note
-
-            const obj = okJSON(stringNote);
+            const rdy = await resClean(stringNote)
+            const obj = await okJSON(rdy);
             console.log(logId)
             console.log(obj);
             const flip = "is upside down"
@@ -155,7 +156,25 @@ const Daily = ({ userId, uprightOnly, logs }) => {
     };
 
 
+    const Style = {
+        lordicon: {
+            width: "250px",
+            height: "250px"
+        }
+    }
+    const [activeIcon, setActiveIcon] = useState(1);
 
+    //everytime loading activate
+    useEffect(() => {
+        if (loading) {
+            const interval = setInterval(() => {
+                setActiveIcon((prevActiveIcon) => (prevActiveIcon % 4) + 1);
+            }, 2000);
+            return () => {
+                clearInterval(interval);
+            };
+        }
+    }, [loading]);
 
     return (
         <Container maxWidth="xs">
@@ -179,11 +198,11 @@ const Daily = ({ userId, uprightOnly, logs }) => {
                         Pull a Card
                     </Button>
                 </Box>
-                {(!logData) ? (
+                {(loading && !logs) ? (
                     <div></div>
                 ) : (
                     <Grid item xs={9}>
-                        <Reading data={logData} />
+                        <Reading data={logs} />
                     </Grid>
                 )}
             </Grid>
@@ -191,7 +210,43 @@ const Daily = ({ userId, uprightOnly, logs }) => {
                 sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                 open={loading}
             >
-                <CircularProgress color="inherit" />
+                <div className={`lord ${activeIcon === 1 ? 'active' : ''}`} elevation={0}>
+                    <lord-icon
+                        src="https://cdn.lordicon.com/wlpxtupd.json"
+                        trigger="loop"
+                        colors="primary:#9cc2f4,secondary:#eeca66"
+                        stroke="45"
+                        state="loop-1"
+                        style={Style.lordicon}>
+                    </lord-icon>
+                </div>
+                <div className={`lord ${activeIcon === 2 ? 'active' : ''}`} elevation={0}>
+                    <lord-icon
+                        src="https://cdn.lordicon.com/etwtznjn.json"
+                        trigger="loop"
+                        colors="primary:#a39cf4,secondary:#eeca66"
+                        stroke="45"
+                        style={Style.lordicon}>
+                    </lord-icon>
+                </div>
+                <div className={`lord ${activeIcon === 3 ? 'active' : ''}`} elevation={0}>
+                    <lord-icon
+                        src="https://cdn.lordicon.com/oswatybr.json"
+                        trigger="loop"
+                        colors="primary:#08a88a,secondary:#eeaa66"
+                        stroke="45"
+                        style={Style.lordicon}>
+                    </lord-icon>
+                </div>
+                <div className={`lord ${activeIcon === 4 ? 'active' : ''}`} elevation={0}>
+                    <lord-icon
+                        src="https://cdn.lordicon.com/zbopvjaq.json"
+                        trigger="loop"
+                        colors="primary:#d4f49c,secondary:#e8b730"
+                        stroke="45"
+                        style={Style.lordicon}>
+                    </lord-icon>
+                </div>
             </Backdrop>
         </Container>
     );

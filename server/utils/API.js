@@ -94,37 +94,37 @@ const cloudinary = require('cloudinary')
 
 //const imageURL = await Promise.all(images.map(uploadImageToCloudinary));
 
-const downloadImageFromURL = async (url, name) => {
-    var client = https;
+// const downloadImageFromURL = async (url, name) => {
+//     var client = https;
 
-    client
-        .request(url, function (response) {
-            var data = new Stream();
+//     client
+//         .request(url, function (response) {
+//             var data = new Stream();
 
-            response.on("data", function (chunk) {
-                data.push(chunk);
-            });
-            // console.log(data)
-            // console.log(data.data);
-            // console.log(data.read());
+//             response.on("data", function (chunk) {
+//                 data.push(chunk);
+//             });
+//             // console.log(data)
+//             // console.log(data.data);
+//             // console.log(data.read());
 
-            response.on("end", function () {
-                fs.writeFileSync(`../template/${name}`, data.read());
-            })
-        })
-};
+//             response.on("end", function () {
+//                 fs.writeFileSync(`../template/${name}`, data.read());
+//             })
+//         })
+// };
 
-const uploadImageToCloudinary = async (filename) => {
-    cloudinary.v2.uploader
-        .upload(`./template/img/${filename}`, {
-            public_id: `tarot/${filename}`
-        })
-        .then(result => {
-            console.log(result.url);
-            const cloud_url = result.url;
-            return cloud_url
-        });
-};
+// const uploadImageToCloudinary = async (filename) => {
+//     cloudinary.v2.uploader
+//         .upload(`./template/img/${filename}`, {
+//             public_id: `tarot/${filename}`
+//         })
+//         .then(result => {
+//             console.log(result.url);
+//             const cloud_url = result.url;
+//             return cloud_url
+//         });
+// };
 //clean up api res string with regex
 const resClean = (text) => {
     const fixedString = text

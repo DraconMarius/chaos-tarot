@@ -1,0 +1,16 @@
+.backdrop {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.icon.active {
+    opacity: 1;
+}
