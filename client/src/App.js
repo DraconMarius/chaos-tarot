@@ -75,13 +75,12 @@ function App() {
   const menuWidth = 300;
   //since we are mapping our nav/appbar item
   const inItems = [{ Tag: "Home", Link: "/" },
-  { Tag: "Daily", Link: "/daily" },
-  { Tag: "Logs", Link: "/" },
-  { Tag: "Disclaimer", Link: "/" }];
+  { Tag: "Generate", Link: "/daily" },
+  { Tag: "About", Link: "/" }];
   const outItems = [{ Tag: "Home", Link: "/" },
   { Tag: "Login", Link: "/login" },
   { Tag: "SignUp", Link: "/signup" },
-  { Tag: "Disclaimer", Link: "/" }]
+  { Tag: "About", Link: "/" }]
 
 
   //setting state for toggle

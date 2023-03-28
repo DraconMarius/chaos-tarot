@@ -140,6 +140,9 @@ const resolvers = {
             const cleanedRes = await resClean(responseReading.data.choices[0].text);
             //json parse, has error handling in util parse fn
             const finalRes = await okJSON(cleanedRes);
+            if (!finalRes) {
+                return
+            }
             console.log("test cleanedRes -->" + cleanedRes);
             console.log(finalRes);
 

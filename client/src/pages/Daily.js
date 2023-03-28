@@ -179,7 +179,7 @@ const Daily = ({ userId, uprightOnly, logs }) => {
     useEffect(() => {
         if (loading) {
             const interval = setInterval(() => {
-                setActiveIcon((prevActiveIcon) => (prevActiveIcon % 4) + 1);
+                setActiveIcon((prevActiveIcon) => (prevActiveIcon % 6) + 1);
             }, 2000);
             return () => {
                 clearInterval(interval);
@@ -230,7 +230,7 @@ const Daily = ({ userId, uprightOnly, logs }) => {
                         state="loop-1"
                         style={Style.lordicon}>
                     </lord-icon>
-                    <div> Take a breath, this might take few </div>
+                    <Typography> Take a breath, this might take few </Typography>
                 </div>
                 <div className={`lord ${activeIcon === 2 ? 'active' : ''}`} elevation={0}>
                     <lord-icon
@@ -240,7 +240,7 @@ const Daily = ({ userId, uprightOnly, logs }) => {
                         stroke="45"
                         style={Style.lordicon}>
                     </lord-icon>
-                    <div>Generating Tarot Reading and Card Image</div>
+                    <Typography>Loading... I promise it is still Loading...</Typography>
                 </div>
                 <div className={`lord ${activeIcon === 3 ? 'active' : ''}`} elevation={0}>
                     <lord-icon
@@ -250,7 +250,7 @@ const Daily = ({ userId, uprightOnly, logs }) => {
                         stroke="45"
                         style={Style.lordicon}>
                     </lord-icon>
-                    <div>Loading... I promise it is till Loading...</div>
+                    <Typography> ( ͡⌐■_-■)</Typography>
                 </div>
                 <div className={`lord ${activeIcon === 4 ? 'active' : ''}`} elevation={0}>
                     <lord-icon
@@ -260,7 +260,28 @@ const Daily = ({ userId, uprightOnly, logs }) => {
                         stroke="45"
                         style={Style.lordicon}>
                     </lord-icon>
-                    <div>         ~ Be Patient! Almost There! ~ </div>
+                    <Typography>  (ಠ_ಠ)⌐■-■ </Typography>
+                </div>
+                <div className={`lord ${activeIcon === 5 ? 'active' : ''}`} elevation={0}>
+                    <lord-icon
+                        src="https://cdn.lordicon.com/jfloqxvk.json"
+                        trigger="loop"
+                        delay="2000"
+                        colors="primary:#ee6d66,secondary:#e8b730"
+                        stroke="45"
+                        style={Style.lordicon}>
+                    </lord-icon>
+                    <Typography>ಠ╭╮ಥ</Typography>
+                </div>
+                <div className={`lord ${activeIcon === 6 ? 'active' : ''}`} elevation={0}>
+                    <lord-icon
+                        src="https://cdn.lordicon.com/eqwebkyi.json"
+                        trigger="loop"
+                        colors="primary:#e8b730,secondary:#08a88a"
+                        stroke="45"
+                        style={Style.lordicon}>
+                    </lord-icon>
+                    <Typography>┻━┻ ︵ヽ(`Д´)ﾉ︵ ┻━┻</Typography>
                 </div>
             </Backdrop>
         </Container>

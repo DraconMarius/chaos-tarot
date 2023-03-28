@@ -1,147 +1,78 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Container, Box, TextField } from '@mui/material'
+import React, { useState, useEffect, useRef } from 'react';
 import styled from '@emotion/styled'
-import HTMLFlipBook from "react-pageflip";
-const PageCover = React.forwardRef((props, ref) => {
-    return (
-        <div className="page page-cover" ref={ref} data-density="hard">
-            <div className="page-content">
-                <h2>{props.children}</h2>
-            </div>
-        </div>
-    );
-});
+import { Button, Container, Box, TextField, Card, CardContent, CardMedia, Typography } from '@mui/material';
 
-const Page = React.forwardRef((props, ref) => {
-    return (
-        <div className="page" ref={ref}>
-            <div className="page-content">
-                <h2 className="page-header">Page header - {props.number}</h2>
-                <div className="page-image"></div>
-                <div className="page-text">{props.children}</div>
-                <div className="page-footer">{props.number + 1}</div>
-            </div>
-        </div>
-    );
-});
-
-class ReadingBook extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            page: 0,
-            totalPage: 0,
-        };
-    }
-
-    nextButtonClick = () => {
-        this.flipBook.getPageFlip().flipNext();
-    };
-
-    prevButtonClick = () => {
-        this.flipBook.getPageFlip().flipPrev();
-    };
-
-    onPage = (e) => {
-        this.setState({
-            page: e.data,
-        });
-    };
-
-    componentDidMount() {
-        this.setState({
-            totalPage: this.flipBook.getPageFlip().getPageCount(),
-        });
-    }
-
-    render() {
-        return (
-            <div>
-                <HTMLFlipBook
-                    width={550}
-                    height={733}
-                    size="stretch"
-                    minWidth={315}
-                    maxWidth={1000}
-                    minHeight={400}
-                    maxHeight={1533}
-                    maxShadowOpacity={0.5}
-                    showCover={true}
-                    mobileScrollSupport={true}
-                    onFlip={this.onPage}
-                    onChangeOrientation={this.onChangeOrientation}
-                    onChangeState={this.onChangeState}
-                    className="demo-book"
-                    ref={(el) => (this.flipBook = el)}
-                >
-
-                    <PageCover>Reading</PageCover>
-                    {this.props.logData.map((log, index) => (
-                        <Page key={index} number={index + 1}>
-                            <img src={log.image} alt={log.title} style={{ display: "block", margin: "0 auto", maxWidth: "100%" }} />
-                            <p>{log.text}</p>
-                        </Page>
-                    ))}
-                    <PageCover>THE END</PageCover>
-
-                </HTMLFlipBook>
-
-                <div className="container centered">
-                    <div>
-
-                        <button type="button" onClick={this.prevButtonClick}>
-                            Previous page
-                        </button>
-
-                        [<span>{this.state.page}</span> of
-                        <span>{this.state.totalPage}</span>]
-
-                        <button type="button" onClick={this.nextButtonClick}>
-                            Next page
-                        </button>
-
-                    </div>
-                    <div>
-
-                        State: <i>{this.state.state}</i>, orientation: <i>{this.state.orientation}</i>
-
-                    </div>
-                </div>
-            </div>
-        );
-    }
-}
-
-
-const Reading = ({ logData }) => {
-    const [selected, setSelected] = useState(0);
-    console.log(logData)
-    const [logs, setLogs] = useState()
-
-
+const ReadingCard = ({ log }) => {
+    const { note, cards, date, question } = log;
+    const noteData = JSON.parse(note);
+    const type = question
 
     return (
-        <div className="container">
-            {(!logData) ? (
-                "Error: please refresh to try again OR no reading yet"
-            ) : (
-                <>
-                    <ReadingBook logData={logData} />
-                    {logData.map((log, index) => (
-                        <div className="page" key={index}>
-                            <div className="page-content">
-                                <img src={log.cards[0].image} alt={log.cards[0].description} style={{ display: "block", margin: "0 auto", maxWidth: "100%" }} />
-                                <p>{log.note}</p>
-                            </div>
-                        </div>
-                    ))}
-                </>
-            )}
-
-        </div >
+        <Card sx={{ maxWidth: { md: 512 }, margin: '0 auto' }}>
+            <CardMedia
+                component="img"
+                height="512"
+                src={cards[0].image}
+                alt={noteData.card}
+                sx={{
+                    width: 512,
+                    height: 512,
+                    objectFit: 'contain',
+                    margin: '0 auto'
+                }}
+            />
+            <CardContent>
+                <Typography variant="h4" align="center" component="div">
+                    {noteData.card}
+                </Typography>
+                <Typography variant="subtitle1" align="center">
+                    {noteData.upright ? 'Upright' : 'Inverted'}
+                </Typography>
+                <Typography variant="h6" sx={[{ mx: 4, my: 4 }]} align="center" gutterBottom>
+                    {noteData.meaning}
+                </Typography>
+                <Typography variant="body1" align="center" gutterBottom>
+                    {noteData.advice}
+                </Typography>
+            </CardContent>
+        </Card>
     );
 };
 
+
+const Reading = ({ logData }) => {
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    const nextCard = () => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % logData.length);
+    };
+
+    const prevCard = () => {
+        setCurrentIndex((prevIndex) => (prevIndex - 1 + logData.length) % logData.length);
+    };
+
+    if (!logData) {
+        return <div>Error: please refresh to try again OR no reading yet</div>;
+    }
+
+    return (
+        <Container>
+            <Box my={4}>
+                <ReadingCard log={logData[currentIndex]} />
+            </Box>
+            <Box display="flex" justifyContent="space-between">
+                <Button variant="contained" onClick={prevCard}>
+                    PREV
+                </Button>
+                <Typography>
+                    {currentIndex + 1} of {logData.length}
+                </Typography>
+                <Button variant="contained" onClick={nextCard}>
+                    NEXT
+                </Button>
+            </Box>
+        </Container>
+    );
+};
 
 export default Reading;
