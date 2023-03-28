@@ -33,7 +33,7 @@ import Button from '@mui/material/Button';
 import LogIn from './pages/Login';
 import SignUp from './pages/Signup';
 import Home from './pages/Home';
-import ReadingContainer from './components/ReadingContainer';
+import GithubReadme from './Pages/About';
 
 
 // import Log from './pages/Log';
@@ -76,7 +76,7 @@ function App() {
   //since we are mapping our nav/appbar item
   const inItems = [{ Tag: "Home", Link: "/" },
   { Tag: "Generate", Link: "/daily" },
-  { Tag: "About", Link: "/" }];
+  { Tag: "About", Link: "/About" }];
   const outItems = [{ Tag: "Home", Link: "/" },
   { Tag: "Login", Link: "/login" },
   { Tag: "SignUp", Link: "/signup" },
@@ -209,7 +209,7 @@ function App() {
                   <Route exact path="/login" element={<LogIn />} />
                   {/* <Route exact path="/logs" element={<Log />} /> */}
                   <Route exact path="/signup" element={<SignUp />} />
-                  {/* <Route exact path="/profile" element={<ProfileContainer />} /> */}
+                  <Route exact path="/about" element={<GithubReadme />} />
                 </Routes>
               </Container>
             </div>

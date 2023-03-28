@@ -80,7 +80,7 @@ const Daily = ({ userId, uprightOnly, logs }) => {
             }
             console.log(prompt + "<-- prompt");
 
-            // then generate the edit
+            // then generate the edit basic <-- generation keep just for sample
             // const imgRes = await fetch('https://api.openai.com/v1/images/generations', {
             //     method: 'POST',
             //     headers: {
@@ -157,7 +157,7 @@ const Daily = ({ userId, uprightOnly, logs }) => {
 
 
                 console.log("createCard data: ", data.createCard);
-                displayLogData.current = [...logs, data.createCard];
+                displayLogData.current = [data.createCard, ...logs];
                 console.log(displayLogData.current)
                 setLoading(false)
             } catch (e) {
@@ -230,7 +230,7 @@ const Daily = ({ userId, uprightOnly, logs }) => {
                         state="loop-1"
                         style={Style.lordicon}>
                     </lord-icon>
-                    <Typography> Take a breath, this might take few </Typography>
+                    <Typography align="center"> Take a breath, this might take few </Typography>
                 </div>
                 <div className={`lord ${activeIcon === 2 ? 'active' : ''}`} elevation={0}>
                     <lord-icon
@@ -240,7 +240,7 @@ const Daily = ({ userId, uprightOnly, logs }) => {
                         stroke="45"
                         style={Style.lordicon}>
                     </lord-icon>
-                    <Typography>Loading... I promise it is still Loading...</Typography>
+                    <Typography align="center">Loading... I promise it is still Loading...</Typography>
                 </div>
                 <div className={`lord ${activeIcon === 3 ? 'active' : ''}`} elevation={0}>
                     <lord-icon
@@ -250,7 +250,7 @@ const Daily = ({ userId, uprightOnly, logs }) => {
                         stroke="45"
                         style={Style.lordicon}>
                     </lord-icon>
-                    <Typography> ( ͡⌐■_-■)</Typography>
+                    <Typography align="center"> ( ͡⌐■_-■)</Typography>
                 </div>
                 <div className={`lord ${activeIcon === 4 ? 'active' : ''}`} elevation={0}>
                     <lord-icon
@@ -260,7 +260,7 @@ const Daily = ({ userId, uprightOnly, logs }) => {
                         stroke="45"
                         style={Style.lordicon}>
                     </lord-icon>
-                    <Typography>  (ಠ_ಠ)⌐■-■ </Typography>
+                    <Typography align="center">  (ಠ_ಠ)⌐■-■ </Typography>
                 </div>
                 <div className={`lord ${activeIcon === 5 ? 'active' : ''}`} elevation={0}>
                     <lord-icon
@@ -271,7 +271,7 @@ const Daily = ({ userId, uprightOnly, logs }) => {
                         stroke="45"
                         style={Style.lordicon}>
                     </lord-icon>
-                    <Typography>ಠ╭╮ಥ</Typography>
+                    <Typography align="center">ಠ╭╮ಥ</Typography>
                 </div>
                 <div className={`lord ${activeIcon === 6 ? 'active' : ''}`} elevation={0}>
                     <lord-icon
@@ -281,7 +281,7 @@ const Daily = ({ userId, uprightOnly, logs }) => {
                         stroke="45"
                         style={Style.lordicon}>
                     </lord-icon>
-                    <Typography>┻━┻ ︵ヽ(`Д´)ﾉ︵ ┻━┻</Typography>
+                    <Typography align="center">┻━┻ ︵ヽ(`Д´)ﾉ︵ ┻━┻</Typography>
                 </div>
             </Backdrop>
         </Container>
