@@ -16,7 +16,7 @@ const cardSchema = new Schema({
         require: true,
     },
     upright: {
-        type: Boolean,
+        type: String,
         required: true,
     },
     date: {

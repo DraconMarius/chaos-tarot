@@ -5,7 +5,6 @@ export const resClean = (text) => {
         .trim()
         .replace(/\n/g, ' ')
         .replace(/(\w+):/g, '"$1":')
-        .replace(/'/g, '"');
     return fixedString;
 }
 

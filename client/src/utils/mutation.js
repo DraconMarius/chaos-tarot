@@ -74,13 +74,14 @@ export const CREATE_CARD = gql`
       _id
       date
       question
+      note
       cards {
         _id
+        image
       }
-      note
     }
   } 
-`
+`;
 
 // Mutation for updating an existing log
 export const UPDATE_LOG = gql`

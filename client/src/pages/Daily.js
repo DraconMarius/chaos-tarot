@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
@@ -25,12 +25,13 @@ const Daily = ({ userId, uprightOnly, logs }) => {
                     ${current.getDate()} / 
                     ${current.getFullYear()}`
 
-    console.log(userId, uprightOnly, logs);
+    // console.log(logs);
 
     const [createLog] = useMutation(CREATE_LOG);
     const [createCard] = useMutation(CREATE_CARD);
-    const [logData, setLogData] = useState(null);
+    // const [logData, setLogData] = useState();
     const [questionType, setQuestionType] = useState("daily");
+    const displayLogData = useRef()
 
     const [loading, setLoading] = useState(false);
 
@@ -43,8 +44,11 @@ const Daily = ({ userId, uprightOnly, logs }) => {
         setLoading(true);
         //check if log contain same dates
         const fetchLogData = async () => {
-
+            let obj;
             // Perform createLog mutation
+            console.log(questionType)
+            console.log(uprightOnly)
+            console.log(userId)
 
             const { data } = await createLog({
                 variables:
@@ -55,22 +59,24 @@ const Daily = ({ userId, uprightOnly, logs }) => {
                     userId: userId
                 }
             });
+            console.log("new Log data : ", data.createLog);
+            console.log("new Log: QuestionType: ", data.createLog.question)
+
             const logId = await data.createLog._id
             const stringNote = await data.createLog.note
             const rdy = await resClean(stringNote)
-            const obj = await okJSON(rdy);
+            obj = await okJSON(rdy);
             console.log(logId)
             console.log(obj);
-            const flip = "is upside down"
+            const flip = "Inverted"
+            const style = "in 'Single Weight Line Art' style in symbolism"
             const cardName = obj.card;
             let prompt = obj.imagery;
             const upright = obj.upright;
-            const advice = obj.advice;
-            const meaning = obj.meaning;
             if (upright === "false") {
-                prompt = `Tarot Card "${cardName}", ${prompt}, ${flip}`
+                prompt = `${flip} Tarot Card "${cardName}": ${prompt}, ${style}`
             } else {
-                prompt = `Tarot Card "${cardName}", ${prompt}`
+                prompt = `Tarot Card "${cardName}": ${prompt}, ${style}`
             }
             console.log(prompt + "<-- prompt");
 
@@ -139,22 +145,27 @@ const Daily = ({ userId, uprightOnly, logs }) => {
 
             const cloudinaryUrl = await cloudinaryRes.url;
             console.log(cloudinaryUrl);
-            const { dataCloud } = await createCard({
-                variables:
-                {
-                    logId: `${logId}`,
-                    imgUrl: `${cloudinaryUrl}`,
-                    name: `${name}`
-                }
-            });
+            try {
+                const { data } = await createCard({
+                    variables:
+                    {
+                        logId: `${logId}`,
+                        imgUrl: `${cloudinaryUrl}`,
+                        name: `${name}`
+                    }
+                });
 
-            setLogData(dataCloud);
-            console.log(dataCloud);
-            setLoading(false);
+
+                console.log("createCard data: ", data.createCard);
+                displayLogData.current = [...logs, data.createCard];
+                console.log(displayLogData.current)
+                setLoading(false)
+            } catch (e) {
+                console.error(e);
+            }
         }
         fetchLogData();
     };
-
 
     const Style = {
         lordicon: {
@@ -198,11 +209,11 @@ const Daily = ({ userId, uprightOnly, logs }) => {
                         Pull a Card
                     </Button>
                 </Box>
-                {(loading && !logs) ? (
+                {(loading && !displayLogData.current) || (!displayLogData.current) ? (
                     <div></div>
                 ) : (
                     <Grid item xs={9}>
-                        <Reading data={logs} />
+                        <Reading logData={displayLogData.current} />
                     </Grid>
                 )}
             </Grid>
@@ -219,6 +230,7 @@ const Daily = ({ userId, uprightOnly, logs }) => {
                         state="loop-1"
                         style={Style.lordicon}>
                     </lord-icon>
+                    <div> Take a breath, this might take few </div>
                 </div>
                 <div className={`lord ${activeIcon === 2 ? 'active' : ''}`} elevation={0}>
                     <lord-icon
@@ -228,6 +240,7 @@ const Daily = ({ userId, uprightOnly, logs }) => {
                         stroke="45"
                         style={Style.lordicon}>
                     </lord-icon>
+                    <div>Generating Tarot Reading and Card Image</div>
                 </div>
                 <div className={`lord ${activeIcon === 3 ? 'active' : ''}`} elevation={0}>
                     <lord-icon
@@ -237,6 +250,7 @@ const Daily = ({ userId, uprightOnly, logs }) => {
                         stroke="45"
                         style={Style.lordicon}>
                     </lord-icon>
+                    <div>Loading... I promise it is till Loading...</div>
                 </div>
                 <div className={`lord ${activeIcon === 4 ? 'active' : ''}`} elevation={0}>
                     <lord-icon
@@ -246,6 +260,7 @@ const Daily = ({ userId, uprightOnly, logs }) => {
                         stroke="45"
                         style={Style.lordicon}>
                     </lord-icon>
+                    <div>         ~ Be Patient! Almost There! ~ </div>
                 </div>
             </Backdrop>
         </Container>

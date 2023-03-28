@@ -5,12 +5,13 @@
     align-items: center;
 }
 
-.icon {
+.lord {
     position: absolute;
     opacity: 0;
     transition: opacity 1s ease-in-out;
+    justify-content: center;
 }
 
-.icon.active {
+.lord.active {
     opacity: 1;
 }

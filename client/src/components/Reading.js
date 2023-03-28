@@ -118,8 +118,8 @@ const Reading = ({ logData }) => {
     const [selected, setSelected] = useState(0);
     console.log(logData)
     const [logs, setLogs] = useState()
-  
-    
+
+
 
     return (
         <div className="container">
@@ -131,7 +131,7 @@ const Reading = ({ logData }) => {
                     {logData.map((log, index) => (
                         <div className="page" key={index}>
                             <div className="page-content">
-                                <img src={log.card[0].image} alt={log.card[0].description} style={{ display: "block", margin: "0 auto", maxWidth: "100%" }} />
+                                <img src={log.cards[0].image} alt={log.cards[0].description} style={{ display: "block", margin: "0 auto", maxWidth: "100%" }} />
                                 <p>{log.note}</p>
                             </div>
                         </div>

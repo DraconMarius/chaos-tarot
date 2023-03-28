@@ -119,10 +119,10 @@ const resolvers = {
             //num = 1 or 3
             //question is optional 
 
-            let prompt = `As an experiment: Pick 1 random major or minor arcana cards for a ${question} reading that includes upright and inverted meanings where the probability of drawing a minor Arcana card is 72%(and within that 72% of them will be number cards and 28% of them will be court cards), while drawing a major arcana is 25%. Whether it is inverted is 50%. Then provide one sentence about the imagery of the card while keeping it 'family friendly', and also 1 concise advice per Card you would share to clarify. Only Respond in a JSON string format and no apostrphes so it can be parsed directly : '{"card": "name", "upright": "true / false", "imagery": "imagery", "meaning'" :"meaning", "advice": "advice"}';`
+            let prompt = `As an experiment: Pick 1 random major or minor arcana cards for a ${question} reading that includes upright and inverted meanings where the probability of drawing a minor Arcana card is 72%(and within that 72% of them will be number cards and 28% of them will be court cards), while drawing a major arcana is 25%. Whether it is inverted is 50%. Then provide one sentence about the imagery of the card while keeping it 'family friendly', and also 1 concise advice per Card you would share to clarify. Only Respond in a JSON string format and no apostrphes so it can be parsed directly : {"card": "name", "upright": "true / false", "imagery": "imagery", "meaning" :"meaning", "advice": "advice"};`
 
             if (pref) {
-                prompt = `As an experiment: Pick 1 random major or minor arcana cards for a ${question} reading that includes upright only meaning based on the probability of drawing a minor Arcana card is 72%(and within that 72% of them will be number cards and 28% of them will be court cards), while drawing a major arcana is  25%. Then provide a sentence about the imagery of the card while keeping it 'family friendly', and also 1 concise advice per Card you would share to clarify. Only Respond in a JSON string format and no apostrphes so it can be parsed directly : '{"card": "name", "upright": "true / false", "imagery": "imagery", "meaning'" :"meaning", "advice": "advice"}'`
+                prompt = `As an experiment: Pick 1 random major or minor arcana cards for a ${question} reading that includes upright only meaning based on the probability of drawing a minor Arcana card is 72%(and within that 72% of them will be number cards and 28% of them will be court cards), while drawing a major arcana is  25%. Then provide a sentence about the imagery of the card while keeping it 'family friendly', and also 1 concise advice per Card you would share to clarify. Only Respond in a JSON string format and no apostrphes so it can be parsed directly : {"card": "name", "upright": "true / false", "imagery": "imagery", "meaning" :"meaning", "advice": "advice"}`
             }
 
             console.log(prompt);
@@ -135,12 +135,12 @@ const resolvers = {
                 stop: ";",
                 temperature: 0.9
             })
-            console.log(responseReading.data.choices[0]);
+            console.log("og res=>" + responseReading.data.choices[0]);
             //make doubly sure the response we get is parsable
             const cleanedRes = await resClean(responseReading.data.choices[0].text);
             //json parse, has error handling in util parse fn
             const finalRes = await okJSON(cleanedRes);
-            console.log(cleanedRes, + "<-- test cleanedRes");
+            console.log("test cleanedRes -->" + cleanedRes);
             console.log(finalRes);
 
             const logCont = {
@@ -158,14 +158,16 @@ const resolvers = {
             );
 
             console.log(updateUser)
-            console.log(newLog);
+            console.log("newly created Log: " + newLog);
             return newLog;
         },
 
         createCard: async (parent, { logId, imgUrl, name }) => {
 
             const getLog = await Log.findById(logId)
-            const cleanedRes = await resClean(getLog.not)
+            const flip = "Inverted"
+            const style = "in 'Single Weight Line Art' style in symbolism"
+            const cleanedRes = await resClean(getLog.note)
             const obj = await okJSON(cleanedRes);
             console.log(obj);
             const cardName = obj.card;
@@ -174,16 +176,16 @@ const resolvers = {
             console.log(upright)
 
             if (upright === "false") {
-                prompt = `Tarot Card "${cardName}", ${prompt}, ${flip}`
+                prompt = `${flip} Tarot Card "${cardName}": ${prompt}, ${style}`
             } else {
-                prompt = `Tarot Card "${cardName}", ${prompt}`
+                prompt = `Tarot Card "${cardName}": ${prompt}, ${style}`
             }
             console.log(prompt + "<-- prompt");
 
             const cardCont = [{
                 name: name,
                 image: imgUrl,
-                description: prompt,
+                description: await prompt,
                 upright: upright
             }
                 // {
@@ -192,11 +194,10 @@ const resolvers = {
                 //     upright: false
                 // }
             ];
-            console.log(cardCont + "testing card create")
             const newCards = await Card.insertMany(cardCont);
             console.log(newCards);
             const newCardsID = newCards.map(card => card._id);
-            console.log(newCardsID + "test");
+            console.log(newCardsID + " test");
 
             const insertLog = await Log.findByIdAndUpdate(
                 logId,
@@ -205,9 +206,10 @@ const resolvers = {
                         cards: [...newCardsID]
                     }
                 },
-                { new: true, upsert: true }
-            );
+                { new: true }
+            ).populate("cards");
 
+            console.log("updated Log: " + insertLog)
             return insertLog;
         },
 

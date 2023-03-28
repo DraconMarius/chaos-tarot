@@ -30,7 +30,7 @@ type Card {
     name: String!
     image: String!
     description: String!
-    upright: Boolean!
+    upright: String!
     date: String
 }
 
