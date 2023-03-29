@@ -123,7 +123,7 @@ const Daily = ({ userId, uprightOnly, logs }) => {
             const imgRes = await fetch('https://api.openai.com/v1/images/edits', {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer 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`
+                    'Authorization': `Bearer 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`
                 },
                 body: imgFormData
             }).then(response => response.json());
