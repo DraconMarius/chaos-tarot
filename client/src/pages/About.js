@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Paper } from "@material-ui/core";
-import ReactMarkdown from "react-markdown";
+import Paper from "@mui/material/Paper";
+import MuiMarkdown from "mui-markdown";
 
 const GithubReadme = () => {
     const [markdown, setMarkdown] = useState("");
@@ -8,19 +8,24 @@ const GithubReadme = () => {
     useEffect(() => {
         const fetchReadme = async () => {
             const response = await fetch(
-                `https://api.github.com/repos/DraconMarius/chaos-tarot/readme`
+                `https://raw.githubusercontent.com/DraconMarius/chaos-tarot/main/README.md`
             );
-            const data = await response.json();
-            const decodedContent = Buffer.from(data.content, 'base64').toString();
-            setMarkdown(decodedContent);
+            const textRes = await response.text();
+
+            setMarkdown(textRes);
         };
 
         fetchReadme();
-    }, [username, repo]);
+    }, []);
 
     return (
         <Paper>
-            <ReactMarkdown>{markdown}</ReactMarkdown>
+            <MuiMarkdown
+                blockquoteBorderColor='gold'
+                overrides={{
+
+                }}
+            >{markdown}</MuiMarkdown>
         </Paper>
     );
 };

@@ -33,7 +33,8 @@ import Button from '@mui/material/Button';
 import LogIn from './pages/Login';
 import SignUp from './pages/Signup';
 import Home from './pages/Home';
-import GithubReadme from './Pages/About';
+import GithubReadme from './pages/About';
+import ReadingContainer from './components/ReadingContainer';
 
 
 // import Log from './pages/Log';
@@ -76,11 +77,11 @@ function App() {
   //since we are mapping our nav/appbar item
   const inItems = [{ Tag: "Home", Link: "/" },
   { Tag: "Generate", Link: "/daily" },
-  { Tag: "About", Link: "/About" }];
+  { Tag: "About", Link: "/about" }];
   const outItems = [{ Tag: "Home", Link: "/" },
   { Tag: "Login", Link: "/login" },
   { Tag: "SignUp", Link: "/signup" },
-  { Tag: "About", Link: "/" }]
+  { Tag: "About", Link: "/about" }]
 
 
   //setting state for toggle
