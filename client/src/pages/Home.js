@@ -18,7 +18,7 @@ const homeData = [
     },
 ]
 
-// import Auth from '../utils/auth'
+
 const ReadingContainer = () => {
     //using useQuery hook to retrieve the logged in user's data
     const { loading, error, data } = useQuery(ME_QUERY);

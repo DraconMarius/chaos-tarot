@@ -133,9 +133,9 @@ const resolvers = {
                 prompt: prompt,
                 max_tokens: 500,
                 stop: ";",
-                temperature: 0.9
+                temperature: 0.8
             })
-            console.log("og res=>" + responseReading.data.choices[0]);
+            console.log("og res=>", responseReading.data.choices[0]);
             //make doubly sure the response we get is parsable
             const cleanedRes = await resClean(responseReading.data.choices[0].text);
             //json parse, has error handling in util parse fn

@@ -22,19 +22,25 @@
 To run a developmental server of this application, please clone this repo to your local Machine.
 
 First, download the dependencies by running 
-```gitbash
-npm install
-```
+
+
+`npm install`
+
+
 which will install all the packages and dependencies for both the Server and Client folder. 
 
+
 Next to initiate a fresh instance of our MongoDB database, run
-```gitbash
-npm run seed
-```
+
+
+`npm run seed`
+
+
 Finally, run 
-```gitbash
-npm run develop
-```
+
+
+`npm run develop`
+
 
 to initiate our development back and front end!
 
@@ -52,11 +58,10 @@ password: dummyAccount1!
 
 ### Features
 
-#### Reading Generation
-
+##### Reading Generation
 Logged in user can generate a reading with a press of a button, as well as a drop down menu to customize what kind of reading you would like
 
-#### Create new art
+##### Create new art
 Once the button is pressed, a loading screen pops up. Keep in mind that it might take a little bit before the prompt and image would pop up
 
 ![Gif of create page](/public/assets/gif%20of%20create%20page.gif)
@@ -65,8 +70,7 @@ Once the button is pressed, a loading screen pops up. Keep in mind that it might
 Once the whole process is finished, a card image and a reading log will display right on the page.
 
 
-
-#### Known bugs:
+##### Known bugs:
 - [ ] OpenAI API returning non-valid JSON
 - [x] loading screen won't stop until reload if error
 

@@ -24,12 +24,14 @@ const GithubReadme = () => {
     return (
         <Paper>
             <MuiMarkdown
-                codeBlockTheme={theme}
+                inlineCodeColor='#ee6d66'
                 overrides={{
                     img: {
                         component: customImg
                     },
-
+                    h4: {
+                        component: "p"
+                    }
                 }}
             >{markdown}</MuiMarkdown>
         </Paper>

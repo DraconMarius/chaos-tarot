@@ -14,49 +14,67 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
 const ReadingCard = ({ log }) => {
     const { note, cards, date, question } = log;
-    const noteData = JSON.parse(note);
-    const type = question
+    try {
 
-    return (
-        <Card sx={{ maxWidth: { md: 512 }, margin: '0 auto' }}>
-            {cards[0].image ?
-                <CardMedia
-                    component="img"
-                    height="512"
-                    src={cards[0].image}
-                    alt={noteData.card}
-                    sx={{
-                        width: 512,
-                        height: 512,
-                        objectFit: 'contain',
-                        margin: '0 auto'
-                    }}
-                /> : <></>
-            }
+        const noteData = JSON.parse(note);
+        const type = question
+
+        return (
+            <Card sx={{ maxWidth: { md: 512 }, margin: '0 auto' }}>
+                {cards[0].image ?
+                    <CardMedia
+                        component="img"
+                        height="512"
+                        src={cards[0].image}
+                        alt={noteData.card}
+                        sx={{
+                            width: 512,
+                            height: 512,
+                            objectFit: 'contain',
+                            margin: '0 auto'
+                        }}
+                    /> : <></>
+                }
+                <CardContent>
+                    <Typography variant="h4" align="center" component="div">
+                        {noteData.card}
+                    </Typography>
+                    {(noteData.upright || date || type) ?
+                        <>
+                            <Typography variant="subtitle1" align="center">
+                                {noteData.upright ? 'Upright' : 'Inverted'}
+                            </Typography>
+                            <Typography variant="subtitle1" align="center">
+                                created at: {date}, a "{type}" reading
+                            </Typography>
+                        </> : <></>
+                    }
+
+                    <Typography variant="h6" sx={[{ mx: 2, my: 2 }]} align="center" gutterBottom>
+                        {noteData.meaning}
+                    </Typography>
+                    <Typography variant="body1" align="center" gutterBottom>
+                        {noteData.advice}
+                    </Typography>
+                </CardContent>
+            </Card>
+        );
+    } catch (e) {
+        console.log("JSON parse error, abort, please reload")
+        return (<Card sx={{ maxWidth: { md: 512 }, margin: '0 auto' }}>
             <CardContent>
                 <Typography variant="h4" align="center" component="div">
-                    {noteData.card}
+                    Error in retrieving reading from openAI
                 </Typography>
-                {(noteData.upright || date || type) ?
-                    <>
-                        <Typography variant="subtitle1" align="center">
-                            {noteData.upright ? 'Upright' : 'Inverted'}
-                        </Typography>
-                        <Typography variant="subtitle1" align="center">
-                            created at: {date}, a "{type}" reading
-                        </Typography>
-                    </> : <></>
-                }
-
                 <Typography variant="h6" sx={[{ mx: 2, my: 2 }]} align="center" gutterBottom>
-                    {noteData.meaning}
+                    ┻━┻ ︵ヽ(`Д´)ﾉ︵ ┻━┻
                 </Typography>
                 <Typography variant="body1" align="center" gutterBottom>
-                    {noteData.advice}
+                    Let me know when you encounter this!
                 </Typography>
             </CardContent>
-        </Card>
-    );
+        </Card>)
+    }
 };
 
 
