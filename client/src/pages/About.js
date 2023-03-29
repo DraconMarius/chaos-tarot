@@ -23,7 +23,9 @@ const GithubReadme = () => {
             <MuiMarkdown
                 blockquoteBorderColor='gold'
                 overrides={{
-
+                    h1: {
+                        component: 'h1'
+                    },
                 }}
             >{markdown}</MuiMarkdown>
         </Paper>
