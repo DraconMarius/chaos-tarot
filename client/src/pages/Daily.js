@@ -71,7 +71,7 @@ const Daily = ({ userId, uprightOnly, logs }) => {
             console.log(logId)
             console.log(obj);
             const flip = "Inverted"
-            const style = "in 'Single Weight Line' style and symbolism"
+            const style = "in 'Single Weight Line' style in symbolism"
             const cardName = obj.card;
             let prompt = obj.imagery;
             const upright = obj.upright;
@@ -99,8 +99,8 @@ const Daily = ({ userId, uprightOnly, logs }) => {
             // console.log(imgRes)
 
 
-            const inputImgUrl = 'https://res.cloudinary.com/dbjhly3lm/image/upload/v1680116525/New-input.png.png';
-            const maskImgUrl = 'https://res.cloudinary.com/dbjhly3lm/image/upload/v1680116523/New-Mask.png.png';
+            const inputImgUrl = 'https://res.cloudinary.com/dbjhly3lm/image/upload/v1680125291/og-input.png.png';
+            const maskImgUrl = 'https://res.cloudinary.com/dbjhly3lm/image/upload/v1680125291/og-mask.input.png';
             const [inputBlob, maskBlob] = await Promise.all([
                 fetch(inputImgUrl).then((r) => r.blob()),
                 fetch(maskImgUrl).then((r) => r.blob())
