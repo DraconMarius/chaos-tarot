@@ -43,6 +43,10 @@ import ReadingContainer from './components/ReadingContainer';
 const darkTheme = createTheme({
   palette: {
     mode: 'dark',
+    primary: {
+      main: '#ffa733',
+
+    }
   },
 });
 

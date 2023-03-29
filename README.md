@@ -3,14 +3,14 @@
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 ### Description
-\
-Always interested in Tarot, but never able to brute force memorize what they all mean? Whanting some general advice that the card means for you? Since Tarot is all about symbolism as well, what about some AI generated Cards to compliment the reading?!
-\
-\
-Chaos-Tarot / ChatGPT Tarot is here for your entertainment. Started from an ios shortcut that I had built by chucking tarot data in a dictionary and ask it to choose one so I can save it someplace using note taking app (I was using Bear, an ios markdown app). 
-\
-\
-This MERN Application utilizes the OpenAI API endpoints along with MaterialUI, Apollo graphQL Server, and MongoDB to create an AI generated reading and image and store it in a database. 
+
+#### Always interested in Tarot, but never able to brute force memorize what they all mean? Whanting some general advice that the card means for you? Since Tarot is all about symbolism as well, what about some AI generated Cards to compliment the reading?!
+
+
+#### Chaos-Tarot / ChatGPT Tarot is here for your entertainment. Started from an ios shortcut that I had built by chucking tarot data in a dictionary and ask it to choose one so I can save it someplace using note taking app (I was using Bear, an ios markdown app). 
+
+
+#### This MERN Application utilizes the OpenAI API endpoints along with MaterialUI, Apollo graphQL Server, and MongoDB to create an AI generated reading and image and store it in a database. 
 
 [Click here for a link to the deployed app!](https://chaos-tarot.herokuapp.com)
 
@@ -22,24 +22,19 @@ This MERN Application utilizes the OpenAI API endpoints along with MaterialUI, A
 To run a developmental server of this application, please clone this repo to your local Machine.
 
 First, download the dependencies by running 
-
-
-```npm install```
-
-
+```gitbash
+npm install
+```
 which will install all the packages and dependencies for both the Server and Client folder. 
 
 Next to initiate a fresh instance of our MongoDB database, run
-
-
-```npm run seed``` 
-
-
+```gitbash
+npm run seed
+```
 Finally, run 
-
-
-```npm run develop``` 
-
+```gitbash
+npm run develop
+```
 
 to initiate our development back and front end!
 
@@ -47,12 +42,12 @@ to initiate our development back and front end!
 
 
 We also have a dummy account set up if you'd like to use that to login & checkout our features: 
-\
+
+
 username: dummyAccount
-\
 email: dummyAccount@gmail.com
-\
 password: dummyAccount1!
+
 
 
 ### Features
@@ -65,14 +60,15 @@ Logged in user can generate a reading with a press of a button, as well as a dro
 Once the button is pressed, a loading screen pops up. Keep in mind that it might take a little bit before the prompt and image would pop up
 
 ![Gif of create page](/public/assets/gif%20of%20create%20page.gif)
-\
+
+
 Once the whole process is finished, a card image and a reading log will display right on the page.
+
 
 
 #### Known bugs:
 - [ ] OpenAI API returning non-valid JSON
 - [x] loading screen won't stop until reload if error
-
 
 
 ### License

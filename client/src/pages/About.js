@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Paper from "@mui/material/Paper";
 import MuiMarkdown from "mui-markdown";
+import theme from "prism-react-renderer/themes/vsDark";
+
+const customImg = ({ children, ...props }) => (<img{...props}>{children}</img>)
 
 const GithubReadme = () => {
     const [markdown, setMarkdown] = useState("");
@@ -21,11 +24,12 @@ const GithubReadme = () => {
     return (
         <Paper>
             <MuiMarkdown
-                blockquoteBorderColor='gold'
+                codeBlockTheme={theme}
                 overrides={{
-                    h1: {
-                        component: 'h1'
+                    img: {
+                        component: customImg
                     },
+
                 }}
             >{markdown}</MuiMarkdown>
         </Paper>
