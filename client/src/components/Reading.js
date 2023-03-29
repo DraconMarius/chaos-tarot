@@ -20,6 +20,7 @@ const ReadingCard = ({ log }) => {
         const noteData = JSON.parse(note);
         const type = question
         const imagery = noteData.imagery
+        // const promptImgaery = cards[0].description
 
         return (
             <Card sx={{ maxWidth: { md: 512 }, margin: '0 auto' }}>
@@ -55,15 +56,15 @@ const ReadingCard = ({ log }) => {
                         onClose={() => setShowDescription(false)}
                         placement="top"
                     >
-                        <Typography variant="h4" align="center" component="div">
+                        <Typography variant="h4" align="center" component="div" sx={{ pt: 0, mt: 0 }}>
                             {noteData.card}
                         </Typography>
                     </Tooltip>
                     {(noteData.upright || date || type) ?
                         <>
-                            <Typography variant="subtitle1" align="center">
+                            {/* <Typography variant="subtitle1" align="center">
                                 {noteData.upright == true || 'true' ? 'Upright' : 'Inverted'}
-                            </Typography>
+                            </Typography> */}
                             <Typography variant="subtitle1" align="center">
                                 created at: {date}, a "{type}" reading
                             </Typography>

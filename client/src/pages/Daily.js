@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-import { Box, Button, FormControl, InputLabel, MenuItem, Select, Paper } from '@mui/material';
+import { Box, Button, FormControl, InputLabel, MenuItem, Select, Paper, Alert } from '@mui/material';
 import Backdrop from '@mui/material/Backdrop';
 import '../styles/loading.css'
 
@@ -31,7 +31,8 @@ const Daily = ({ userId, uprightOnly, logs }) => {
     const [createCard] = useMutation(CREATE_CARD);
     // const [logData, setLogData] = useState();
     const [questionType, setQuestionType] = useState("daily");
-    const [getEnv, setEnv] = useState()
+    // const [getEnv, setEnv] = useState()
+    const [errorMessage, setErrorMessage] = useState('');
     const displayLogData = useRef()
 
     const [loading, setLoading] = useState(false);
@@ -70,7 +71,7 @@ const Daily = ({ userId, uprightOnly, logs }) => {
             console.log(logId)
             console.log(obj);
             const flip = "Inverted"
-            const style = "in 'Single Weight Line Art' style in symbolism"
+            const style = "in 'Single Weight Line Design' style including symbolism"
             const cardName = obj.card;
             let prompt = obj.imagery;
             const upright = obj.upright;
@@ -98,8 +99,8 @@ const Daily = ({ userId, uprightOnly, logs }) => {
             // console.log(imgRes)
 
 
-            const inputImgUrl = 'https://res.cloudinary.com/dbjhly3lm/image/upload/v1680113921/New-input.png.png';
-            const maskImgUrl = 'https://res.cloudinary.com/dbjhly3lm/image/upload/v1680113692/New-Mask.png.png';
+            const inputImgUrl = 'https://res.cloudinary.com/dbjhly3lm/image/upload/v1680116525/New-input.png.png';
+            const maskImgUrl = 'https://res.cloudinary.com/dbjhly3lm/image/upload/v1680116523/New-Mask.png.png';
             const [inputBlob, maskBlob] = await Promise.all([
                 fetch(inputImgUrl).then((r) => r.blob()),
                 fetch(maskImgUrl).then((r) => r.blob())
@@ -167,6 +168,8 @@ const Daily = ({ userId, uprightOnly, logs }) => {
                 setLoading(false)
             } catch (e) {
                 console.error(e);
+                setLoading(false)
+                setErrorMessage('An error occurred with generation. Please try again.');
             }
         }
         fetchLogData();
@@ -206,6 +209,11 @@ const Daily = ({ userId, uprightOnly, logs }) => {
                 <Typography component="h1" variant="h5">
                     Today is {date}
                 </Typography>
+                {errorMessage && (
+                    <Grid item xs={12}>
+                        <Alert severity="error">{errorMessage}</Alert>
+                    </Grid>
+                )}
                 <Box sx={{ mt: 2, width: '100%' }}>
                     <FormControl fullWidth>
                         <InputLabel>Type</InputLabel>

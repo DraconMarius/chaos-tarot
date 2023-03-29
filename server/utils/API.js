@@ -5,7 +5,7 @@ const resClean = (text) => {
         .trim()
         .replace(/\n/g, ' ')
         .replace(/("[^"]+":)(\s*)(\w+:)/g, '$1"$3"')
-        .replace(/'/g, '"');
+        .replace(/'/g, "\\'");
     return fixedString;
 }
 //try catch block to parse

@@ -29,6 +29,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import styled from '@emotion/styled'
 
 import LogIn from './pages/Login';
 import SignUp from './pages/Signup';
@@ -47,6 +48,12 @@ const darkTheme = createTheme({
       main: '#ffa733',
 
     }
+  },
+});
+
+const logoStyles = ({
+  logo: {
+    maxHeight: 100,
   },
 });
 
@@ -97,6 +104,7 @@ function App() {
   //menu display based on login or not
   const menu = (
     <Box onClick={toggleMenu} sx={{ textAlign: 'center' }}>
+
       <Typography variant="h6" sx={{ my: 2 }}>
         Chaos Tarot
       </Typography>
@@ -156,6 +164,11 @@ function App() {
                 component="div"
                 sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
               >
+                <img
+                  src='https://res.cloudinary.com/dbjhly3lm/image/upload/w_70,h_53,c_scale/v1680114110/Chaos%20Tarot%20Logo.png'
+                  alt="Chaos-Tarot Logo"
+                >
+                </img>
                 Chaos Tarot
               </Typography>
               <Box sx={{ display: { xs: 'none', sm: 'block' } }}>

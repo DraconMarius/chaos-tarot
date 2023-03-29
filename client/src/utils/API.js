@@ -1,11 +1,11 @@
-
+//clean up api res string with regex
 export const resClean = (text) => {
     console.log(text);
     const fixedString = text
         .trim()
         .replace(/\n/g, ' ')
         .replace(/("[^"]+":)(\s*)(\w+:)/g, '$1"$3"')
-        .replace(/'/g, '"');
+        .replace(/'/g, "\\'");
     return fixedString;
 }
 
