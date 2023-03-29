@@ -31,6 +31,7 @@ const Daily = ({ userId, uprightOnly, logs }) => {
     const [createCard] = useMutation(CREATE_CARD);
     // const [logData, setLogData] = useState();
     const [questionType, setQuestionType] = useState("daily");
+    const [getEnv, setEnv] = useState()
     const displayLogData = useRef()
 
     const [loading, setLoading] = useState(false);
@@ -115,13 +116,13 @@ const Daily = ({ userId, uprightOnly, logs }) => {
             imgFormData.append("response_format", "b64_json");
 
             //trying to get env keys
-            const env = await fetch('/api/env').then(res => res.json())
-            console.log(env.REACT_APP_OPENAI_API_KEY)
+            // const env = await fetch('/api/env').then(res => res.json())
+            // // console.log(env.REACT_APP_OPENAI_API_KEY)
 
             const imgRes = await fetch('https://api.openai.com/v1/images/edits', {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${env.REACT_APP_OPENAI_API_KEY}`
+                    'Authorization': `Bearer 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`
                 },
                 body: imgFormData
             }).then(response => response.json());
@@ -139,7 +140,7 @@ const Daily = ({ userId, uprightOnly, logs }) => {
             // Set a `name` that ends with .png so that the API knows it's a PNG image
 
             const cloudinaryRes = await fetch(
-                `https://api.cloudinary.com/v1_1/${env.REACT_APP_CLOUD_NAME}/image/upload`,
+                `https://api.cloudinary.com/v1_1/dbjhly3lm/image/upload`,
                 {
                     method: "POST",
                     body: formData,
