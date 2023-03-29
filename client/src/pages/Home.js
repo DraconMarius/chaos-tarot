@@ -26,7 +26,7 @@ const ReadingContainer = () => {
     //if there is an error/, display undefined rather than crashing the app
     const user = data?.me;
     console.log(user);
-    if (error) {
+    if (error || !user.logs) {
         console.error("Error in retrieving User Data or LogIn expired");
         return <>{loading ? <div>Loading...</div> : <Reading logData={homeData} />}</>;
     }
