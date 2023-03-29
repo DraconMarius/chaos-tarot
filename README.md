@@ -72,6 +72,7 @@ Once the whole process is finished, a card image and a reading log will display 
 
 ##### Known bugs:
 - [ ] OpenAI API returning non-valid JSON
+- [ ] API returning upright meaning even though card is inverted
 - [x] loading screen won't stop until reload if error
 
 

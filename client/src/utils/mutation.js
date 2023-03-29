@@ -78,6 +78,7 @@ export const CREATE_CARD = gql`
       cards {
         _id
         image
+        description
       }
     }
   } 

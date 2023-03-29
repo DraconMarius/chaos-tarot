@@ -73,7 +73,7 @@ const Daily = ({ userId, uprightOnly, logs }) => {
             const cardName = obj.card;
             let prompt = obj.imagery;
             const upright = obj.upright;
-            if (upright === "false") {
+            if (upright === false || "false" || "False") {
                 prompt = `${flip} Tarot Card "${cardName}": ${prompt}, ${style}`
             } else {
                 prompt = `Tarot Card "${cardName}": ${prompt}, ${style}`
@@ -173,6 +173,14 @@ const Daily = ({ userId, uprightOnly, logs }) => {
             height: "250px"
         }
     }
+
+    const StyleButton = {
+        lordicon: {
+            width: "80px",
+            height: "80px"
+        }
+    }
+
     const [activeIcon, setActiveIcon] = useState(1);
 
     //everytime loading activate
@@ -205,18 +213,25 @@ const Daily = ({ userId, uprightOnly, logs }) => {
                     </FormControl>
                 </Box>
                 <Box sx={{ mt: 2 }}>
-                    <Button variant="contained" color="primary" onClick={handleSubmit}>
-                        Pull a Card
+                    <Button variant="outlined" color="primary" onClick={handleSubmit}>
+                        <lord-icon
+                            src="https://cdn.lordicon.com/wxnxiano.json"
+                            trigger="morph"
+                            colors="primary:#66d7ee,secondary:#7166ee"
+                            stroke="60"
+                            state="morph"
+                            style={StyleButton.lordicon}>
+                        </lord-icon>
                     </Button>
                 </Box>
-                {(loading && !displayLogData.current) || (!displayLogData.current) ? (
-                    <div></div>
-                ) : (
-                    <Grid item xs={9}>
-                        <Reading logData={displayLogData.current} />
-                    </Grid>
-                )}
             </Grid>
+            {(loading && !displayLogData.current) || (!displayLogData.current) ? (
+                <div></div>
+            ) : (
+
+                <Reading logData={displayLogData.current} />
+
+            )}
             <Backdrop
                 sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                 open={loading}

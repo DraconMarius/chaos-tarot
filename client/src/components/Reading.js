@@ -8,16 +8,18 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-
+import Tooltip from '@mui/material/Tooltip';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
 const ReadingCard = ({ log }) => {
     const { note, cards, date, question } = log;
+    const [showDescription, setShowDescription] = useState(false);
     try {
 
         const noteData = JSON.parse(note);
         const type = question
+        const imagery = noteData.imagery
 
         return (
             <Card sx={{ maxWidth: { md: 512 }, margin: '0 auto' }}>
@@ -36,13 +38,31 @@ const ReadingCard = ({ log }) => {
                     /> : <></>
                 }
                 <CardContent>
-                    <Typography variant="h4" align="center" component="div">
-                        {noteData.card}
-                    </Typography>
+                    <Tooltip
+                        title={<Typography
+                            sx={{
+                                borderRadius: 2,
+                                fontSize: '16px',
+                                color: 'white',
+                                maxWidth: '500px',
+                                textAlign: 'center'
+                            }}
+                        >
+                            {imagery}
+                        </Typography>}
+                        open={showDescription}
+                        onOpen={() => setShowDescription(true)}
+                        onClose={() => setShowDescription(false)}
+                        placement="top"
+                    >
+                        <Typography variant="h4" align="center" component="div">
+                            {noteData.card}
+                        </Typography>
+                    </Tooltip>
                     {(noteData.upright || date || type) ?
                         <>
                             <Typography variant="subtitle1" align="center">
-                                {noteData.upright ? 'Upright' : 'Inverted'}
+                                {noteData.upright == true || 'true' ? 'Upright' : 'Inverted'}
                             </Typography>
                             <Typography variant="subtitle1" align="center">
                                 created at: {date}, a "{type}" reading
