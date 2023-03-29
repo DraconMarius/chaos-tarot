@@ -19,18 +19,18 @@ const homeData = [
 ]
 
 
-const ReadingContainer = () => {
+const Home = () => {
     //using useQuery hook to retrieve the logged in user's data
     const { loading, error, data } = useQuery(ME_QUERY);
 
     //if there is an error/, display undefined rather than crashing the app
-    const user = data?.me;
+    const user = data?.me
     console.log(user);
-    if (error || !user.logs) {
+    if (error || !user?.logs?.length) {
         console.error("Error in retrieving User Data or LogIn expired");
         return <>{loading ? <div>Loading...</div> : <Reading logData={homeData} />}</>;
     }
     return <>{loading ? <div>Loading...</div> : <Reading logData={user.logs} />}</>;
 }
 
-export default ReadingContainer
+export default Home
