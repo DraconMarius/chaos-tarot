@@ -13,6 +13,7 @@ const { authMiddleware } = require('./utils/auth')
 const dotenv = require('dotenv');
 dotenv.config();
 
+
 //typeDefs and Resolvers for graphQL
 const { typeDefs, resolvers } = require('./schemas');
 
@@ -33,7 +34,6 @@ const server = new ApolloServer({
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-//cloudinary
 
 
 //static public build folder
@@ -41,7 +41,11 @@ if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../client/build')));
 }
 
-// catch route
+//env to pass to front end
+app.get('/api/env', (req, res) => {
+    res.json(process.env)
+})
+//catch route
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build/index.html'));
 })
