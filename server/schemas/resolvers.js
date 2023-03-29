@@ -119,7 +119,7 @@ const resolvers = {
             //num = 1 or 3
             //question is optional 
 
-            let prompt = `As an experiment: The probability of picking any inverted card =50%, any Suite in Minor Arcana =72% (number 1-10 cards =72%, court cards like page, knight, queen, and king =28%), any Major Arcana =25%. Pick ${num}inverted or upright Major or Minor Arcana card for a ${question} reading based on the provided probability.  Provide one sentence about the imagery of the card while avoiding any references of nudity or nakedness, then provide an inverted meaning OR upright meaning for the card relating to a ${question} reading, and also 1 concise advice per Card you would share to clarify. Only respond in valid JSON string format so it can be parsed directly. {"upright": "(false)/(true)", "card": "name", "imagery": "imagery", "meaning" :"up-meaning OR invert-meaning", "advice": "advice"};`
+            let prompt = `As an experiment: The probability of picking any inverted card =50%, any Suite in Minor Arcana =72% (number 1-10 cards =72%, court cards like page, knight, queen, and king =28%), any Major Arcana =25%. Pick ${num}inverted or upright Major or Minor Arcana card for a ${question} reading based on the provided probability.  Provide one sentence about the imagery of the card while avoiding any references of nudity or nakedness, then provide an inverted meaning OR upright meaning for the card relating to a ${question} reading, and also 1 concise advice per Card you would share to clarify. Only respond in valid JSON string format so it can be parsed directly. {"upright": "(false)/(true)", "card": "name", "imagery": "imagery", "meaning" :"meaning", "advice": "advice"};`
 
             if (pref) {
                 prompt = `As an experiment: The probability of picking any Suite in Minor Arcana =72% (number 1-10 cards =72%, court cards like page, knight, queen, and king =28%), any Major Arcana =25%. Pick ${num} inverted or upright Major or Minor Arcana card for a ${question} reading based on the provided probability.  Provide one sentence about the imagery of the card while avoiding any references of nudity or nakedness, then provide a upright OR inverted meaning for the card relating to a ${question} reading, and also 1 concise advice per Card you would share to clarify. Only respond in valid JSON string format so it can be parsed directly. {"upright": "true", "card": "name", "imagery": "imagery", "meaning" :"meaning", "advice": "advice"};`
@@ -191,11 +191,6 @@ const resolvers = {
                 description: await prompt,
                 upright: upright
             }
-                // {
-                //     name: "test2",
-                //     image: "4",
-                //     upright: false
-                // }
             ];
             const newCards = await Card.insertMany(cardCont);
             console.log(newCards);

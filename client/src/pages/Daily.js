@@ -71,7 +71,7 @@ const Daily = ({ userId, uprightOnly, logs }) => {
             console.log(logId)
             console.log(obj);
             const flip = "Inverted"
-            const style = "in 'Single Weight Line Design' style including symbolism"
+            const style = "in 'Single Weight Line' style and symbolism"
             const cardName = obj.card;
             let prompt = obj.imagery;
             const upright = obj.upright;

@@ -4,7 +4,7 @@ export const resClean = (text) => {
     const fixedString = text
         .trim()
         .replace(/\n/g, ' ')
-        .replace(/("[^"]+":)(\s*)(\w+:)/g, '$1"$3"')
+        .replace(/("[^"]+"\s*:\s*)(\w+)/g, '$1"$3"')
         .replace(/'/g, "\\'");
     return fixedString;
 }
