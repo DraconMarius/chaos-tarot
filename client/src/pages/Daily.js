@@ -116,9 +116,6 @@ const Daily = ({ userId, uprightOnly, logs }) => {
             imgFormData.append("size", "512x512");
             imgFormData.append("response_format", "b64_json");
 
-            //trying to get env keys
-            // const env = await fetch('/api/env').then(res => res.json())
-            // // console.log(env.REACT_APP_OPENAI_API_KEY)
 
             const imgRes = await fetch('https://api.openai.com/v1/images/edits', {
                 method: 'POST',
