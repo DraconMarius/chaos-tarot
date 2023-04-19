@@ -1,6 +1,6 @@
 const { User, Log, Card, Tarot } = require('../models');
 //import util function for API Call
-const { resClean, okJSON } = require('../utils/API')
+const { resClean, okJSON, pullCard } = require('../utils/API')
 
 
 // openai api for generation;
@@ -113,17 +113,18 @@ const resolvers = {
         createLog: async (
             parent,
             { question, pref, num, userId }) => {
+            let pulledCards = []
 
-            //geting reading from API
+
             //pref = string true false
             //num = 1 or 3
-            //question is optional 
-
-            let prompt = `As an experiment: The probability of picking any inverted card =50%, any Suite in Minor Arcana =72% (number 1-10 cards =72%, court cards like page, knight, queen, and king =28%), any Major Arcana =25%. Pick ${num}inverted or upright Major or Minor Arcana card for a ${question} reading based on the provided probability.  Provide one sentence about the imagery of the card while avoiding any references of nudity or nakedness, then provide an inverted meaning OR upright meaning for the card relating to a ${question} reading, and also 1 concise advice per Card you would share to clarify. Only respond in valid JSON string format so it can be parsed directly. {"upright": "(false)/(true)", "card": "name", "imagery": "imagery", "meaning" :"meaning", "advice": "advice"};`
-
-            if (pref) {
-                prompt = `As an experiment: The probability of picking any Suite in Minor Arcana =72% (number 1-10 cards =72%, court cards like page, knight, queen, and king =28%), any Major Arcana =25%. Pick ${num} inverted or upright Major or Minor Arcana card for a ${question} reading based on the provided probability.  Provide one sentence about the imagery of the card while avoiding any references of nudity or nakedness, then provide a upright OR inverted meaning for the card relating to a ${question} reading, and also 1 concise advice per Card you would share to clarify. Only respond in valid JSON string format so it can be parsed directly. {"upright": "true", "card": "name", "imagery": "imagery", "meaning" :"meaning", "advice": "advice"};`
+            //pull card function for more reliable random cards instead of relying on GPT model
+            for (let i = num; i > 0; i--) {
+                const card = pullCard(pref)
+                pulledCards = [...pulledCards, `"${card.cardName}" (upright=${card.dir})`]
             }
+            //question = type
+            let prompt = `You are an agent simulated as an API mystic: It is a ${question} reading where ${pulledCards} was puled.  Provide one sentence about the imagery of the card while avoiding any references of nudity or nakedness, then provide an inverted meaning OR upright meaning for the card relating to a ${question} reading, and also 1 concise advice per Card you would share to clarify. only provide a RFC8259 compliant JSON response following this format without deviation. {"upright": "true"/"false", "card": "name", "imagery": "imagery", "meaning" :"meaning", "advice": "advice"};`
 
             console.log(prompt);
 
@@ -133,7 +134,7 @@ const resolvers = {
                 prompt: prompt,
                 max_tokens: 500,
                 stop: ";",
-                temperature: 0.8
+                temperature: 0.5
             })
             console.log("og res=>", responseReading.data.choices[0]);
             //make doubly sure the response we get is parsable

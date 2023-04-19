@@ -1,10 +1,13 @@
-//clean up api res string with regex
 const resClean = (text) => {
-    console.log(text);
     const fixedString = text
         .trim()
         .replace(/\n/g, ' ')
-        .replace(/("[^"]+"\s*:\s*)(\w+)/g, '$1"$3"')
+        .replace(/("[^"]+"\s*:\s*)(true|false|"([^"\\]|\\.)+"|\d+)/g, (match, p1, p2) => {
+            if (p2 === 'true' || p2 === 'false') {
+                return `${p1}"${p2}"`;
+            }
+            return `${p1}${p2}`;
+        })
         .replace(/'/g, "\\'");
     return fixedString;
 }
@@ -22,12 +25,12 @@ const okJSON = (jsonString) => {
 
 // deciding which card is pulled, takes in uprightOnly pref.
 const pullCard = (uprightOnly) => {
-    const dirSelect = { 1: "Upright", 2: "Inverted" };
+    const dirSelect = { 1: true, 2: false };
     let cardName;
     let dir;
 
     if (uprightOnly) {
-        dir = "Upright";
+        dir = true;
     } else {
         dir = dirSelect[Math.floor(Math.random() * 2) + 1]
     }

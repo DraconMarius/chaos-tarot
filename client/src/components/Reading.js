@@ -62,9 +62,9 @@ const ReadingCard = ({ log }) => {
                     </Tooltip>
                     {(noteData.upright || date || type) ?
                         <>
-                            {/* <Typography variant="subtitle1" align="center">
-                                {noteData.upright == true || 'true' ? 'Upright' : 'Inverted'}
-                            </Typography> */}
+                            <Typography variant="subtitle1" align="center">
+                                {(noteData.upright === (false || "false" || "False")) ? 'Inverted' : 'Upright'}
+                            </Typography>
                             <Typography variant="subtitle1" align="center">
                                 created at: {date}, a "{type}" reading
                             </Typography>
@@ -85,13 +85,13 @@ const ReadingCard = ({ log }) => {
         return (<Card sx={{ maxWidth: { md: 512 }, margin: '0 auto' }}>
             <CardContent>
                 <Typography variant="h4" align="center" component="div">
-                    Error in retrieving reading from openAI
+                    Error in retrieving reading from openAI API
                 </Typography>
                 <Typography variant="h6" sx={[{ mx: 2, my: 2 }]} align="center" gutterBottom>
                     ┻━┻ ︵ヽ(`Д´)ﾉ︵ ┻━┻
                 </Typography>
                 <Typography variant="body1" align="center" gutterBottom>
-                    Let me know when you encounter this!
+                    Do apologize for the inconvenience
                 </Typography>
             </CardContent>
         </Card>)

@@ -1,14 +1,17 @@
 //clean up api res string with regex
 export const resClean = (text) => {
-    console.log(text);
     const fixedString = text
         .trim()
         .replace(/\n/g, ' ')
-        .replace(/("[^"]+"\s*:\s*)(\w+)/g, '$1"$3"')
+        .replace(/("[^"]+"\s*:\s*)(true|false|"([^"\\]|\\.)+"|\d+)/g, (match, p1, p2) => {
+            if (p2 === 'true' || p2 === 'false') {
+                return `${p1}"${p2}"`;
+            }
+            return `${p1}${p2}`;
+        })
         .replace(/'/g, "\\'");
     return fixedString;
 }
-
 //try catch block to parse
 export const okJSON = (jsonString) => {
     try {
