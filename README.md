@@ -14,7 +14,8 @@
 
 [Click here for a link to the deployed app!](https://chaos-tarot.herokuapp.com)
 
-[<img src="./public/assets/188-microphone-recording-lineal.gif" alt='lord-icon' height='90' width='90'>]()
+![demo.gif](https://res.cloudinary.com/dbjhly3lm/image/upload/v1681946376/demo_cmrgtx.gif)
+
 
 
 ### Usage
@@ -44,15 +45,6 @@ Finally, run
 
 to initiate our development back and front end!
 
-[<img src="./public/assets/1062-disco-ball-flat.gif" alt='lord-icon' height='150' width='150' >]()
-
-
-We also have a dummy account set up if you'd like to use that to login & checkout our features: 
-
-
-username: dummyAccount
-email: dummyAccount@gmail.com
-password: dummyAccount1!
 
 
 
@@ -62,19 +54,18 @@ password: dummyAccount1!
 Logged in user can generate a reading with a press of a button, as well as a drop down menu to customize what kind of reading you would like
 
 ##### Create new art
-Once the button is pressed, a loading screen pops up. Keep in mind that it might take a little bit before the prompt and image would pop up
-
-![Gif of create page](/public/assets/gif%20of%20create%20page.gif)
+Once the button is pressed, a loading screen pops up. Keep in mind that it might take a little bit before the prompt and image would be generated
 
 
 Once the whole process is finished, a card image and a reading log will display right on the page.
 
 
 ##### Known bugs:
-- [ ] OpenAI API returning non-valid JSON / Parsing Error 
-- [ ] API returning upright meaning even though card is inverted
+- [x] ~~OpenAI API returning non-valid JSON / Parsing Error~~
+    > *4/19/23: JSON error should mostly be fixed. please create an issue if error persist*
+- [x] ~~API returning upright meaning even though card is inverted~~
 - [ ] Apollo Server 429 if too many request
-- [x] loading screen won't stop until reload if error in generation
+- [ ] loading screen won't stop until reload if error in generation
 
 
 ### License
