@@ -8,7 +8,7 @@ const resClean = (text) => {
             }
             return `${p1}${p2}`;
         })
-        .replace(/'/g, "\\'");
+    // .replace(/'/g, "\\'");
     return fixedString;
 }
 //try catch block to parse
