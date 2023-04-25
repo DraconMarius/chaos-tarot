@@ -25,12 +25,13 @@ const User = () => {
 
     const { loading, error, data } = useQuery(ME_QUERY);
 
-    const userData = data?.me
-    console.log(userData);
     const uprightOnly = useRef();
+    const [flipped, setflipped] = useState();
     const [errorMessage, setErrorMessage] = useState('');
 
     if (!loading) {
+
+        // const userData = data?.me
         uprightOnly.current = data.me.uprightOnly
         console.log(uprightOnly.current)
     }
@@ -38,7 +39,6 @@ const User = () => {
 
 
     const handleChange = (e) => {
-        console.log(userData.uprightOnly)
         uprightOnly.current = !uprightOnly.current
         console.log(uprightOnly)
 
@@ -51,7 +51,7 @@ const User = () => {
         // const formData = new FormData(e.currentTarget);
         // prep data to send to server 
         const newObj = {
-            userId: userData._id,
+            userId: data.me._id,
             uprightOnly: uprightOnly.current
         };
         console.log(newObj)
@@ -87,7 +87,7 @@ const User = () => {
                     <Grid item xs={12}>
 
                         <FormControlLabel
-                            control={<Switch checked={uprightOnly.current} onChange={handleChange} />}
+                            control={<Switch defaultChecked={uprightOnly.current} onChange={handleChange} />}
                             label="Do you want only upright cards?"
                         />
 
