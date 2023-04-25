@@ -36,7 +36,7 @@ import SignUp from './pages/Signup';
 import Home from './pages/Home';
 import GithubReadme from './pages/About';
 import ReadingContainer from './components/ReadingContainer';
-
+import User from './components/User';
 
 // import Log from './pages/Log';
 // import Reading from './pages/Reading';
@@ -133,17 +133,22 @@ function App() {
             </ListItem>)
           ))}
         {Auth.loggedIn() ? (
-          <ListItemButton sx={{ textAlign: 'center' }}>
-            <ListItemText primary="Logout" onClick={Auth.logout} />
-          </ListItemButton>
+          <>
+            <ListItemButton sx={{ textAlign: 'center' }}>
+              <ListItemText primary="Logout" onClick={Auth.logout} />
+            </ListItemButton>
+            <ListItemButton sx={{ textAlign: 'center' }} component={RouterLink} to={{ pathname: '/profile' }}>
+              <ListItemText primary="Profile" />
+            </ListItemButton>
+          </>
         ) : (null)}
       </List>
-    </Box>
+    </Box >
   );
   const container = typeof window !== 'undefined' ? window.document.body : undefined;
 
   return (
-    //wrapping provier to the App component, we can then use the Hooks in any component to make a GraphQL query.
+    //wrapping provier to the App component, we can then use the Hooks in any component.
     <ApolloProvider client={client}>
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
@@ -185,9 +190,14 @@ function App() {
                   )
                   ))}
                 {Auth.loggedIn() ? (
-                  <Button sx={{ color: '#fff' }}>
-                    <ListItemText primary="Logout" onClick={Auth.logout} />
-                  </Button>
+                  <>
+                    <Button sx={{ color: '#fff' }}>
+                      <ListItemText primary="Logout" onClick={Auth.logout} />
+                    </Button>
+                    <Button sx={{ color: '#fff' }} component={RouterLink} to={{ pathname: '/profile' }}>
+                      <ListItemText primary="Profile" />
+                    </Button>
+                  </>
                 ) : (null)}
               </Box>
 
@@ -228,6 +238,7 @@ function App() {
                   {/* <Route exact path="/logs" element={<Log />} /> */}
                   <Route exact path="/signup" element={<SignUp />} />
                   <Route exact path="/about" element={<GithubReadme />} />
+                  <Route exact path="/profile" element={<User />} />
                 </Routes>
               </Container>
             </div>

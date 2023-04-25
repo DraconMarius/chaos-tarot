@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from 'react';
 //import useQuery from apollo client to retrieve the user data
 import { useQuery } from "@apollo/client";
 //importing our query me from utils
 import { ME_QUERY } from "../utils/queries";
-//importing our reading components if logged in otherwise sample
+//importing our tab components on the home page when logged in
 import Reading from "../components/Reading";
+
 
 const homeData = [
     {
@@ -27,7 +28,6 @@ const Home = () => {
     const user = data?.me
     console.log(user);
     if (error || !user?.logs?.length) {
-        console.error("Error in retrieving User Data or LogIn expired");
         return <>{loading ? <div>Loading...</div> : <Reading logData={homeData} />}</>;
     }
     return <>{loading ? <div>Loading...</div> : <Reading logData={user.logs} />}</>;

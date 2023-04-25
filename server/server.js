@@ -41,14 +41,14 @@ if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../client/build')));
 }
 
-//env to pass to front end
-app.get('/api/env', (req, res) => {
-    res.json(process.env)
-})
-//catch route
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build/index.html'));
-})
+// //env to pass to front end
+// app.get('/api/env', (req, res) => {
+//     res.json(process.env)
+// })
+// //catch route
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, '../client/build/index.html'));
+// })
 
 
 // Create a new instance of an Apollo server with the GraphQL schema

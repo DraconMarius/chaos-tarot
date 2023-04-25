@@ -44,10 +44,7 @@ export const UPDATE_USER = gql`
   mutation UpdateUser($userId: ID!, $uprightOnly: Boolean!) {
     updateUser(userId: $userId, uprightOnly: $uprightOnly) {
       _id
-      username
-      email
-      password
-      Logs
+      uprightOnly
     }
   }
 `;

@@ -21,7 +21,7 @@ import { okJSON, resClean } from '../utils/API'
 
 const Daily = ({ userId, uprightOnly, logs }) => {
     const current = new Date();
-    const date = ` ${current.getMonth()} / 
+    const date = ` ${current.getMonth() + 1} / 
                     ${current.getDate()} / 
                     ${current.getFullYear()}`
 
@@ -51,104 +51,105 @@ const Daily = ({ userId, uprightOnly, logs }) => {
             console.log(questionType)
             console.log(uprightOnly)
             console.log(userId)
-
-            const { data } = await createLog({
-                variables:
-                {
-                    question: questionType,
-                    pref: uprightOnly,
-                    num: "1",
-                    userId: userId
-                }
-            });
-            console.log("new Log data : ", data.createLog);
-            console.log("new Log: QuestionType: ", data.createLog.question)
-
-            const logId = await data.createLog._id
-            const stringNote = await data.createLog.note
-            const rdy = await resClean(stringNote)
-            obj = await okJSON(rdy);
-            console.log(logId)
-            console.log(obj);
-            const flip = "Inverted"
-            const style = "in 'Single Weight Line' style in symbolism"
-            const cardName = obj.card;
-            let prompt = obj.imagery;
-            const upright = obj.upright;
-            if (upright === false || "false" || "False") {
-                prompt = `${flip} Tarot Card "${cardName}": ${prompt}, ${style}`
-            } else {
-                prompt = `Tarot Card "${cardName}": ${prompt}, ${style}`
-            }
-            console.log(prompt + "<-- prompt");
-
-            // then generate the edit basic <-- generation keep just for sample
-            // const imgRes = await fetch('https://api.openai.com/v1/images/generations', {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //         'Authorization': `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
-            //     },
-            //     body: JSON.stringify({
-            //         prompt: prompt,
-            //         n: 1,
-            //         size: "512x512",
-            //         response_format: "b64_json",
-            //     }),
-            // }).then(response => response.json());
-            // console.log(imgRes)
-
-
-            const inputImgUrl = 'https://res.cloudinary.com/dbjhly3lm/image/upload/v1682160835/custom_input.png';
-            const maskImgUrl = 'https://res.cloudinary.com/dbjhly3lm/image/upload/v1682160827/custom_mask.png';
-            const [inputBlob, maskBlob] = await Promise.all([
-                fetch(inputImgUrl).then((r) => r.blob()),
-                fetch(maskImgUrl).then((r) => r.blob())
-            ]);
-            inputBlob.name = "input.png";
-            maskBlob.name = "mask.png";
-
-            const imgFormData = new FormData();
-            imgFormData.append("image", inputBlob, "input.png");
-            imgFormData.append("mask", maskBlob, "mask.png");
-            imgFormData.append("prompt", prompt);
-            imgFormData.append("n", 1);
-            imgFormData.append("size", "512x512");
-            imgFormData.append("response_format", "b64_json");
-
-
-            const imgRes = await fetch('https://api.openai.com/v1/images/edits', {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`
-                },
-                body: imgFormData
-            }).then(response => response.json());
-            console.log(imgRes)
-                ;
-
-            const name = await imgRes.created
-            console.log(name)
-
-            const imgB64 = imgRes.data[0].b64_json;
-            const imgBlob = await fetch(`data:image/png;base64,${imgB64}`).then((r) => r.blob());
-            const formData = new FormData();
-            formData.append("file", imgBlob, "image.png");
-            formData.append("upload_preset", "tarotApp_preset");
-            // Set a `name` that ends with .png so that the API knows it's a PNG image
-
-            const cloudinaryRes = await fetch(
-                `https://api.cloudinary.com/v1_1/dbjhly3lm/image/upload`,
-                {
-                    method: "POST",
-                    body: formData,
-                }
-            ).then(response => response.json());
-            console.log(cloudinaryRes);
-
-            const cloudinaryUrl = await cloudinaryRes.url;
-            console.log(cloudinaryUrl);
             try {
+                const logRes = await createLog({
+                    variables:
+                    {
+                        question: questionType,
+                        pref: uprightOnly,
+                        num: "1",
+                        userId: userId
+                    }
+                })
+
+                console.log(logRes.data.createLog)
+                console.log("new Log data : ", logRes.data.createLog);
+                console.log("new Log: QuestionType: ", logRes.data.createLog.question)
+
+                const logId = await logRes.data.createLog._id
+                const stringNote = await logRes.data.createLog.note
+                const rdy = await resClean(stringNote)
+                obj = await okJSON(rdy);
+                console.log(logId)
+                console.log(obj);
+                const flip = "Inverted"
+                const style = "in 'Single Weight Line' style in symbolism"
+                const cardName = obj.card;
+                let prompt = obj.imagery;
+                const upright = obj.upright;
+                if (upright === false || "false" || "False") {
+                    prompt = `${flip} Tarot Card "${cardName}": ${prompt}, ${style}`
+                } else {
+                    prompt = `Tarot Card "${cardName}": ${prompt}, ${style}`
+                }
+                console.log(prompt + "<-- prompt");
+
+                // then generate the edit basic <-- generation keep just for sample
+                // const imgRes = await fetch('https://api.openai.com/v1/images/generations', {
+                //     method: 'POST',
+                //     headers: {
+                //         'Content-Type': 'application/json',
+                //         'Authorization': `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
+                //     },
+                //     body: JSON.stringify({
+                //         prompt: prompt,
+                //         n: 1,
+                //         size: "512x512",
+                //         response_format: "b64_json",
+                //     }),
+                // }).then(response => response.json());
+                // console.log(imgRes)
+
+
+                const inputImgUrl = 'https://res.cloudinary.com/dbjhly3lm/image/upload/v1682160835/custom_input.png';
+                const maskImgUrl = 'https://res.cloudinary.com/dbjhly3lm/image/upload/v1682160827/custom_mask.png';
+                const [inputBlob, maskBlob] = await Promise.all([
+                    fetch(inputImgUrl).then((r) => r.blob()),
+                    fetch(maskImgUrl).then((r) => r.blob())
+                ]);
+                inputBlob.name = "input.png";
+                maskBlob.name = "mask.png";
+
+                const imgFormData = new FormData();
+                imgFormData.append("image", inputBlob, "input.png");
+                imgFormData.append("mask", maskBlob, "mask.png");
+                imgFormData.append("prompt", prompt);
+                imgFormData.append("n", 1);
+                imgFormData.append("size", "512x512");
+                imgFormData.append("response_format", "b64_json");
+
+
+                const imgRes = await fetch('https://api.openai.com/v1/images/edits', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`
+                    },
+                    body: imgFormData
+                }).then(response => response.json());
+                // console.log(imgRes);
+
+                const name = await imgRes.created
+                // console.log(name)
+
+                const imgB64 = imgRes.data[0].b64_json;
+                const imgBlob = await fetch(`data:image/png;base64,${imgB64}`).then((r) => r.blob());
+                const formData = new FormData();
+                formData.append("file", imgBlob, "image.png");
+                formData.append("upload_preset", "tarotApp_preset");
+                // Set a `name` that ends with .png so that the API knows it's a PNG image
+
+                const cloudinaryRes = await fetch(
+                    `https://api.cloudinary.com/v1_1/dbjhly3lm/image/upload`,
+                    {
+                        method: "POST",
+                        body: formData,
+                    }
+                ).then(response => response.json());
+                console.log(cloudinaryRes);
+
+                const cloudinaryUrl = await cloudinaryRes.url;
+                console.log(cloudinaryUrl);
+
                 const { data } = await createCard({
                     variables:
                     {

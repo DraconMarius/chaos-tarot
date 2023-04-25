@@ -28,7 +28,7 @@ const logSchema = new Schema({
     note: {
         type: String,
         minlength: 1,
-        maxlength: 600,
+        maxlength: 3000,
     },
 
 });
