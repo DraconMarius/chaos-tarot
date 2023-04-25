@@ -27,7 +27,7 @@ const Daily = ({ userId, uprightOnly, logs }) => {
 
     // console.log(logs);
 
-    const [createLog] = useMutation(CREATE_LOG);
+    const [createLog, { loading: logLoading, error: logError }] = useMutation(CREATE_LOG);
     const [createCard] = useMutation(CREATE_CARD);
     // const [logData, setLogData] = useState();
     const [questionType, setQuestionType] = useState("daily");
@@ -36,6 +36,7 @@ const Daily = ({ userId, uprightOnly, logs }) => {
     const displayLogData = useRef()
 
     const [loading, setLoading] = useState(false);
+    const [loadingImg, setloadingImg] = useState(false);
 
     const handleChange = (event) => {
         setQuestionType(event.target.value);
@@ -61,6 +62,12 @@ const Daily = ({ userId, uprightOnly, logs }) => {
                         userId: userId
                     }
                 })
+
+                if (!logLoading || !logError) {
+                    setLoading(false)
+                    setloadingImg(true)
+                }
+
 
                 console.log(logRes.data.createLog)
                 console.log("new Log data : ", logRes.data.createLog);
@@ -163,10 +170,10 @@ const Daily = ({ userId, uprightOnly, logs }) => {
                 console.log("createCard data: ", data.createCard);
                 displayLogData.current = [data.createCard, ...logs];
                 console.log(displayLogData.current)
-                setLoading(false)
+                setloadingImg(false)
             } catch (e) {
                 console.error(e);
-                setLoading(false)
+                setloadingImg(false)
                 setErrorMessage('An error occurred with generation. Please try again.');
             }
         }
@@ -191,7 +198,7 @@ const Daily = ({ userId, uprightOnly, logs }) => {
 
     //everytime loading activate
     useEffect(() => {
-        if (loading) {
+        if (loading || loadingImg) {
             const interval = setInterval(() => {
                 setActiveIcon((prevActiveIcon) => (prevActiveIcon % 6) + 1);
             }, 2000);
@@ -199,7 +206,7 @@ const Daily = ({ userId, uprightOnly, logs }) => {
                 clearInterval(interval);
             };
         }
-    }, [loading]);
+    }, [loading, loadingImg]);
 
     return (
         <Container maxWidth="xs">
@@ -310,7 +317,75 @@ const Daily = ({ userId, uprightOnly, logs }) => {
                     <Typography align="center">┻━┻ ︵ヽ(`Д´)ﾉ︵ ┻━┻</Typography>
                 </div>
             </Backdrop>
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={loadingImg}
+            >
+                <div className={`lord ${activeIcon === 1 ? 'active' : ''}`} elevation={0}>
+                    <lord-icon
+                        src="https://cdn.lordicon.com/wlpxtupd.json"
+                        trigger="loop"
+                        colors="primary:#9cc2f4,secondary:#eeca66"
+                        stroke="45"
+                        state="loop-1"
+                        style={Style.lordicon}>
+                    </lord-icon>
+                    <Typography align="center"> gathering ether to create a card </Typography>
+                </div>
+                <div className={`lord ${activeIcon === 2 ? 'active' : ''}`} elevation={0}>
+                    <lord-icon
+                        src="https://cdn.lordicon.com/etwtznjn.json"
+                        trigger="loop"
+                        colors="primary:#a39cf4,secondary:#eeca66"
+                        stroke="45"
+                        style={Style.lordicon}>
+                    </lord-icon>
+                    <Typography align="center">Loading... I promise it is still Loading...</Typography>
+                </div>
+                <div className={`lord ${activeIcon === 3 ? 'active' : ''}`} elevation={0}>
+                    <lord-icon
+                        src="https://cdn.lordicon.com/oswatybr.json"
+                        trigger="loop"
+                        colors="primary:#08a88a,secondary:#eeaa66"
+                        stroke="45"
+                        style={Style.lordicon}>
+                    </lord-icon>
+                    <Typography align="center"> { }</Typography>
+                </div>
+                <div className={`lord ${activeIcon === 4 ? 'active' : ''}`} elevation={0}>
+                    <lord-icon
+                        src="https://cdn.lordicon.com/zbopvjaq.json"
+                        trigger="loop"
+                        colors="primary:#d4f49c,secondary:#e8b730"
+                        stroke="45"
+                        style={Style.lordicon}>
+                    </lord-icon>
+                    <Typography align="center">  (ಠ_ಠ)⌐■-■ </Typography>
+                </div>
+                <div className={`lord ${activeIcon === 5 ? 'active' : ''}`} elevation={0}>
+                    <lord-icon
+                        src="https://cdn.lordicon.com/jfloqxvk.json"
+                        trigger="loop"
+                        delay="2000"
+                        colors="primary:#ee6d66,secondary:#e8b730"
+                        stroke="45"
+                        style={Style.lordicon}>
+                    </lord-icon>
+                    <Typography align="center">ಠ╭╮ಥ</Typography>
+                </div>
+                <div className={`lord ${activeIcon === 6 ? 'active' : ''}`} elevation={0}>
+                    <lord-icon
+                        src="https://cdn.lordicon.com/eqwebkyi.json"
+                        trigger="loop"
+                        colors="primary:#e8b730,secondary:#08a88a"
+                        stroke="45"
+                        style={Style.lordicon}>
+                    </lord-icon>
+                    <Typography align="center">I wonder what the card will look like?</Typography>
+                </div>
+            </Backdrop>
         </Container>
+
     );
 };
 export default Daily;

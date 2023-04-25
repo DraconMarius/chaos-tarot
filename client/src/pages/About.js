@@ -3,7 +3,7 @@ import Paper from "@mui/material/Paper";
 import MuiMarkdown from "mui-markdown";
 import theme from "prism-react-renderer/themes/vsDark";
 
-const customImg = ({ children, ...props }) => (<img{...props}>{children}</img>)
+const customImg = ({ children, ...props }) => (<img {...props}>{children}</img>)
 
 const GithubReadme = () => {
     const [markdown, setMarkdown] = useState("");
@@ -25,6 +25,7 @@ const GithubReadme = () => {
         <Paper>
             <MuiMarkdown
                 inlineCodeColor='#ee6d66'
+
                 overrides={{
                     img: {
                         component: customImg
