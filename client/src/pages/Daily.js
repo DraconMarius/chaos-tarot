@@ -73,14 +73,14 @@ const Daily = ({ userId, uprightOnly, logs }) => {
                 console.log(logId)
                 console.log(obj);
                 const flip = "Inverted"
-                const style = "in 'Single Weight Line' style in symbolism"
+                const style = "uses only symbolism in 'Single Weight Line Art' design"
                 const cardName = obj.card;
                 let prompt = obj.imagery;
                 const upright = obj.upright;
                 if (upright === false || "false" || "False") {
-                    prompt = `${flip} Tarot Card "${cardName}": ${prompt}, ${style}`
+                    prompt = `Imagery only for "${cardName}" ${flip}: ${prompt}, ${style}`
                 } else {
-                    prompt = `Tarot Card "${cardName}": ${prompt}, ${style}`
+                    prompt = `Imagery only for "${cardName}": ${prompt}, ${style}`
                 }
                 console.log(prompt + "<-- prompt");
 
