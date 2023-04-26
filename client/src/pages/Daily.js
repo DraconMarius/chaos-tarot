@@ -158,6 +158,7 @@ const Daily = ({ userId, uprightOnly, logs }) => {
                 const formData = new FormData();
                 formData.append("file", imgBlob, "image.png");
                 formData.append("upload_preset", "tarotApp_preset");
+                formData.append("folder", 'tarot')
                 // Set a `name` that ends with .png so that the API knows it's a PNG image
 
                 const cloudinaryRes = await fetch(
