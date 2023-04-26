@@ -1,6 +1,6 @@
 # Chaos-Tarot
 
-![logo](https://res.cloudinary.com/dbjhly3lm/image/upload/v1682488127/logo-bkg_zhgsgy.png)
+![logo](https://res.cloudinary.com/dbjhly3lm/image/upload/h_100/v1682488127/logo-bkg_zhgsgy.png)
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
@@ -104,7 +104,7 @@ Licensed under the MIT license. [License details here](https://opensource.org/li
 ### Author
 **Mari Ma**
 
-![<img src="https://res.cloudinary.com/dbjhly3lm/image/upload/h_50/v1682488301/logo_github_icon_143196_phgakv.png" alt='github' height='33px'>](https://github.com/DraconMarius)
+[<img src="https://res.cloudinary.com/dbjhly3lm/image/upload/v1682488301/logo_github_icon_143196_phgakv.png" alt='github' height='33px'>](https://github.com/DraconMarius)
 [<img src="https://res.cloudinary.com/dbjhly3lm/image/upload/h_50/v1682488301/logo_linkedin_icon_143191_nv9tim.png" alt='linkedin' height='33px'>](https://www.linkedin.com/in/mari-ma-70771585/)
 
 [Icon credit @ Anton Kalashnyk](https://icon-icons.com/users/14quJ7FM9cYdQZHidnZoM/icon-sets/)
