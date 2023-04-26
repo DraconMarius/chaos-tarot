@@ -17,7 +17,7 @@
 [Click here for a link to the deployed app!](https://chaos-tarot.herokuapp.com)
 *please note that this is hosted on a heroku eco server, it goes idle often. Appreciate you patience when loading up the demo*
 
-![demo.gif](https://res.cloudinary.com/dbjhly3lm/image/upload/v1681946376/demo_cmrgtx.gif)
+![demo.gif](https://res.cloudinary.com/dbjhly3lm/image/upload/v1682499009/demo.gif)
 
 
 
@@ -25,6 +25,8 @@
 
 
 To run a developmental server of this application, please clone this repo to your local Machine.
+
+**make sure you create a `.env` file at the root of the directory with `OPENAI_API_KEY` and `REACT_APP_API_KEY` set up with your OPEN API key!**
 
 First, download the dependencies by running 
 
@@ -56,9 +58,12 @@ to initiate our development back and front end!
 
 ##### Reading Generation
 Logged in user can generate a reading with a press of a button, as well as a drop down menu to customize what kind of reading you would like. If a user select an option other than `daily` a text box will be available for you to ask a question too.
+![loading-demo.gif](https://res.cloudinary.com/dbjhly3lm/image/upload/v1682499005/2-step-loading.gif)
 
 ##### Create new art
 Once the button is pressed, a loading screen pops up. Keep in mind that since we are making multiple api calls, it might take a little bit! (The loading text will now change slightly depends on progess)
+
+![card-demo.gif](https://res.cloudinary.com/dbjhly3lm/image/upload/v1682499010/card-generate-demo.gif)
 
 
 Once the whole process is finished, a card image and a reading log will display right on the page.
@@ -78,6 +83,7 @@ you can also hover over the card's name to get a description of the prompt that 
 
     > *4/24/23: improved loading screen and error message*
     added ability to chage upright preference under `profile`
+    - [ ] still need positive feednack when sucessfully saved
 
 - [x] ~~add ability to ask question for more specific reading~~
 
