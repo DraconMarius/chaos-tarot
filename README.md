@@ -1,6 +1,6 @@
 # Chaos-Tarot
 
-![logo](https://res.cloudinary.com/dbjhly3lm/image/upload/v1682488127/tarot/logo-bkg_zhgsgy.png)
+![logo](https://res.cloudinary.com/dbjhly3lm/image/upload/h_100/v1682488127/tarot/logo-bkg_zhgsgy.png)
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
