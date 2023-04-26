@@ -9,13 +9,22 @@ import Reading from "../components/Reading";
 
 const homeData = [
     {
-        note: "{\"card\": \"Chaos Tarot\", \"meaning\": \"a MERN App generating tarot card reading and imagery using OpenAI's API\", \"advice\": \"For Entertainment Purposes Only\"}", cards: [{ image: "https://res.cloudinary.com/dbjhly3lm/image/upload/v1680038930/DALL_E_2023-03-28_04.25.51_-_The_Tarot_Card__Ace_of_Wands_ywiup5.png" }]
+        note: "{\"card\": \"Chaos Tarot\", \"meaning\": \"a MERN App generating tarot card reading and imagery using OpenAI's API\", \"advice\": \"For Entertainment Purposes Only\"}", cards: [{ image: "https://res.cloudinary.com/dbjhly3lm/image/upload/v1682482060/ri3zwsvgaaaycznibuxz.png" }]
     },
     {
-        note: "{\"card\": \"How It Works 1/2\", \"meaning\": \"By utilizing two of OpenAI's API: *Text Completion*, and Image Edit\", \"advice\": \"We first pass a prompt with custom parameters to generate a readingData with the Text Completion end point\"}", cards: [{ image: "https://res.cloudinary.com/dbjhly3lm/image/upload/v1680038930/DALL_E_2023-03-28_04.25.51_-_The_Tarot_Card__Ace_of_Wands_ywiup5.png" }]
+        note: "{\"card\": \"How It Works 1/2\", \"meaning\": \"By utilizing two of OpenAI's API: *Text Completion*, and Image Edit\", \"advice\": \"We first pass a prompt with custom parameters to generate a readingData with the Text Completion end point\"}", cards: [{ image: "https://res.cloudinary.com/dbjhly3lm/image/upload/v1682398736/gunhk7g9epskfbl1gzu6.png" }]
     },
     {
-        note: "{\"card\": \"How It Works 2/2\", \"meaning\": \"By utilize two of OpenAI's API: Text Completion, and *Image Edit*\", \"advice\": \"We then take the imagery from out AI generated readingData, along with an input and mask image to generate the resulting image, ensuring there are uniformity with the results\"}", cards: [{ image: "https://res.cloudinary.com/dbjhly3lm/image/upload/v1680038930/DALL_E_2023-03-28_04.25.51_-_The_Tarot_Card__Ace_of_Wands_ywiup5.png" }]
+        note: "{\"card\": \"How It Works 2/2\", \"meaning\": \"By utilize two of OpenAI's API: Text Completion, and *Image Edit*\", \"advice\": \"We then take the imagery, along with an input and mask image to generate the resulting image, ensuring there are uniformity with the results\"}", cards: [{ image: "https://res.cloudinary.com/dbjhly3lm/image/upload/v1682397703/n01whhewykpxg6lafuvl.png" }]
+    },
+    {
+        note: "{\"card\": \"Here are some sample:\", \"meaning\": \"Four of Wands\", \"advice\": \"As with AI generated images, you can get something like this\"}", cards: [{ image: "https://res.cloudinary.com/dbjhly3lm/image/upload/v1682457646/px3yl2lp3a5om1abeurr.png" }]
+    },
+    {
+        note: "{\"card\": \"Here are some sample:\", \"meaning\": \"Queen of Pentacles\", \"advice\": \"To something a bit abstract\"}", cards: [{ image: "https://res.cloudinary.com/dbjhly3lm/image/upload/v1682475922/qfxguqnrcz2t3li71pn7.png" }]
+    },
+    {
+        note: "{\"card\": \"Here are some sample:\", \"meaning\": \"Queen of Pentacles\", \"advice\": \"To complete @#%$. I will be looking at other image generation model when they become available.\"}", cards: [{ image: "https://res.cloudinary.com/dbjhly3lm/image/upload/v1682475567/ate5z7hmtrscreb6cmsz.png" }]
     },
 ]
 

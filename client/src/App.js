@@ -12,7 +12,7 @@ import { setContext } from '@apollo/client/link/context';
 import Auth from "./utils/auth";
 
 //i can't stand light mode tbh
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider, createTheme, responsiveFontSizes } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
 import Container from '@mui/material/Container';
@@ -29,7 +29,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import styled from '@emotion/styled'
 
 import LogIn from './pages/Login';
 import SignUp from './pages/Signup';
@@ -46,10 +45,30 @@ const darkTheme = createTheme({
     mode: 'dark',
     primary: {
       main: '#ffa733',
-
-    }
+    },
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        text: {
+          '&:hover': {
+            color: '#d4f49c',
+          },
+        },
+      },
+    },
   },
 });
+
+darkTheme.typography.h6 = {
+  fontSize: '1.0rem',
+  '@media (min-width:600px)': {
+    fontSize: '1.0rem',
+  },
+  [darkTheme.breakpoints.up('md')]: {
+    fontSize: '1.5rem',
+  },
+};
 
 const logoStyles = ({
   logo: {

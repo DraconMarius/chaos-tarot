@@ -63,17 +63,24 @@ Once the button is pressed, a loading screen pops up. Keep in mind that since we
 
 Once the whole process is finished, a card image and a reading log will display right on the page.
 
+you can also hover over the card's name to get a description of the prompt that was used to generate the card!
+
 
 ##### Known bugs/todo:
 - [ ] Ability to edit/make notes on the resulting reading log
 - [ ] Apollo Server 429 if too many request / occasional cors error
 - [x] ~~OpenAI API returning non-valid JSON / Parsing Error~~
+
     > *4/19/23: JSON error should mostly be fixed. please create an issue if error persist*
+
 - [x] ~~API returning upright meaning even though card is inverted~~
 - [x] ~~loading screen won't stop until reload if error in generation~~
+
     > *4/24/23: improved loading screen and error message*
     added ability to chage upright preference under `profile`
+
 - [x] ~~add ability to ask question for more specific reading~~
+
     > *4/25/23: added ability to ask question*
 
 
@@ -104,8 +111,8 @@ Licensed under the MIT license. [License details here](https://opensource.org/li
 ### Author
 **Mari Ma**
 
-[<img src="https://res.cloudinary.com/dbjhly3lm/image/upload/v1682488301/logo_github_icon_143196_phgakv.png" alt='github' height='33px'>](https://github.com/DraconMarius)
-[<img src="https://res.cloudinary.com/dbjhly3lm/image/upload/h_50/v1682488301/logo_linkedin_icon_143191_nv9tim.png" alt='linkedin' height='33px'>](https://www.linkedin.com/in/mari-ma-70771585/)
+[<img src="https://res.cloudinary.com/dbjhly3lm/image/upload/h_50/v1682488301/logo_github_icon_143196_phgakv.png" alt='github' >](https://github.com/DraconMarius)
+[<img src="https://res.cloudinary.com/dbjhly3lm/image/upload/h_50/v1682488301/logo_linkedin_icon_143191_nv9tim.png" alt='linkedin'>](https://www.linkedin.com/in/mari-ma-70771585/)
 
 [Icon credit @ Anton Kalashnyk](https://icon-icons.com/users/14quJ7FM9cYdQZHidnZoM/icon-sets/)
 

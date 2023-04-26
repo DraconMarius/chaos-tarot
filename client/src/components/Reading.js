@@ -23,7 +23,7 @@ const ReadingCard = ({ log }) => {
         // const promptImgaery = cards[0].description
 
         return (
-            <Card sx={{ maxWidth: { md: 512 }, margin: '0 auto' }}>
+            <Card sx={{ width: { md: 512 }, justifyContent: "center", margin: '0 auto' }}>
                 {cards[0].image ?
                     <CardMedia
                         component="img"
@@ -32,9 +32,11 @@ const ReadingCard = ({ log }) => {
                         alt={noteData.card}
                         sx={{
                             width: 512,
-                            height: 512,
+                            maxheight: 512,
                             objectFit: 'contain',
-                            margin: '0 auto'
+                            margin: '0 auto',
+                            padding: '0 auto',
+                            justifySelf: "center"
                         }}
                     /> : <></>
                 }

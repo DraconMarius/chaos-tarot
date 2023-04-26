@@ -224,55 +224,58 @@ const Daily = ({ userId, uprightOnly, logs }) => {
     }, [loading, loadingImg]);
 
     return (
-        <Container maxWidth="xs">
-            <Grid container direction="column" alignItems="center">
-                <Typography component="h1" variant="h5">
-                    Today is {date}
-                </Typography>
-                {errorMessage && (
-                    <Grid item xs={12}>
-                        <Alert severity="error">{errorMessage}</Alert>
-                    </Grid>
-                )}
-                <Box sx={{ mt: 2, width: '100%' }}>
-                    <FormControl fullWidth>
-                        <InputLabel>Type</InputLabel>
-                        <Select value={questionType} onChange={handleChange}>
-                            <MenuItem value={'daily'}>Daily</MenuItem>
-                            <MenuItem value={'relationship'}>Relationship</MenuItem>
-                            <MenuItem value={'abundance'}>Abundance</MenuItem>
-                            <MenuItem value={'yes_or_no'}>Yes or No</MenuItem>
-                        </Select>
-                        {(questionType !== 'daily') ?
+        <>
 
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="input"
-                                label="Question"
-                                name="input"
-                                autoFocus
-                                onChange={inputChange}
-                            />
+            <Container maxWidth="xs">
+                <Grid container direction="column" alignItems="center">
+                    <Typography component="h1" variant="h5">
+                        Today is {date}
+                    </Typography>
+                    {errorMessage && (
+                        <Grid item xs={12}>
+                            <Alert severity="error">{errorMessage}</Alert>
+                        </Grid>
+                    )}
+                    <Box sx={{ mt: 2, width: '100%' }}>
+                        <FormControl fullWidth>
+                            <InputLabel>Type</InputLabel>
+                            <Select value={questionType} onChange={handleChange}>
+                                <MenuItem value={'daily'}>Daily</MenuItem>
+                                <MenuItem value={'relationship'}>Relationship</MenuItem>
+                                <MenuItem value={'abundance'}>Abundance</MenuItem>
+                                <MenuItem value={'yes_or_no'}>Yes or No</MenuItem>
+                            </Select>
+                            {(questionType !== 'daily') ?
 
-                            : <></>
-                        }
-                    </FormControl>
-                </Box>
-                <Box sx={{ mt: 2 }}>
-                    <Button variant="outlined" color="primary" onClick={handleSubmit}>
-                        <lord-icon
-                            src="https://cdn.lordicon.com/wxnxiano.json"
-                            trigger="morph"
-                            colors="primary:#66d7ee,secondary:#7166ee"
-                            stroke="60"
-                            state="morph"
-                            style={StyleButton.lordicon}>
-                        </lord-icon>
-                    </Button>
-                </Box>
-            </Grid>
+                                <TextField
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    id="input"
+                                    label="Question"
+                                    name="input"
+                                    autoFocus
+                                    onChange={inputChange}
+                                />
+
+                                : <></>
+                            }
+                        </FormControl>
+                    </Box>
+                    <Box sx={{ mt: 2 }}>
+                        <Button variant="outlined" color="primary" onClick={handleSubmit}>
+                            <lord-icon
+                                src="https://cdn.lordicon.com/wxnxiano.json"
+                                trigger="morph"
+                                colors="primary:#66d7ee,secondary:#7166ee"
+                                stroke="60"
+                                state="morph"
+                                style={StyleButton.lordicon}>
+                            </lord-icon>
+                        </Button>
+                    </Box>
+                </Grid>
+            </Container>
             {(loading && !displayLogData.current) || (!displayLogData.current) ? (
                 <div></div>
             ) : (
@@ -280,6 +283,7 @@ const Daily = ({ userId, uprightOnly, logs }) => {
                 <Reading logData={displayLogData.current} />
 
             )}
+
             <Backdrop
                 sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                 open={loading}
@@ -380,7 +384,7 @@ const Daily = ({ userId, uprightOnly, logs }) => {
                         stroke="45"
                         style={Style.lordicon}>
                     </lord-icon>
-                    <Typography align="center"> { }</Typography>
+                    <Typography align="center"> ( ͡⌐■_-■)</Typography>
                 </div>
                 <div className={`lord ${activeIcon === 4 ? 'active' : ''}`} elevation={0}>
                     <lord-icon
@@ -414,7 +418,8 @@ const Daily = ({ userId, uprightOnly, logs }) => {
                     <Typography align="center">I wonder what the card will look like?</Typography>
                 </div>
             </Backdrop>
-        </Container>
+
+        </>
 
     );
 };
