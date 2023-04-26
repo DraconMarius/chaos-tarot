@@ -13,9 +13,14 @@ const logSchema = new Schema({
     },
     question: {
         type: String,
+        minlength: 0,
+        maxlength: 3000,
+    },
+    readtype: {
+        type: String,
         require: true,
         minlength: 1,
-        maxlength: 280,
+        maxlength: 600,
     },
     //as a array just in case we do more than 1 card spread later
     cards: [

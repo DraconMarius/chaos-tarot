@@ -45,7 +45,7 @@ if (process.env.NODE_ENV === 'production') {
 // app.get('/api/env', (req, res) => {
 //     res.json(process.env)
 // })
-// //catch route
+//catch route
 // app.get('*', (req, res) => {
 //     res.sendFile(path.join(__dirname, '../client/build/index.html'));
 // })

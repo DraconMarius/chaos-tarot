@@ -120,9 +120,9 @@ const resolvers = {
         //to create the log
         createLog: async (
             parent,
-            { question, pref, num, userId }) => {
+            { question, readtype, pref, num, userId }) => {
             let pulledCards = []
-
+            console.log("readtype: " + readtype)
 
             //pref = string true false
             //num = 1 or 3
@@ -131,9 +131,15 @@ const resolvers = {
                 const card = pullCard(pref)
                 pulledCards = [...pulledCards, `"${card.cardName}" (upright=${card.dir})`]
             }
-            //question = type
-            let prompt = `You are an agent simulated as an API wizard: This is a ${question} reading and ${pulledCards} was pulled.  Provide a sentence about the imagery of the card while avoiding any references of nudity or nakedness, then provide an explanation for the card, and also 1 concise advice per Card you would share to clarify this specific reading. only provide a RFC8259 compliant JSON response following this format without deviation. {"upright": "true"/"false", "card": "name", "imagery": "imagery", "meaning" :"meaning", "advice": "advice"};`
+            //
+            let prompt = `You are an agent simulated as an helpful API wizard: This is a ${readtype} reading and ${pulledCards} was pulled. Provide a sentence about the imagery of the card while avoiding any references of nudity or nakedness, then provide an explanation for this reading, and also 1 advice per Card you would share to clarify this specific reading. only provide a RFC8259 compliant JSON response following this format without deviation. {"upright": "true"/"false", "card": "name", "imagery": "imagery", "meaning" :"meaning", "advice": "advice"};`
 
+            //if there are user input
+            if (readtype !== "daily") {
+                prompt = `You are an agent simulated as an helpful API wizard: This is a ${readtype} reading and ${pulledCards} was pulled when \"${question}\" was asked.  Provide a sentence about the imagery of the card while avoiding any references of nudity or nakedness, then provide an definitive explanation for this reading and also provide a concise interpretation to clarify this specific reading. only provide a RFC8259 compliant JSON response following this format without deviation. {"upright": "true"/"false", "card": "name", "imagery": "imagery", "meaning" :"meaning", "advice": "advice"};`
+            } else if (readtype == "yes_or_no") {
+                prompt = `You are an agent simulated as an helpful API wizard: This is a ${readtype} reading and ${pulledCards} was pulled when \"${question}\" was asked.  Provide a sentence about the imagery of the card while avoiding any references of nudity or nakedness, then provide an definitive explanation for this reading and also provide a concise interpretation with a YES or NO to clarify this specific reading. only provide a RFC8259 compliant JSON response following this format without deviation. {"upright": "true"/"false", "card": "name", "imagery": "imagery", "meaning" :"meaning", "advice": "advice"};`
+            }
             console.log(prompt);
 
             //reading generation
@@ -142,7 +148,6 @@ const resolvers = {
                 prompt: prompt,
                 max_tokens: 500,
                 stop: ";",
-                temperature: 0.5
             })
             console.log("og res=>", responseReading.data.choices[0]);
             //make doubly sure the response we get is parsable
@@ -157,6 +162,7 @@ const resolvers = {
 
             const logCont = {
                 question: question,
+                readtype: readtype,
                 cards: [],
                 note: cleanedRes
             }

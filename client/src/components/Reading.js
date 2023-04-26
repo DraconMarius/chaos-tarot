@@ -13,12 +13,12 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
 const ReadingCard = ({ log }) => {
-    const { note, cards, date, question } = log;
+    const { note, cards, date, question, readtype } = log;
     const [showDescription, setShowDescription] = useState(false);
     try {
 
         const noteData = JSON.parse(note);
-        const type = question
+        const input = question
         const imagery = noteData.imagery
         // const promptImgaery = cards[0].description
 
@@ -60,13 +60,16 @@ const ReadingCard = ({ log }) => {
                             {noteData.card}
                         </Typography>
                     </Tooltip>
-                    {(noteData.upright || date || type) ?
+                    {(noteData.upright || date || readtype) ?
                         <>
                             <Typography variant="subtitle1" align="center">
                                 {(noteData.upright === (false || "false" || "False")) ? 'Inverted' : 'Upright'}
                             </Typography>
                             <Typography variant="subtitle1" align="center">
-                                created at: {date}, a "{type}" reading
+                                created at: {date}, a {readtype} reading
+                            </Typography>
+                            <Typography variant="subtitle1" align="center">
+                                {input ? `user asked: "${input}` : ""}
                             </Typography>
                         </> : <></>
                     }
@@ -81,7 +84,7 @@ const ReadingCard = ({ log }) => {
             </Card>
         );
     } catch (e) {
-        console.log("JSON parse error, abort, please reload")
+        console.log("JSON parse error, abort, please reload", e)
         return (<Card sx={{ maxWidth: { md: 512 }, margin: '0 auto' }}>
             <CardContent>
                 <Typography variant="h4" align="center" component="div">

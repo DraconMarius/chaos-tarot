@@ -12,6 +12,7 @@ export const ME_QUERY = gql`
         logs {
           _id
           date
+          readtype
           question
           cards {
             _id

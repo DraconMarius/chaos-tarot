@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-import { Box, Button, FormControl, InputLabel, MenuItem, Select, Paper, Alert } from '@mui/material';
+import { Box, Button, FormControl, TextField, InputLabel, MenuItem, Select, Paper, Alert } from '@mui/material';
 import Backdrop from '@mui/material/Backdrop';
 import '../styles/loading.css'
 
@@ -31,6 +31,9 @@ const Daily = ({ userId, uprightOnly, logs }) => {
     const [createCard] = useMutation(CREATE_CARD);
     // const [logData, setLogData] = useState();
     const [questionType, setQuestionType] = useState("daily");
+    // const [input, setInput] = useState("");
+    const input = useRef();
+
     // const [getEnv, setEnv] = useState()
     const [errorMessage, setErrorMessage] = useState('');
     const displayLogData = useRef()
@@ -40,23 +43,35 @@ const Daily = ({ userId, uprightOnly, logs }) => {
 
     const handleChange = (event) => {
         setQuestionType(event.target.value);
+        // if (questionType !== 'daily') {
+        //     setInput(event.target.input)
+        // }
     };
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+    const inputChange = (e) => {
+        input.current = `${e.target.value}`
+        console.log(input.current)
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
         setLoading(true);
         //check if log contain same dates
         const fetchLogData = async () => {
             let obj;
             // Perform createLog mutation
             console.log(questionType)
-            console.log(uprightOnly)
+            console.log(input.current)
             console.log(userId)
+
             try {
+
                 const logRes = await createLog({
                     variables:
                     {
-                        question: questionType,
+                        question: input.current,
+                        readtype: questionType,
                         pref: uprightOnly,
                         num: "1",
                         userId: userId
@@ -71,7 +86,7 @@ const Daily = ({ userId, uprightOnly, logs }) => {
 
                 console.log(logRes.data.createLog)
                 console.log("new Log data : ", logRes.data.createLog);
-                console.log("new Log: QuestionType: ", logRes.data.createLog.question)
+                console.log("new Log: Question (if not daily): ", logRes.data.createLog.question)
 
                 const logId = await logRes.data.createLog._id
                 const stringNote = await logRes.data.createLog.note
@@ -228,6 +243,21 @@ const Daily = ({ userId, uprightOnly, logs }) => {
                             <MenuItem value={'abundance'}>Abundance</MenuItem>
                             <MenuItem value={'yes_or_no'}>Yes or No</MenuItem>
                         </Select>
+                        {(questionType !== 'daily') ?
+
+                            <TextField
+                                variant="outlined"
+                                required
+                                fullWidth
+                                id="input"
+                                label="Question"
+                                name="input"
+                                autoFocus
+                                onChange={inputChange}
+                            />
+
+                            : <></>
+                        }
                     </FormControl>
                 </Box>
                 <Box sx={{ mt: 2 }}>

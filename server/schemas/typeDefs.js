@@ -13,7 +13,8 @@ type User {
 type Log {
     _id: ID
     date: String
-    question: String!
+    question: String
+    readtype: String!
     cards: [Card]
     note: String
 }
@@ -55,7 +56,7 @@ type Mutation {
     ): Auth
     logIn(email: String!, password: String!): Auth
     updateUser(userId: ID!, uprightOnly: Boolean!): User
-    createLog(question: String!, pref: Boolean!, num: String!, userId: String!): Log
+    createLog(question: String, readtype: String!, pref: Boolean!, num: String!, userId: String!): Log
     createCard(logId: ID!, imgUrl: String!, name: String!): Log
     updateLog(logId: ID!, question: String!, note: String): Log
 }

@@ -51,11 +51,12 @@ export const UPDATE_USER = gql`
 
 // Mutation for creating a new log
 export const CREATE_LOG = gql`
-  mutation CreateLog($question: String!, $pref: Boolean!, $num: String!, $userId: String!) {
-    createLog(question: $question, pref: $pref, num: $num, userId: $userId) {
+  mutation CreateLog($question: String, $readtype: String!, $pref: Boolean!, $num: String!, $userId: String!) {
+    createLog(question: $question, readtype:$readtype , pref: $pref, num: $num, userId: $userId) {
       _id
       date
       question
+      readtype
       cards {
         _id
       }
@@ -71,6 +72,7 @@ export const CREATE_CARD = gql`
       _id
       date
       question
+      readtype
       note
       cards {
         _id
@@ -88,6 +90,7 @@ export const UPDATE_LOG = gql`
       _id
       date
       question
+      readtype
       image
       cards {
         _id

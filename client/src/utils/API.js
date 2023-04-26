@@ -6,12 +6,22 @@ export const resClean = (text) => {
         .replace(/("[^"]+"\s*:\s*)(true|false|"([^"\\]|\\.)+"|\d+)/g, (match, p1, p2) => {
             if (p2 === 'true' || p2 === 'false') {
                 return `${p1}"${p2}"`;
+            } else if (p2.startsWith('"') && !p2.endsWith('"')) {
+                // Check if the value is a string and doesn't have a closing quote
+                // Find the position of the next comma or closing curly brace
+                let nextComma = text.indexOf(',', match.index + match.length);
+                let nextCurlyBrace = text.indexOf('}', match.index + match.length);
+                if (nextComma === -1 || (nextCurlyBrace !== -1 && nextCurlyBrace < nextComma)) {
+                    nextComma = nextCurlyBrace;
+                }
+                // Extract the string value and add a closing quote
+                const strValue = text.substring(match.index + p1.length, nextComma);
+                return `${p1}"${strValue}"`;
             }
             return `${p1}${p2}`;
-        })
-    // .replace(/'/g, "\\'");
+        });
     return fixedString;
-}
+};
 //try catch block to parse
 export const okJSON = (jsonString) => {
     try {
