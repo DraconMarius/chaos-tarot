@@ -1,25 +1,37 @@
 //clean up api res string with regex
 export const resClean = (text) => {
-    const fixedString = text
+    let fixedString = text
         .trim()
         .replace(/\n/g, ' ')
-        .replace(/("[^"]+"\s*:\s*)(true|false|"([^"\\]|\\.)+"|\d+)/g, (match, p1, p2) => {
-            if (p2 === 'true' || p2 === 'false') {
-                return `${p1}"${p2}"`;
-            } else if (p2.startsWith('"') && !p2.endsWith('"')) {
-                // Check if the value is a string and doesn't have a closing quote
-                // Find the position of the next comma or closing curly brace
+        .replace(/("[^"]+"|[\w-]+)\s*:\s*(true|false|"([^"\\]|\\.)*"|\d+|[^{},]+)/g, (match, p1, p2) => {
+            let key = p1.replace(/"/g, '');
+            let value = p2.trim();
+
+            if (value === 'true' || value === 'false' || !isNaN(value)) {
+                value = `"${value}"`;
+            } else if (!value.startsWith('"')) {
+                value = `"${value.replace(/"/g, '\\"')}"`;
+            } else if (value.startsWith('"') && !value.endsWith('"')) {
                 let nextComma = text.indexOf(',', match.index + match.length);
                 let nextCurlyBrace = text.indexOf('}', match.index + match.length);
                 if (nextComma === -1 || (nextCurlyBrace !== -1 && nextCurlyBrace < nextComma)) {
                     nextComma = nextCurlyBrace;
                 }
-                // Extract the string value and add a closing quote
-                const strValue = text.substring(match.index + p1.length, nextComma);
-                return `${p1}"${strValue}"`;
+                const strValue = text.substring(match.index + p1.length + 1, nextComma).trim();
+                value = `"${strValue.replace(/"/g, '\\"')}"`;
             }
-            return `${p1}${p2}`;
+
+            return `"${key}": ${value}`;
         });
+
+    if (!fixedString.endsWith('}')) {
+        if (fixedString.endsWith('"')) {
+            fixedString += '}';
+        } else {
+            fixedString += '"}';
+        }
+    }
+
     return fixedString;
 };
 //try catch block to parse

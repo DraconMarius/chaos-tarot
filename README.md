@@ -58,6 +58,7 @@ to initiate our development back and front end!
 
 ##### Reading Generation
 Logged in user can generate a reading with a press of a button, as well as a drop down menu to customize what kind of reading you would like. If a user select an option other than `daily` a text box will be available for you to ask a question too.
+
 ![loading-demo.gif](https://res.cloudinary.com/dbjhly3lm/image/upload/v1682499005/2-step-loading.gif)
 
 ##### Create new art

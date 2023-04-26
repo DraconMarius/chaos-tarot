@@ -132,13 +132,14 @@ const resolvers = {
                 pulledCards = [...pulledCards, `"${card.cardName}" (upright=${card.dir})`]
             }
             //
-            let prompt = `You are an agent simulated as an helpful API wizard: This is a ${readtype} reading and ${pulledCards} was pulled. Provide a sentence about the imagery of the card while avoiding any references of nudity or nakedness, then provide an explanation for this reading, and also 1 advice per Card you would share to clarify this specific reading. only provide a RFC8259 compliant JSON response following this format without deviation. {"upright": "true"/"false", "card": "name", "imagery": "imagery", "meaning" :"meaning", "advice": "advice"};`
+            let prompt = `You are an agent simulated as an helpful API wizard: This is a ${readtype} reading and ${pulledCards} was pulled. Provide a sentence describing only the occult imagery (for text to image generation) of the card while avoiding any references of nudity or nakedness, then provide an unique explanation for this reading, and also 1 advice per Card you would share to clarify this specific reading. only provide a RFC8259 compliant JSON response following this format without deviation. {"upright": "true"/"false", "card": "name", "imagery": "imagery", "meaning" :"meaning", "advice": "advice"};`
 
             //if there are user input
             if (readtype !== "daily") {
-                prompt = `You are an agent simulated as an helpful API wizard only able to respond in RFC8259 compliant JSON: This is a ${readtype} reading and ${pulledCards} was pulled when \"${question}\" was asked.  Provide a sentence about the imagery of the card while avoiding any references of nudity or nakedness, then provide an definitive explanation for this reading and also provide a concise interpretation to clarify this specific reading. only provide a RFC8259 compliant JSON response following this format without deviation. {"upright": "true"/"false", "card": "name", "imagery": "imagery", "meaning" :"meaning", "advice": "advice"};`
-            } else if (readtype == "yes_or_no") {
-                prompt = `You are an agent simulated as an helpful API wizard only able to respond in RFC8259 compliant JSON: This is a ${readtype} reading and ${pulledCards} was pulled when \"${question}\" was asked.  Provide a sentence about the imagery of the card while avoiding any references of nudity or nakedness, then provide an definitive explanation for this reading and also provide a concise interpretation with a YES or NO to clarify this specific reading. only provide a RFC8259 compliant JSON response following this format without deviation. {"upright": "true"/"false", "card": "name", "imagery": "imagery", "meaning" :"meaning", "advice": "advice"};`
+                prompt = `You are an agent simulated as an helpful API wizard only able to respond in RFC8259 compliant JSON format: This is a ${readtype} reading and ${pulledCards} was pulled when \"${question}\" was asked.  Provide a sentence describing only the occult imagery (for text to image generation) of the card while avoiding any references of nudity or nakedness, then provide an unique explanation for this specific reading and also provide a concise interpretation to answer '${question}'. only provide a RFC8259 compliant JSON response following this format without deviation. {"upright": "true"/"false", "card": "name", "imagery": "imagery", "meaning" :"explanation", "advice": "advice"};`
+            }
+            if (readtype == 'yes_or_no') {
+                prompt = `You are an agent simulated as an helpful API wizard only able to respond in RFC8259 compliant JSON format: This is a ${readtype} reading and ${pulledCards} was pulled when \"${question}\" was asked.  Provide a sentence describing only the occult imagery (for text to image generation) of the card while avoiding any references of nudity or nakedness, then provide an unique explanation for this specific reading and also provide a concise interpretation with a definitive YES or NO for '${question}'. only provide a RFC8259 compliant JSON response following this format without deviation. {"upright": "true"/"false", "card": "name", "imagery": "imagery", "meaning" :"explanation", "advice": "advice"};`
             }
             console.log(prompt);
 
@@ -148,6 +149,7 @@ const resolvers = {
                 prompt: prompt,
                 max_tokens: 500,
                 stop: ";",
+                temperature: 0.9
             })
             console.log("og res=>", responseReading.data.choices[0]);
             //make doubly sure the response we get is parsable
