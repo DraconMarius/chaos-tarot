@@ -36,6 +36,7 @@ import Home from './pages/Home';
 import GithubReadme from './pages/About';
 import ReadingContainer from './components/ReadingContainer';
 import User from './components/User';
+import Footer from './components/Footer'
 
 // import Log from './pages/Log';
 // import Reading from './pages/Reading';
@@ -263,6 +264,7 @@ function App() {
               </Container>
             </div>
           </Box>
+          <Footer></Footer>
         </Router>
       </ThemeProvider>
       {/* <Footer /> */}
