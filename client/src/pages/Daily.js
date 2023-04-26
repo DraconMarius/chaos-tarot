@@ -50,7 +50,7 @@ const Daily = ({ userId, uprightOnly, logs }) => {
 
     const inputChange = (e) => {
         input.current = `${e.target.value}`
-        console.log(input.current)
+        // console.log(input.current)
     }
 
     const handleSubmit = async (e) => {

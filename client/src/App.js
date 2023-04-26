@@ -105,9 +105,11 @@ function App() {
   const menu = (
     <Box onClick={toggleMenu} sx={{ textAlign: 'center' }}>
 
-      <Typography variant="h6" sx={{ my: 2 }}>
-        Chaos Tarot
-      </Typography>
+      <img
+        src='https://res.cloudinary.com/dbjhly3lm/image/upload/w_100/v1682486909/CT_LOGO_t4wm8o.png'
+        alt="logo"
+      >
+      </img>
       <Divider />
 
       <List>
@@ -164,17 +166,16 @@ function App() {
               >
                 <MenuIcon />
               </IconButton>
+              <img
+                src='https://res.cloudinary.com/dbjhly3lm/image/upload/w_100/v1682486909/CT_LOGO_t4wm8o.png'
+                alt="logo"
+              >
+              </img>
               <Typography
                 variant="h6"
-                component="div"
-                sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+                // alignItems="center"
+                sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' }, alignItems: 'center' }}
               >
-                <img
-                  src='https://res.cloudinary.com/dbjhly3lm/image/upload/w_70,h_53,c_scale/v1680114110/Chaos%20Tarot%20Logo.png'
-                  alt="Chaos-Tarot Logo"
-                >
-                </img>
-                Chaos Tarot
               </Typography>
               <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                 {Auth.loggedIn() ? (
