@@ -118,8 +118,8 @@ Licensed under the MIT license. [License details here](https://opensource.org/li
 ### Author
 *Mari Ma*
 
-[<img src="https://res.cloudinary.com/dbjhly3lm/image/upload/h_50/v1682488301/logo_github_icon_143196_phgakv.png" alt='github' >](https://github.com/DraconMarius)
-[<img src="https://res.cloudinary.com/dbjhly3lm/image/upload/h_50/v1682488301/logo_linkedin_icon_143191_nv9tim.png" alt='linkedin'>](https://www.linkedin.com/in/mari-ma-70771585/)
+[<img src="https://res.cloudinary.com/dbjhly3lm/image/h_50/upload/v1682488301/personal%20assets/logo_linkedin_icon_143191_nv9tim.png" alt='github' >](https://github.com/DraconMarius)
+[<img src="https://res.cloudinary.com/dbjhly3lm/image/upload/h_50/v1682488301/personal%20assets/logo_linkedin_icon_143191_nv9tim.png" alt='linkedin'>](https://www.linkedin.com/in/mari-ma-70771585/)
 
 [Icon credit @ Anton Kalashnyk](https://icon-icons.com/users/14quJ7FM9cYdQZHidnZoM/icon-sets/)
 

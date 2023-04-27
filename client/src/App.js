@@ -187,7 +187,7 @@ function App() {
                 <MenuIcon />
               </IconButton>
               <img
-                src='https://res.cloudinary.com/dbjhly3lm/image/upload/w_100/v1682486909/CT_LOGO_t4wm8o.png'
+                src='https://res.cloudinary.com/dbjhly3lm/image/upload/w_100/personal%20assets/v1682486909/CT_LOGO_t4wm8o.png'
                 alt="logo"
               >
               </img>
