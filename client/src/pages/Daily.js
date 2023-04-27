@@ -123,8 +123,8 @@ const Daily = ({ userId, uprightOnly, logs }) => {
                 // console.log(imgRes)
 
 
-                const inputImgUrl = 'https://res.cloudinary.com/dbjhly3lm/image/upload/v1682160835/custom_input.png';
-                const maskImgUrl = 'https://res.cloudinary.com/dbjhly3lm/image/upload/v1682160827/custom_mask.png';
+                const inputImgUrl = 'https://res.cloudinary.com/dbjhly3lm/image/upload/v1682160835/tarot/custom_input.png';
+                const maskImgUrl = 'https://res.cloudinary.com/dbjhly3lm/image/upload/v1682160827/tarot/custom_mask.png';
                 const [inputBlob, maskBlob] = await Promise.all([
                     fetch(inputImgUrl).then((r) => r.blob()),
                     fetch(maskImgUrl).then((r) => r.blob())

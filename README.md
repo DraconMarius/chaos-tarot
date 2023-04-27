@@ -8,14 +8,21 @@
 
 #### Always interested in Tarot, but never able to brute force memorize what they all mean? Whanting some general advice that the card means for you? Since Tarot is all about symbolism as well, what about some AI generated Cards to compliment the reading?!
 
+---
 
 #### Chaos-Tarot / ChatGPT Tarot is here for your entertainment. Started from an ios shortcut that I had built by chucking tarot data in a dictionary and ask it to choose one so I can save it someplace using note taking app (I was using Bear, an ios markdown app). 
 
+---
 
 #### This MERN Application utilizes the OpenAI API endpoints along with MaterialUI, Apollo graphQL Server, and MongoDB to create an AI generated reading and image and store it in a database. 
 
+
 [Click here for a link to the deployed app!](https://chaos-tarot.herokuapp.com)
-*please note that this is hosted on a heroku eco server, it goes idle often. Appreciate you patience when loading up the demo*
+
+
+*please note that this is hosted on a heroku eco server, it goes idle often. Appreciate your patience when loading up the demo*
+
+>*if you are interested in a more efficient workflow and do not need a generated card image, feel free to check out my ios shortcut [ObsidianTarot](https://routinehub.co/shortcut/15013/) that saves a reading (including a 3card spread option) as markdown to a file in your obsidian vault*
 
 ![demo.gif](https://res.cloudinary.com/dbjhly3lm/image/upload/v1682499009/demo.gif)
 
@@ -74,7 +81,8 @@ you can also hover over the card's name to get a description of the prompt that 
 
 ##### Known bugs/todo:
 - [ ] Ability to edit/make notes on the resulting reading log
-- [ ] Apollo Server 429 if too many request / occasional cors error
+- [ ] Apollo Server 429 if too many request / **occasional cors error**
+- [ ] 4/27/23: Increased error on mobile device (needs more testing) 
 - [x] ~~OpenAI API returning non-valid JSON / Parsing Error~~
 
     > *4/19/23: JSON error should mostly be fixed. please create an issue if error persist*
@@ -84,11 +92,11 @@ you can also hover over the card's name to get a description of the prompt that 
 
     > *4/24/23: improved loading screen and error message*
     added ability to chage upright preference under `profile`
-    - [ ] still need positive feednack when sucessfully saved
+    - [ ] still need positive feednack when sucessfully saved, currently null response
 
 - [x] ~~add ability to ask question for more specific reading~~
 
-    > *4/25/23: added ability to ask question*
+    > *4/25/23: added ability to ask questions*
 
 
 ### License
@@ -110,6 +118,7 @@ Licensed under the MIT license. [License details here](https://opensource.org/li
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 ![MUI](https://img.shields.io/badge/MUI-%230081CB.svg?style=for-the-badge&logo=mui&logoColor=white)
 ![OpenAI](https://camo.githubusercontent.com/ea872adb9aba9cf6b4e976262f6d4b83b97972d0d5a7abccfde68eb2ae55325f/68747470733a2f2f696d672e736869656c64732e696f2f7374617469632f76313f7374796c653d666f722d7468652d6261646765266d6573736167653d4f70656e414926636f6c6f723d343132393931266c6f676f3d4f70656e4149266c6f676f436f6c6f723d464646464646266c6162656c3d)
+![Animated Icon by Lordicon](https://lordicon.com/)
 
 
 ### Code Snippets 
@@ -118,7 +127,7 @@ Licensed under the MIT license. [License details here](https://opensource.org/li
 ### Author
 *Mari Ma*
 
-[<img src="https://res.cloudinary.com/dbjhly3lm/image/h_50/upload/v1682488301/personal%20assets/logo_linkedin_icon_143191_nv9tim.png" alt='github' >](https://github.com/DraconMarius)
+[<img src="https://res.cloudinary.com/dbjhly3lm/image/upload//h_50/v1682488301/personal%20assets/logo_github_icon_143196_phgakv.png" alt='github' >](https://github.com/DraconMarius)
 [<img src="https://res.cloudinary.com/dbjhly3lm/image/upload/h_50/v1682488301/personal%20assets/logo_linkedin_icon_143191_nv9tim.png" alt='linkedin'>](https://www.linkedin.com/in/mari-ma-70771585/)
 
 [Icon credit @ Anton Kalashnyk](https://icon-icons.com/users/14quJ7FM9cYdQZHidnZoM/icon-sets/)
