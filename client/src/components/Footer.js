@@ -22,10 +22,10 @@ const Footer = () => {
         <FooterContainer>
             <IconContainer>
                 <Link href="https://github.com/DraconMarius" target="_blank" rel="noopener noreferrer">
-                    <img src="https://res.cloudinary.com/dbjhly3lm/image/upload/h_50/v1682488301/logo_github_icon_143196_phgakv.png" alt="github" />
+                    <img src="https://res.cloudinary.com/dbjhly3lm/image/upload//h_50/v1682488301/personal%20assets/logo_github_icon_143196_phgakv.png" alt="github" />
                 </Link>
                 <Link href="https://www.linkedin.com/in/mari-ma-70771585" target="_blank" rel="noopener noreferrer">
-                    <img src="https://res.cloudinary.com/dbjhly3lm/image/upload/h_50/v1682488301/logo_linkedin_icon_143191_nv9tim.png" alt="linkedin" />
+                    <img src="https://res.cloudinary.com/dbjhly3lm/image/upload/h_50/v1682488301/personal%20assets/logo_linkedin_icon_143191_nv9tim.png" alt="linkedin" />
                 </Link>
             </IconContainer>
             <Typography variant="body2" component="p">
@@ -38,11 +38,6 @@ const Footer = () => {
                 <Link href="https://icon-icons.com/users/14quJ7FM9cYdQZHidnZoM/icon-sets/" target="_blank" rel="noopener noreferrer">
                     {' '}
                     @Anton Kalashnyk{' '}
-                </Link>
-                &amp;
-                <Link href="https://icon-icons.com/pack/Electronic-Devices/1829" target="_blank" rel="noopener noreferrer">
-                    {' '}
-                    @Unknown
                 </Link>
             </Typography>
         </FooterContainer>
