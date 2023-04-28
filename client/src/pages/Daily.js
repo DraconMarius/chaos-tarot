@@ -17,6 +17,9 @@ import FormData from 'form-data';
 
 import { okJSON, resClean } from '../utils/API'
 
+import { Frames } from '../utils/Frames.js'
+
+
 
 
 const Daily = ({ userId, uprightOnly, logs }) => {
@@ -31,6 +34,8 @@ const Daily = ({ userId, uprightOnly, logs }) => {
     const [createCard] = useMutation(CREATE_CARD);
     // const [logData, setLogData] = useState();
     const [questionType, setQuestionType] = useState("daily");
+    // const [logData, setLogData] = useState();
+    const [color, setColor] = useState("OG");
     // const [input, setInput] = useState("");
     const input = useRef();
 
@@ -47,6 +52,11 @@ const Daily = ({ userId, uprightOnly, logs }) => {
         //     setInput(event.target.input)
         // }
     };
+
+    const handleColorChange = (e) => {
+        setColor(e.target.value)
+        console.log(color)
+    }
 
     const inputChange = (e) => {
         input.current = `${e.target.value}`
@@ -123,8 +133,8 @@ const Daily = ({ userId, uprightOnly, logs }) => {
                 // console.log(imgRes)
 
 
-                const inputImgUrl = 'https://res.cloudinary.com/dbjhly3lm/image/upload/v1682160835/tarot/custom_input.png';
-                const maskImgUrl = 'https://res.cloudinary.com/dbjhly3lm/image/upload/v1682160827/tarot/custom_mask.png';
+                const inputImgUrl = Frames[color].input;
+                const maskImgUrl = Frames[color].mask;
                 const [inputBlob, maskBlob] = await Promise.all([
                     fetch(inputImgUrl).then((r) => r.blob()),
                     fetch(maskImgUrl).then((r) => r.blob())
@@ -261,6 +271,16 @@ const Daily = ({ userId, uprightOnly, logs }) => {
 
                                 : <></>
                             }
+                        </FormControl>
+
+                        <FormControl fullWidth>
+
+                            <Select value={color} onChange={handleColorChange}>
+                                <MenuItem value={'OG'}>Original(Orange)</MenuItem>
+                                <MenuItem value={'Blue'}>Blue</MenuItem>
+                                <MenuItem value={'Pink'}>Pink</MenuItem>
+                                <MenuItem value={'Green'}>Green</MenuItem>
+                            </Select>
                         </FormControl>
                     </Box>
                     <Box sx={{ mt: 2 }}>
