@@ -26,7 +26,18 @@
 
 ![demo.gif](https://res.cloudinary.com/dbjhly3lm/image/upload/v1682499009/demo.gif)
 
+Sample Readings and Cards:
 
+![sampleReading](https://res.cloudinary.com/dbjhly3lm/image/upload/h_500/v1682655582/tarot/PNG_image_jb189x.png)![sampleReading1](https://res.cloudinary.com/dbjhly3lm/image/upload/h_500/v1682655577/tarot/Screen_Shot_2023-04-27_at_8.38.54_PM_utnknq.png)
+
+
+![sampleReading2](https://res.cloudinary.com/dbjhly3lm/image/upload/h_500/v1682655576/tarot/Screen_Shot_2023-04-27_at_8.35.24_PM_ibaoxx.png)![sampleReading4](https://res.cloudinary.com/dbjhly3lm/image/upload/h_500/v1682656324/tarot/Screen_Shot_2023-04-27_at_9.31.43_PM_gjbkbw.png)
+
+
+![sampleCard](https://res.cloudinary.com/dbjhly3lm/image/upload/w_300/v1682650656/tarot/kvcbz8agkunyerecnpwa.png)![sampleCard1](https://res.cloudinary.com/dbjhly3lm/image/upload/w_300/v1682649029/tarot/uznq2crxswdwmbwfkyit.png)
+
+
+![sampleCard2](https://res.cloudinary.com/dbjhly3lm/image/upload/w_300/v1682539461/tarot/hcaz3bftdbacckvrn1zk.png)![sampleCard3](https://res.cloudinary.com/dbjhly3lm/image/upload/w_300/v1682657305/tarot/yxxeykqvmmtq8myrknxe.png)
 
 ### Usage
 
@@ -65,6 +76,7 @@ to initiate our development back and front end!
 
 ##### Reading Generation
 Logged in user can generate a reading with a press of a button, as well as a drop down menu to customize what kind of reading you would like. If a user select an option other than `daily` a text box will be available for you to ask a question too.
+*Update* you can now choose a color for the frames as well.
 
 ![loading-demo.gif](https://res.cloudinary.com/dbjhly3lm/image/upload/v1682499005/2-step-loading.gif)
 
@@ -82,7 +94,7 @@ you can also hover over the card's name to get a description of the prompt that 
 ##### Known bugs/todo:
 - [ ] Ability to edit/make notes on the resulting reading log
 - [ ] Apollo Server 429 if too many request / **occasional cors error**
-- [ ] 4/27/23: Increased error on mobile device (needs more testing) 
+- [X] added frame switch 
 - [x] ~~OpenAI API returning non-valid JSON / Parsing Error~~
 
     > *4/19/23: JSON error should mostly be fixed. please create an issue if error persist*
