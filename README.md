@@ -141,16 +141,21 @@ Licensed under the MIT license. [License details here](https://opensource.org/li
 ### Highlight
 
 > Code snippet for deciding which tarot card is chosen: 
+>
 > ![codeSnippetSample](https://res.cloudinary.com/dbjhly3lm/image/upload/w_500/v1682719640/tarot/Screen_Shot_2023-04-28_at_3.04.30_PM_y00pxp.png)
+>
 > ![Snippet4](https://res.cloudinary.com/dbjhly3lm/image/upload/w_500/v1682719640/tarot/Screen_Shot_2023-04-28_at_3.03.41_PM_rzocbq.png)
+>
 > ![Snippet2](https://res.cloudinary.com/dbjhly3lm/image/upload/w_500/v1682719640/tarot/Screen_Shot_2023-04-28_at_3.04.10_PM_xsuebr.png)
-
+>
 > ![Snippet3](https://res.cloudinary.com/dbjhly3lm/image/upload/h_500/v1682719888/tarot/Screen_Shot_2023-04-28_at_3.10.44_PM_mamm1q.png) ![Snipet4](https://res.cloudinary.com/dbjhly3lm/image/upload/h_500/v1682719888/tarot/Screen_Shot_2023-04-28_at_3.11.10_PM_moajcm.png)
 
 > Code snippet for back end text completion:
+>
 > ![completionSnippet](https://res.cloudinary.com/dbjhly3lm/image/upload/w_500/v1682719641/tarot/Screen_Shot_2023-04-28_at_3.05.22_PM_egp9xb.png)
 
 > Code snippet for front end image edit end point using b64 input/mask. after that the resulting b64 is uploaded directly to cloudinary:
+>
 > ![imageeditSnippet](https://res.cloudinary.com/dbjhly3lm/image/upload/w_500/v1682719641/tarot/Screen_Shot_2023-04-28_at_3.06.26_PM_rqtei8.png)
 
 
