@@ -8,7 +8,7 @@
 
 #### Always interested in Tarot, but never able to brute force memorize what they all mean? Wanting some general advice that the card means for you? Since Tarot is all about symbolism as well, what about some AI generated Cards to compliment the reading?!
 
-As with always, *TAKE WHAT RESONATES*
+As always, *TAKE WHAT RESONATES ;)*
 
 ---
 
@@ -40,6 +40,8 @@ Sample Readings and Cards:
 
 
 ![sampleCard2](https://res.cloudinary.com/dbjhly3lm/image/upload/w_300/v1682539461/tarot/hcaz3bftdbacckvrn1zk.png)![sampleCard3](https://res.cloudinary.com/dbjhly3lm/image/upload/w_300/v1682657305/tarot/yxxeykqvmmtq8myrknxe.png)
+
+![sampleCard4](https://res.cloudinary.com/dbjhly3lm/image/upload/w_300/v1682723801/tarot/g4fsnwidbqn7c4oot9bh.png)![sampleCard5](https://res.cloudinary.com/dbjhly3lm/image/upload/w_300/v1682740111/tarot/cgsybytgxi8b4peqfaot.png)
 
 ### Usage
 
@@ -146,7 +148,7 @@ Licensed under the MIT license. [License details here](https://opensource.org/li
 >
 > ![Snippet4](https://res.cloudinary.com/dbjhly3lm/image/upload/w_500/v1682719640/tarot/Screen_Shot_2023-04-28_at_3.03.41_PM_rzocbq.png)
 >
-> ![Snippet2](https://res.cloudinary.com/dbjhly3lm/image/upload/w_500/v1682719640/tarot/Screen_Shot_2023-04-28_at_3.04.10_PM_xsuebr.png)
+> ![Snippet2](https://res.cloudinary.com/dbjhly3lm/image/upload/w_700/v1682719640/tarot/Screen_Shot_2023-04-28_at_3.04.10_PM_xsuebr.png)
 >
 > ![Snippet3](https://res.cloudinary.com/dbjhly3lm/image/upload/h_500/v1682719888/tarot/Screen_Shot_2023-04-28_at_3.10.44_PM_mamm1q.png) ![Snipet4](https://res.cloudinary.com/dbjhly3lm/image/upload/h_500/v1682719888/tarot/Screen_Shot_2023-04-28_at_3.11.10_PM_moajcm.png)
 

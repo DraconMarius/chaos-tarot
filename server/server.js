@@ -46,9 +46,9 @@ if (process.env.NODE_ENV === 'production') {
 //     res.json(process.env)
 // })
 //catch route
-// app.get('*', (req, res) => {
-//     res.sendFile(path.join(__dirname, '../client/build/index.html'));
-// })
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build/index.html'));
+})
 
 
 // Create a new instance of an Apollo server with the GraphQL schema
