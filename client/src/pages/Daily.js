@@ -188,7 +188,7 @@ const Daily = ({ userId, uprightOnly, logs }) => {
                     {
                         logId: `${logId}`,
                         imgUrl: `${cloudinaryUrl}`,
-                        name: `${name}`
+                        name: `${cardName}${name}`
                     }
                 });
 

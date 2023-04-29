@@ -195,12 +195,11 @@ const resolvers = {
             const upright = await obj.upright;
             console.log(upright)
 
-            if (upright === "false") {
-                prompt = `${flip} Tarot Card "${cardName}": ${prompt}, ${style}`
+            if (upright == false || "false" || "False") {
+                prompt = `${style} depicting Tarot Card"${cardName}" ${flip}: ${prompt}`
             } else {
-                prompt = `Tarot Card "${cardName}": ${prompt}, ${style}`
+                prompt = `${style} depicting Tarot Card"${cardName}": ${prompt}`
             }
-            console.log(prompt + "<-- prompt");
 
             const cardCont = [{
                 name: name,
