@@ -3,7 +3,7 @@ export const resClean = (text) => {
     let fixedString = text
         .trim()
         .replace(/\n/g, ' ')
-        .replace(/("[^"]+"|[\w-]+)\s*:\s*(true|false|"([^"\\]|\\.)*"|\d+|[^{},]+)/g, (match, p1, p2) => {
+        .replace(/("[^"]+"|[\w-]+)\s*:\s*(true|false|"([^"\\]|\\.)*"|\d+|[\w\s-]+)(?=,|$)/g, (match, p1, p2) => {
             let key = p1.replace(/"/g, '');
             let value = p2.trim();
 
