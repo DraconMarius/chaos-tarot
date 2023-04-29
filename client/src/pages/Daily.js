@@ -55,7 +55,7 @@ const Daily = ({ userId, uprightOnly, logs }) => {
 
     const handleColorChange = (e) => {
         setColor(e.target.value)
-        console.log(color)
+        // console.log(color)
     }
 
     const inputChange = (e) => {

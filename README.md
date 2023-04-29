@@ -6,11 +6,13 @@
 
 ### Description
 
-#### Always interested in Tarot, but never able to brute force memorize what they all mean? Whanting some general advice that the card means for you? Since Tarot is all about symbolism as well, what about some AI generated Cards to compliment the reading?!
+#### Always interested in Tarot, but never able to brute force memorize what they all mean? Wanting some general advice that the card means for you? Since Tarot is all about symbolism as well, what about some AI generated Cards to compliment the reading?!
+
+As with always, *TAKE WHAT RESONATES*
 
 ---
 
-#### Chaos-Tarot / ChatGPT Tarot is here for your entertainment. Started from an ios shortcut that I had built by chucking tarot data in a dictionary and ask it to choose one so I can save it someplace using note taking app (I was using Bear, an ios markdown app). 
+#### Chaos-Tarot / GPT Tarot is here for your entertainment. Started from an ios shortcut that I had built by chucking tarot data in a dictionary and ask it to choose one so I can save it someplace using note taking app (I was using Bear, an ios markdown app). 
 
 ---
 
@@ -22,7 +24,7 @@
 
 *please note that this is hosted on a heroku eco server, it goes idle often. Appreciate your patience when loading up the demo*
 
->*if you are interested in a more efficient workflow and do not need a generated card image, feel free to check out my ios shortcut [ObsidianTarot](https://routinehub.co/shortcut/15013/) that saves a reading (including a 3card spread option) as markdown to a file in your obsidian vault*
+>*if you are interested in a more efficient workflow and do not need a generated card image, feel free to check out my ios shortcut [ObsidianTarot](https://routinehub.co/shortcut/15013/) that saves a reading (including a 3card spread option) as markdown to a file in your obsidian vault. This includes a 3 card spread option*
 
 ![demo.gif](https://res.cloudinary.com/dbjhly3lm/image/upload/v1682499009/demo.gif)
 
@@ -41,6 +43,9 @@ Sample Readings and Cards:
 
 ### Usage
 
+Head over to the [deployed demo](https://chaos-tarot.herokuapp.com) to try it out!
+
+Or if you want to host it locally:
 
 To run a developmental server of this application, please clone this repo to your local Machine.
 
@@ -93,7 +98,7 @@ you can also hover over the card's name to get a description of the prompt that 
 
 ##### Known bugs/todo:
 - [ ] Ability to edit/make notes on the resulting reading log
-- [ ] Apollo Server 429 if too many request / **occasional cors error**
+- [ ] ~~Apollo Server 429 if too many request~~ / **occasional cors error**
 - [X] added frame switch 
 - [x] ~~OpenAI API returning non-valid JSON / Parsing Error~~
 
@@ -133,7 +138,20 @@ Licensed under the MIT license. [License details here](https://opensource.org/li
 [Animated Icon by Lordicon](https://lordicon.com/)
 
 
-### Code Snippets 
+### Highlight
+
+> Code snippet for deciding which tarot card is chosen: 
+> ![codeSnippetSample](https://res.cloudinary.com/dbjhly3lm/image/upload/w_500/v1682719640/tarot/Screen_Shot_2023-04-28_at_3.04.30_PM_y00pxp.png)
+> ![Snippet4](https://res.cloudinary.com/dbjhly3lm/image/upload/w_500/v1682719640/tarot/Screen_Shot_2023-04-28_at_3.03.41_PM_rzocbq.png)
+> ![Snippet2](https://res.cloudinary.com/dbjhly3lm/image/upload/w_500/v1682719640/tarot/Screen_Shot_2023-04-28_at_3.04.10_PM_xsuebr.png)
+
+> ![Snippet3](https://res.cloudinary.com/dbjhly3lm/image/upload/h_500/v1682719888/tarot/Screen_Shot_2023-04-28_at_3.10.44_PM_mamm1q.png) ![Snipet4](https://res.cloudinary.com/dbjhly3lm/image/upload/h_500/v1682719888/tarot/Screen_Shot_2023-04-28_at_3.11.10_PM_moajcm.png)
+
+> Code snippet for back end text completion:
+> ![completionSnippet](https://res.cloudinary.com/dbjhly3lm/image/upload/w_500/v1682719641/tarot/Screen_Shot_2023-04-28_at_3.05.22_PM_egp9xb.png)
+
+> Code snippet for front end image edit end point using b64 input/mask. after that the resulting b64 is uploaded directly to cloudinary:
+> ![imageeditSnippet](https://res.cloudinary.com/dbjhly3lm/image/upload/w_500/v1682719641/tarot/Screen_Shot_2023-04-28_at_3.06.26_PM_rqtei8.png)
 
 
 ### Author

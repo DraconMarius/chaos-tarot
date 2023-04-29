@@ -26,7 +26,8 @@ const User = () => {
     const { loading, error, data } = useQuery(ME_QUERY);
 
     const uprightOnly = useRef();
-    const [flipped, setflipped] = useState();
+    const [successMessage, setSuccessMessage] = useState('');
+    // const [flipped, setflipped] = useState();
     const [errorMessage, setErrorMessage] = useState('');
 
     if (!loading) {
@@ -66,11 +67,12 @@ const User = () => {
             // console.log(data);
 
 
+            setSuccessMessage('User preference updated successfully.');
+            setErrorMessage('');
 
         } catch (error) {
-            console.log(error);
-            console.error(error);
-            setErrorMessage('An error occurred while updating user prference. Please try again.');
+            setErrorMessage('An error occurred while updating user preference. Please try again.');
+            setSuccessMessage('');
         };
     };
 
@@ -80,6 +82,11 @@ const User = () => {
             {errorMessage && (
                 <Grid item xs={12}>
                     <Alert severity="error">{errorMessage}</Alert>
+                </Grid>
+            )}
+            {successMessage && (
+                <Grid item xs={12}>
+                    <Alert severity="success">{successMessage}</Alert>
                 </Grid>
             )}
             <StyledForm onSubmit={handleSubmit}>
