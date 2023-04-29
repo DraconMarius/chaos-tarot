@@ -166,7 +166,7 @@ const Daily = ({ userId, uprightOnly, logs }) => {
                 const imgB64 = imgRes.data[0].b64_json;
                 const imgBlob = await fetch(`data:image/png;base64,${imgB64}`).then((r) => r.blob());
                 const formData = new FormData();
-                formData.append("file", imgBlob, "image.png");
+                formData.append("file", imgBlob, `${cardName}.png`);
                 formData.append("upload_preset", "tarotApp_preset");
                 formData.append("folder", 'tarot')
                 // Set a `name` that ends with .png so that the API knows it's a PNG image
