@@ -109,7 +109,7 @@ const Daily = ({ userId, uprightOnly, logs }) => {
                 const cardName = obj.card;
                 let prompt = obj.imagery;
                 const upright = obj.upright;
-                if (upright === false || "false" || "False") {
+                if (upright == false || "false" || "False") {
                     prompt = `${style} depicting Tarot Card"${cardName}" ${flip}: ${prompt}`
                 } else {
                     prompt = `${style} depicting Tarot Card"${cardName}": ${prompt}`
