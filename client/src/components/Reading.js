@@ -68,7 +68,7 @@ const ReadingCard = ({ log }) => {
                                 {(noteData.upright === (false || "false" || "False")) ? 'Inverted' : 'Upright'}
                             </Typography>
                             <Typography variant="subtitle1" align="center">
-                                created at: {date}, a {readtype} reading
+                                created at: {date.toLocaleString()}, a {readtype} reading
                             </Typography>
                             <Typography variant="subtitle1" align="center">
                                 {input ? `user asked: "${input}` : ""}

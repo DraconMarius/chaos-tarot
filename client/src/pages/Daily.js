@@ -55,6 +55,7 @@ const Daily = ({ userId, uprightOnly, logs }) => {
 
     const handleColorChange = (e) => {
         setColor(e.target.value)
+        input.current = ''
         // console.log(color)
     }
 
@@ -105,14 +106,14 @@ const Daily = ({ userId, uprightOnly, logs }) => {
                 console.log(logId)
                 console.log(obj);
                 const flip = "Inverted"
-                const style = "symbolism in 'Single Weight Line Art' design"
+                const style = "occult symbolism in 'monoline single line weight' design"
                 const cardName = obj.card;
                 let prompt = obj.imagery;
                 const upright = obj.upright;
-                if (upright == false || "false" || "False") {
-                    prompt = `${style} depicting Tarot Card"${cardName}" ${flip}: ${prompt}`
+                if (upright == (false || "false" || "False")) {
+                    prompt = `${style} depicting Tarot Card "${cardName}" ${flip}: ${prompt}`
                 } else {
-                    prompt = `${style} depicting Tarot Card"${cardName}": ${prompt}`
+                    prompt = `${style} depicting Tarot Card "${cardName}": ${prompt}`
                 }
                 console.log(prompt + "<-- prompt");
 
