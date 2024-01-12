@@ -116,6 +116,7 @@ you can also hover over the card's name to get a description of the prompt that 
 - [x] ~~add ability to ask question for more specific reading~~
 
     > *4/25/23: added ability to ask questions*
+- [ ] ~~update to newer gpt model, previous model deprecated~~
 
 
 ### License
