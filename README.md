@@ -4,6 +4,26 @@
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
+##### Known bugs/todo:
+- [ ] Ability to edit/make notes on the resulting reading log
+- [ ] ~~Apollo Server 429 if too many request~~ / **occasional cors error**
+- [X] added frame switch 
+- [x] ~~OpenAI API returning non-valid JSON / Parsing Error~~
+
+    > *4/19/23: JSON error should mostly be fixed. please create an issue if error persist*
+
+- [x] ~~API returning upright meaning even though card is inverted~~
+- [x] ~~loading screen won't stop until reload if error in generation~~
+
+    > *4/24/23: improved loading screen and error message*
+    added ability to chage upright preference under `profile`
+    - [ ] still need positive feednack when sucessfully saved, currently null response
+
+- [x] ~~add ability to ask question for more specific reading~~
+
+    > *4/25/23: added ability to ask questions*
+- [ ] working on updating to newer gpt model, previous model deprecated
+
 ### Description
 
 #### Always interested in Tarot, but never able to brute force memorize what they all mean? Wanting some general advice that the card means for you? Since Tarot is all about symbolism as well, what about some AI generated Cards to compliment the reading?!
@@ -97,26 +117,6 @@ Once the whole process is finished, a card image and a reading log will display 
 
 you can also hover over the card's name to get a description of the prompt that was used to generate the card!
 
-
-##### Known bugs/todo:
-- [ ] Ability to edit/make notes on the resulting reading log
-- [ ] ~~Apollo Server 429 if too many request~~ / **occasional cors error**
-- [X] added frame switch 
-- [x] ~~OpenAI API returning non-valid JSON / Parsing Error~~
-
-    > *4/19/23: JSON error should mostly be fixed. please create an issue if error persist*
-
-- [x] ~~API returning upright meaning even though card is inverted~~
-- [x] ~~loading screen won't stop until reload if error in generation~~
-
-    > *4/24/23: improved loading screen and error message*
-    added ability to chage upright preference under `profile`
-    - [ ] still need positive feednack when sucessfully saved, currently null response
-
-- [x] ~~add ability to ask question for more specific reading~~
-
-    > *4/25/23: added ability to ask questions*
-- [ ] ~~update to newer gpt model, previous model deprecated~~
 
 
 ### License
